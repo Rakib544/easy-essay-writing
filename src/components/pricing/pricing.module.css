@@ -1,0 +1,30 @@
+.styleCard{
+width: 293px;
+height: 396px;
+border-radius: 25px;
+opacity: 1;
+}
+.dateStyle{
+    font-size:30px;
+    color:#FFC12C;
+    opacity: 100%;
+}
+.priceStyle{
+    font-size:60px; 
+    color:#0262FA;  
+}
+.priceStyle:hover{
+    color:#FFFFFF;
+}
+.wordStyle{
+font-size:30px;
+}
+
+.styleCard:hover{
+    background: #0262FA;
+    color:#FFFFFF;
+    opacity: 100%;
+}
+.pricingTitle{
+    font-size:48px;
+}
