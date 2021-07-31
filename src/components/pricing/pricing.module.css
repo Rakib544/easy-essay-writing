@@ -1,30 +1,31 @@
-.styleCard{
-width: 293px;
-height: 396px;
-border-radius: 25px;
-opacity: 1;
+.styleCard {
+  width: 293px;
+  height: 396px;
+  border-radius: 25px;
+  opacity: 1;
 }
-.dateStyle{
-    font-size:30px;
-    color:#FFC12C;
-    opacity: 100%;
+.dateStyle {
+  font-size: 30px;
+  color: #ffc12c;
+  opacity: 100%;
 }
-.priceStyle{
-    font-size:60px; 
-    color:#0262FA;  
+.priceStyle {
+  font-size: 60px;
+  color: #0262fa;
 }
-.priceStyle:hover{
-    color:#FFFFFF;
+.priceStyle:hover {
+  color: #ffffff;
 }
-.wordStyle{
-font-size:30px;
+.wordStyle {
+  font-size: 30px;
 }
 
-.styleCard:hover{
-    background: #0262FA;
-    color:#FFFFFF;
-    opacity: 100%;
+.styleCard:hover {
+  background: #0262fa;
+  color: #ffffff;
+  opacity: 100%;
 }
-.pricingTitle{
-    font-size:48px;
+.pricingTitle {
+  font-size: 38px;
+  font-weight: bolder;
 }
