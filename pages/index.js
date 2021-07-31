@@ -1,16 +1,19 @@
-import Footer from "../src/components/footer/footer";
+import Plagiarism from "../src/components/plagiarism/plagiarism";
+import Process from '../src/components/process/Process';
 import Pricing from "../src/components/pricing/pricing";
-import Process from "../src/components/process/Process";
+import Footer from "../src/components/footer/footer";
+import Header from "../src/components/header/Header";
+import Navbar from "../src/components/navbar/Navbar";
 
 export default function Home() {
   return (
     <div>
-      <p className="font-bold text-primary">Hello World, I am Rakib</p>
-      <p>Development branch created and merge with Rakib</p>
-      <button className="btn btn-primary">Test</button>
+      <Navbar />
+      <Header />
+      <Plagiarism />
       <Process />
-      <Pricing />
-      <Footer />
+      <Pricing/>
+      <Footer/>
     </div>
   );
 }
