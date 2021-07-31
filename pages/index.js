@@ -1,5 +1,6 @@
 import Pricing from "../src/components/pricing/pricing";
 import Process from "../src/components/process/Process";
+import Question from "../src/components/Question/Question";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <button className="btn btn-primary">Test</button>
       <Process />
       <Pricing />
+      <Question/>
     </div>
   );
 }
