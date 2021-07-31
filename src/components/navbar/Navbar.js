@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import styles from "./Navbar.module.css";
 import logo from '../../../images/logo.png';
 
 const Navbar = () => {
@@ -10,7 +9,7 @@ const Navbar = () => {
         <div style={{ backgroundColor: '#0254F9', color: 'white' }}>
             <div className="container pt-4">
                 <div className="d-flex justify-content-between align-items-center">
-                    <Image src={logo} className={`${styles.logo}`} alt="" />
+                    <Image src={logo} height="50px" width="130px" alt="" />
                     <div>
                         <Link href="/"><a className="mx-3">Sign Up</a></Link>
                         <Link href="/"><a>Log In</a></Link>
