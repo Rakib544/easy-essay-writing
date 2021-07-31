@@ -1,0 +1,17 @@
+.iconStyle {
+  border: 1px solid #868b99;
+  padding: 8px;
+  border-radius: 50%;
+  margin: 0 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.iconStyle:hover {
+  background-color: #868b99;
+  color: #fff;
+}
+
+.borderTop {
+  border-top: 1px solid #add6ff;
+}
