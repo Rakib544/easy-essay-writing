@@ -1,0 +1,39 @@
+.circleBgImage {
+    height: 400px;
+    width: 400px;
+}
+
+.mobileBgImage {
+    height: 694px;
+    width: 344px;
+}
+
+.hello {
+    position: absolute;
+    top: 10px;
+    left: -150px;
+    z-index: 1;
+}
+
+.hello2 {
+    position: absolute;
+    top: 200px;
+    left: 20px;
+    z-index: 2;
+}
+
+.hello3 {
+    position: absolute;
+    top: 335px;
+    left: 360px;
+}
+
+.hello4 {
+    position: absolute;
+    top: 770px;
+    left: -150px;
+}
+
+.hello5 {
+    position: relative;
+}
