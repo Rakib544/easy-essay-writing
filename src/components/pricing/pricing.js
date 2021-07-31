@@ -12,7 +12,11 @@ const Pricing = () => {
         {cardData.map((data) => (
           <div className="col-12 col-sm-6 col-md-3">
             <div
-              className={`${styles.styleCard} mx-auto d-flex justify-content-center align-items-center mx-3 mb-3 p-3`}
+              className={`${
+                styles.styleCard
+              } mx-auto d-flex justify-content-center align-items-center mx-3 mb-3 p-3 ${
+                data.status === "active" ? `${styles.active}` : ""
+              }`}
             >
               <div className="card-body text-center">
                 <p className="fw-bold">Delivery within</p>

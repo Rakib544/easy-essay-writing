@@ -8,13 +8,14 @@
 .pricingBtn {
   width: 200px;
   height: 59px;
-  background: #e2e6ff 0% 0% no-repeat padding-box;
-  border-radius: 30px;
+  background: #0262fa 0% 0% no-repeat padding-box;
+  border-radius: 8px;
   opacity: 1;
   font-size: 15px;
   letter-spacing: 0px;
-  color: #566df2;
+  color: #fff;
   opacity: 1;
+  transition: 0.3s;
 }
 .dateStyle {
   font-size: 30px;
@@ -40,4 +41,22 @@
 .pricingTitle {
   font-size: 38px;
   font-weight: bolder;
+}
+
+.styleCard:hover .pricingBtn {
+  background-color: #fff;
+  color: #0262fa;
+}
+.active {
+  background-color: #0262fa;
+  color: #fff;
+}
+
+.active * {
+  color: #fff;
+}
+
+.active button {
+  background-color: #fff;
+  color: #0262fa;
 }

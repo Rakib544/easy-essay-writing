@@ -1,31 +1,40 @@
 .headerContainer {
-    background-image: url('../../../images/background.png');
-    height: 100vh;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
+  background-image: url("../../../images/background.png");
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
 }
 
 .headingText {
-    font-size: 48px;
+  font-size: 48px;
 }
 
 .paragraphText {
-    font-size: 16px;
+  font-size: 16px;
+}
+
+.text {
+  width: 50%;
 }
 
 @media only screen and (max-width: 600px) {
-    .headerContainer {
-        background-image: url('../../../images/mobileBackgroud.png');
-        height: 300px;
-        width: 100%;
-    }
+  .headerContainer {
+    background-image: url("../../../images/mobileBanner.svg");
+    height: 400px;
+    width: 100%;
+  }
 
-    .headingText {
-        font-size: 14px;
-    }
-    
-    .paragraphText {
-        font-size: 10px;
-    }
+  .headingText {
+    font-size: 22px;
+    margin-top: 18px;
+    line-height: 30px;
+  }
+
+  .paragraphText {
+    font-size: 16px;
+  }
+  .text {
+    width: 100%;
+  }
 }

@@ -9,7 +9,7 @@ const Process = () => {
   return (
     <div className={`${styles.processSectionBg} py-5`}>
       <div className="container position-relative">
-        <div className="position-absolute end-0 top-0">
+        <div className="position-absolute end-0 top-0 d-none d-md-block">
           <Image src={processSectionImg} alt="img" height="125" width="125" />
         </div>
         <div className="col-12 col-md-8 col-lg-7 mx-auto">

@@ -4,17 +4,20 @@ export const cardData = [
     dueDate: "1-2",
     price: "36",
     word: "250",
+    status: "inactive",
   },
   {
     id: 2,
     dueDate: "7+",
     price: "12",
     word: "250 ",
+    status: "active",
   },
   {
     id: 3,
     dueDate: "3-7",
     price: "18",
     word: "250 ",
+    status: "inactive",
   },
 ];
