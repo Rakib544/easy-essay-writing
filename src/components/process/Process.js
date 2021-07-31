@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import aboutImg from "../../../images/Group 57.svg";
 import processSectionImg from "../../../images/Grupo 257.svg";
 import { processCardData } from "../../data/processCardData";
 import styles from "./process.module.css";
@@ -38,10 +39,28 @@ const Process = () => {
                 <p className={`${styles.processCardHeading} fw-bolder pt-4`}>
                   {data.title}
                 </p>
-                <p className="text-center fs-6 pb-2">{data.text}</p>
+                <small className="text-center d-block pb-5">{data.text}</small>
               </div>
             </div>
           ))}
+        </div>
+        <div className="text-center mt-4">
+          <Image
+            src={aboutImg}
+            height="500"
+            width="600"
+            className="mx-auto d-block"
+            alt="about"
+          />
+          <div className="col-12 col-md-8 col-lg-7 mx-auto">
+            <small className="fw-bold">
+              Easy Essay Writing’s experts have more than 5 years of experience
+              with writing professionally.Our expertise lies in ghostwriting
+              books, blog posts, news articles, press releases, and
+              academic-level essays. We provide plagiarism-free writing that is
+              checked for free with every piece of work provided.
+            </small>
+          </div>
         </div>
       </div>
     </div>
