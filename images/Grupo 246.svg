@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="201.3" height="201.309" viewBox="0 0 201.3 201.309">
+  <defs>
+    <filter id="Trazado_711" x="0" y="0" width="201.3" height="201.309" filterUnits="userSpaceOnUse">
+      <feOffset dy="14" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feFlood flood-color="#ffc12c" flood-opacity="0.345"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_246" data-name="Grupo 246" transform="translate(43.771 34.036)">
+    <g id="Grupo_244" data-name="Grupo 244" transform="translate(4.256)">
+      <g transform="matrix(1, 0, 0, 1, -48.03, -34.04)" filter="url(#Trazado_711)">
+        <path id="Trazado_711-2" data-name="Trazado 711" d="M581.648,525a17.434,17.434,0,0,0,12.328-29.76,23.827,23.827,0,1,1,33.692-33.7,17.435,17.435,0,1,0,24.656-24.656,58.692,58.692,0,1,0-83,83A17.379,17.379,0,0,0,581.648,525Z" transform="translate(-504.13 -385.69)" fill="#ffc12c"/>
+      </g>
+    </g>
+    <g id="Grupo_259" data-name="Grupo 259" transform="translate(-10.805 29.329)">
+      <path id="Trazado_711-3" data-name="Trazado 711" d="M581.648,525a17.434,17.434,0,0,0,12.328-29.76,23.827,23.827,0,1,1,33.692-33.7,17.435,17.435,0,1,0,24.656-24.656,58.692,58.692,0,1,0-83,83A17.379,17.379,0,0,0,581.648,525Z" transform="translate(-552.158 -419.727)" fill="none" opacity="0.18"/>
+    </g>
+    <g id="Grupo_245" data-name="Grupo 245" transform="translate(-2.24 14.114)">
+      <path id="Trazado_712" data-name="Trazado 712" d="M587.413,519.235a17.435,17.435,0,0,0,12.328-29.76,23.826,23.826,0,1,1,33.69-33.7,17.435,17.435,0,0,0,24.658-24.656,58.691,58.691,0,1,0-83,83A17.384,17.384,0,0,0,587.413,519.235Z" transform="translate(-557.923 -413.962)" fill="none" stroke="#ffc417" stroke-miterlimit="10" stroke-width="4"/>
+    </g>
+  </g>
+</svg>
