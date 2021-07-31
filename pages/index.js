@@ -1,6 +1,6 @@
 import Plagiarism from "../src/components/plagiarism/plagiarism";
 import Pricing from "../src/components/pricing/pricing";
-import Process from "../src/components/process/Process";
+import Footer from "../src/components/footer/footer";
 
 export default function Home() {
   return (
