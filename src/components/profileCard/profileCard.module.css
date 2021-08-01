@@ -1,6 +1,6 @@
 .profileCard {
-  width: 504px;
-  height: 216px;
+  width: 35%;
+  padding: 30px 10px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 10px;
   opacity: 1;
@@ -26,4 +26,10 @@
 .email {
   font-size: 16px;
   color: #c9c9c9;
+}
+
+@media only screen and (max-width: 600px) {
+  .profileCard {
+    width: 100%;
+  }
 }
