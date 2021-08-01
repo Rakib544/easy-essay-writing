@@ -7,7 +7,6 @@ import styles from "./navbar.module.css";
 
 const Navbar = () => {
   const router = useRouter();
-  console.log(router);
 
   return (
     <div style={{ backgroundColor: "#0254F9", color: "white" }}>
@@ -17,11 +16,11 @@ const Navbar = () => {
           <div>
             {router.pathname === "/" && (
               <>
-                <Link href="/singup">
+                <Link href="/signup">
                   <a className="mx-3 text-white">Sign Up</a>
                 </Link>
-                <Link href="/singin">
-                  <a className={`${styles.navItem} text-white`}>Log In</a>
+                <Link href="/signin">
+                  <a className={`${styles.navItem} text-white`}>Sing In</a>
                 </Link>
               </>
             )}

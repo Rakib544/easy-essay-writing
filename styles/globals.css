@@ -19,27 +19,42 @@ a {
   display: flex;
   flex-direction: row;
 }
-.beforeAfter:before, .beforeAfter:after{
+.beforeAfter:before,
+.beforeAfter:after {
   content: "";
   flex: 1 1;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid #ddd;
   margin: auto;
 }
 .beforeAfter:before {
-  margin-right: 10px
+  margin-right: 10px;
 }
 .beforeAfter:after {
-  margin-left: 10px
+  margin-left: 10px;
 }
 
-.input-background{
-  background-color: #ECF2F8;
+.input-background {
+  background-color: #ecf2f8;
   border: none;
 }
 
-.icon-style{
-  background-color: red;
-  height: 40px;
-  width: 40px;
+.icon-bg {
+  background-color: #ecf2f8;
+  border-radius: 12px;
 }
 
+.fs-7 {
+  font-size: 14px;
+  line-height: 10px;
+}
+
+.image {
+  object-fit: contain;
+  width: 100%;
+  position: relative;
+  height: unset;
+}
+
+.fb-icon-color {
+  color: #315a9e;
+}
