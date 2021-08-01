@@ -44,6 +44,7 @@ const Signin = () => {
                   type="email"
                   id="email"
                   placeholder="@mail.com"
+                  defaultValue=""
                   {...register("email")}
                 />
               </div>
@@ -56,6 +57,7 @@ const Signin = () => {
                   className="form-control input-background py-2"
                   type="password"
                   id="password"
+                  defaultValue=""
                   placeholder="Password"
                   {...register("password", { required: true })}
                 />

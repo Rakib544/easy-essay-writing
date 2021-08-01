@@ -43,6 +43,7 @@ const Signup = () => {
                     className="form-control input-background py-2"
                     id="firstName"
                     type="text"
+                    defaultValue=""
                     placeholder="First Name"
                     {...register("firstName")}
                   />
@@ -56,6 +57,7 @@ const Signup = () => {
                     className="form-control input-background py-2"
                     type="text"
                     id="lastName"
+                    defaultValue=""
                     placeholder="Last Name"
                     {...register("lastName")}
                   />
@@ -70,6 +72,7 @@ const Signup = () => {
                   className="form-control input-background py-2"
                   type="email"
                   id="email"
+                  defaultValue=""
                   placeholder="@mail.com"
                   {...register("email")}
                 />
@@ -82,6 +85,7 @@ const Signup = () => {
                   autoComplete="off"
                   className="form-control input-background py-2"
                   id="phone"
+                  defaultValue=""
                   placeholder="Phone"
                   {...register("Phone")}
                 />
@@ -95,6 +99,7 @@ const Signup = () => {
                   className="form-control input-background py-2"
                   type="password"
                   id="password"
+                  defaultValue=""
                   placeholder="Password"
                   {...register("password", { required: true })}
                 />
@@ -108,6 +113,7 @@ const Signup = () => {
                   className="form-control input-background py-2"
                   type="password"
                   id="confirm-password"
+                  defaultValue=""
                   placeholder="Confirm Password"
                   {...register("confirm password", { required: true })}
                 />
