@@ -1,10 +1,6 @@
 import React from "react";
-<<<<<<< HEAD
-import AdminFaqCard from "../../src/components/AdminFaqCard/AdminFaqCard";
-=======
 
 import Card from "../../src/components/Card/Card";
->>>>>>> 1534153f151f6d746c4fcd6bbc81a89b915b680a
 import Navbar from "../../src/components/navbar/Navbar";
 import ProfileCard from "../../src/components/profileCard/profileCard";
 import { cardData } from "../../src/data/pricedata";
@@ -13,17 +9,11 @@ const Edit = () => {
   return (
     <>
       <Navbar />
-<<<<<<< HEAD
-      <div className="container my-5">
-        <ProfileCard />
-        <p className="bg-white py-2 px-5 d-inline-block fs-4 fw-bold my-4">
-          Banner Info
-        </p>
-        <AdminFaqCard/>
-=======
       <div className="bg-light">
         <div className="container my-5">
+
           <ProfileCard />
+
           <p className="bg-white py-2 px-5 d-inline-block fs-4 fw-bold my-4">
             Banner Info
           </p>
@@ -126,8 +116,101 @@ const Edit = () => {
 
           </div>
 
+          <p className="bg-white py-2 px-5 d-inline-block fs-4 fw-bold my-4">
+            FAQ
+          </p>
+
+          <div className="bg-white py-4 px-5 my-4">
+            <div className="row">
+
+              <div className="col-md-6">
+
+                <div className='mb-4' >
+                  <div className='d-flex align-items-center justify-content-between' >
+                    <h4 className='pb-3' >How long does it take?</h4>
+                    <button className="btn" style={{ border: 'none', color: 'blue', fontWeight: '700' }}>Edit</button>
+                  </div>
+                  <p className='text-muted' >You will select exactly when you need the essay while filling out the order form. Occasionally the work will be finished before the due date.</p>
+                </div>
+
+                <div className='mb-4' >
+                  <div className='d-flex align-items-center justify-content-between' >
+                    <h4 className='pb-3' >How long does it take?</h4>
+                    <button className="btn" style={{ border: 'none', color: 'blue', fontWeight: '700' }}>Edit</button>
+                  </div>
+                  <p className='text-muted' >You will select exactly when you need the essay while filling out the order form. Occasionally the work will be finished before the due date.</p>
+                </div>
+
+                <div className='mb-4' >
+                  <div className='d-flex align-items-center justify-content-between' >
+                    <h4 className='pb-3' >How long does it take?</h4>
+                    <button className="btn" style={{ border: 'none', color: 'blue', fontWeight: '700' }}>Edit</button>
+                  </div>
+                  <p className='text-muted' >You will select exactly when you need the essay while filling out the order form. Occasionally the work will be finished before the due date.</p>
+                </div>
+
+                <div className='mb-4' >
+                  <div className='d-flex align-items-center justify-content-between' >
+                    <h4 className='pb-3' >How long does it take?</h4>
+                    <button className="btn" style={{ border: 'none', color: 'blue', fontWeight: '700' }}>Edit</button>
+                  </div>
+                  <p className='text-muted' >You will select exactly when you need the essay while filling out the order form. Occasionally the work will be finished before the due date.</p>
+                </div>
+
+                <div className='mb-4' >
+                  <div className='d-flex align-items-center justify-content-between' >
+                    <h4 className='pb-3' >How long does it take?</h4>
+                    <button className="btn" style={{ border: 'none', color: 'blue', fontWeight: '700' }}>Edit</button>
+                  </div>
+                  <p className='text-muted' >You will select exactly when you need the essay while filling out the order form. Occasionally the work will be finished before the due date.</p>
+                </div>
+
+              </div>
+
+              <div className="col-md-6">
+
+                <div className='pb-3'>
+                  <p className='bg-primary p-3 text-white rounded'><span className="ms-5">Footer</span></p>
+                </div>
+
+                <div className='pb-3'>
+                  <div className='d-flex align-items-center justify-content-between pb-2'>
+                    <h4>Facebook</h4>
+                    <button className="btn" style={{ border: 'none', color: 'blue', fontWeight: '700' }}>Edit</button>
+                  </div>
+                  <input style={{backgroundColor: '#F4F8FF', color: 'blue'}} className='form-control' type="" name="" value="https://www.facebook.com/" />
+                </div>
+
+                <div className='pb-3'>
+                  <div className='d-flex align-items-center justify-content-between pb-2'>
+                    <h4>Instagram</h4>
+                    <button className="btn" style={{ border: 'none', color: 'blue', fontWeight: '700' }}>Edit</button>
+                  </div>
+                  <input style={{backgroundColor: '#F4F8FF', color: 'blue'}} className='form-control' type="" name="" value="https://www.facebook.com/" />
+                </div>
+
+                <div className='pb-3'>
+                  <div className='d-flex align-items-center justify-content-between pb-2'>
+                    <h4>LinkedIn</h4>
+                    <button className="btn" style={{ border: 'none', color: 'blue', fontWeight: '700' }}>Edit</button>
+                  </div>
+                  <input style={{backgroundColor: '#F4F8FF', color: 'blue'}} className='form-control' type="" name="" value="https://www.facebook.com/" />
+                </div>
+
+                <div className='pb-3'>
+                  <div className='d-flex align-items-center justify-content-between pb-2'>
+                    <h4>Twiter</h4>
+                    <button className="btn" style={{ border: 'none', color: 'blue', fontWeight: '700' }}>Edit</button>
+                  </div>
+                  <input style={{backgroundColor: '#F4F8FF', color: 'blue'}} className='form-control' type="" name="" value="https://www.facebook.com/" />
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
         </div>
->>>>>>> 1534153f151f6d746c4fcd6bbc81a89b915b680a
       </div>
     </>
   );
