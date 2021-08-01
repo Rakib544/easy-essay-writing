@@ -16,7 +16,7 @@ const Footer = () => {
         <FaTwitter className="mx-2" size={30} className={styles.iconStyle} />
       </div>
       <small className="d-block mt-2 text-center">
-        &#169; 2021 Dribble All right reserved
+        &#169; 2021 Dribble All right reserved 
       </small>
     </footer>
   );
