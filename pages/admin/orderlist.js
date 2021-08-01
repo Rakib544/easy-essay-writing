@@ -1,9 +1,9 @@
 import React from "react";
-import Card from "../src/components/Card/Card";
-import Navbar from "../src/components/navbar/Navbar";
-import TotalOrderCard from "../src/components/TotalOrderCard/totalOrderCard";
-import { orderData } from "../src/data/orderData";
-import { cardData } from "../src/data/pricedata";
+import Card from "../../src/components/Card/Card";
+import Navbar from "../../src/components/navbar/Navbar";
+import TotalOrderCard from "../../src/components/TotalOrderCard/totalOrderCard";
+import { orderData } from "../../src/data/orderData";
+import { cardData } from "../../src/data/pricedata";
 
 const OrderList = () => {
   return (

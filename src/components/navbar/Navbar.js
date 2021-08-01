@@ -7,6 +7,7 @@ import styles from "./navbar.module.css";
 
 const Navbar = () => {
   const router = useRouter();
+  console.log(router);
 
   return (
     <div style={{ backgroundColor: "#0254F9", color: "white" }}>
@@ -16,18 +17,39 @@ const Navbar = () => {
           <div>
             {router.pathname === "/" && (
               <>
-                <Link href="/">
+                <Link href="/singup">
                   <a className="mx-3 text-white">Sign Up</a>
                 </Link>
-                <Link href="/">
+                <Link href="/singin">
                   <a className={`${styles.navItem} text-white`}>Log In</a>
                 </Link>
               </>
             )}
-            {router.pathname === "/orderlist" && (
+            {router.pathname === "/admin/orderlist" && (
               <>
-                <Link href="/">
+                <Link href="/orderlist">
                   <a className={`${styles.navItem} text-white`}>Order List</a>
+                </Link>
+              </>
+            )}
+            {(router.pathname === "/admin" ||
+              router.pathname === "/admin/pending-orders" ||
+              router.pathname === "/admin/complete-orders") && (
+              <>
+                <Link href="/admin/">
+                  <a className={`${styles.navItem} text-white mx-2`}>
+                    Home Page
+                  </a>
+                </Link>
+                <Link href="/admin/pending-orders">
+                  <a className={`${styles.navItem} text-white mx-2`}>
+                    Pending Orders
+                  </a>
+                </Link>
+                <Link href="/admin/complete-orders">
+                  <a className={`${styles.navItem} text-white mx-2`}>
+                    Complete Orders
+                  </a>
                 </Link>
               </>
             )}
