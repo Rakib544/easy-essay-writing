@@ -17,7 +17,7 @@ const TotalOrderCard = () => {
         <h1 className={styles.totalItemsText}>5 - Items</h1>
         <p className={styles.lastOrderDateText}>Last Order - 23 Oct, 2021</p>
       </div>
-      <button className={styles.pricingBtn}>New Order</button>
+      <button className={`btn ${styles.pricingBtn}`}>New Order</button>
     </div>
   );
 };

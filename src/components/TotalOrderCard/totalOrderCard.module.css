@@ -10,8 +10,6 @@
 }
 
 .pricingBtn {
-  /* width: 200px;
-  height: 59px; */
   padding: 10px 30px;
   width: 100%;
   background: #0262fa 0% 0% no-repeat padding-box;
@@ -23,6 +21,10 @@
   opacity: 1;
   transition: 0.3s;
   border: 0;
+}
+
+.pricingBtn:hover {
+  color: #fff;
 }
 
 .totalOrder {

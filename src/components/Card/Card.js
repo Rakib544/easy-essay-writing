@@ -1,8 +1,14 @@
+import { useRouter } from "next/router";
 import styles from "./card.module.css";
 
 const Card = ({ data }) => {
+  const router = useRouter();
   return (
-    <div className="col-12 col-sm-6 col-md-6 col-lg-4">
+    <div
+      className={`col-12 col-sm-6 col-md-6 ${
+        router.pathname === "/" ? "col-lg-3" : "col-lg-4"
+      }`}
+    >
       <div
         className={`${
           styles.styleCard
