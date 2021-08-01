@@ -1,12 +1,13 @@
 import React from "react";
 import Navbar from "../../src/components/navbar/Navbar";
+import OrderInfoCard from "../../src/components/orderInfoCard/orderInfoCard";
 
 const CompleteOrders = () => {
   return (
     <>
       <Navbar />
-      <div className="container">
-        <h1>Complete Orders Page</h1>
+      <div className="container my-5">
+        <OrderInfoCard />
       </div>
     </>
   );
