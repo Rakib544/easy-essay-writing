@@ -1,0 +1,29 @@
+.profileCard {
+  width: 504px;
+  height: 216px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  opacity: 1;
+}
+
+.btn {
+  padding: 10px 30px;
+  background: #cbdcff 0% 0% no-repeat padding-box;
+  display: block;
+  border: 0;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-size: 18px;
+  color: #0254f9;
+}
+
+.name {
+  font-size: 28px;
+  line-height: 20px;
+  font-weight: bold;
+}
+
+.email {
+  font-size: 16px;
+  color: #c9c9c9;
+}

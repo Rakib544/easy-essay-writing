@@ -1,0 +1,49 @@
+.name {
+  font-size: 28px;
+  line-height: 20px;
+  font-weight: bold;
+}
+
+.email {
+  font-size: 16px;
+  color: #c9c9c9;
+}
+
+.pricingBtn {
+  /* width: 200px;
+  height: 59px; */
+  padding: 10px 30px;
+  width: 100%;
+  background: #0262fa 0% 0% no-repeat padding-box;
+  border-radius: 8px;
+  opacity: 1;
+  font-size: 15px;
+  letter-spacing: 0px;
+  color: #fff;
+  opacity: 1;
+  transition: 0.3s;
+  border: 0;
+}
+
+.totalOrder {
+  font-size: 14px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.totalItemsText {
+  font-size: 40px;
+  line-height: 20px;
+  color: #0254f9;
+}
+
+.lastOrderDateText {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ed0000;
+}
+
+.border {
+  border: 4px solid #0254f9;
+  border-radius: 10px;
+}
