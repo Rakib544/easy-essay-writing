@@ -1,4 +1,5 @@
 import React from "react";
+import AdminFaqCard from "../../src/components/AdminFaqCard/AdminFaqCard";
 import Navbar from "../../src/components/navbar/Navbar";
 import ProfileCard from "../../src/components/profileCard/profileCard";
 
@@ -11,6 +12,7 @@ const Edit = () => {
         <p className="bg-white py-2 px-5 d-inline-block fs-4 fw-bold my-4">
           Banner Info
         </p>
+        <AdminFaqCard/>
       </div>
     </>
   );
