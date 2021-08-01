@@ -14,3 +14,32 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.beforeAfter {
+  display: flex;
+  flex-direction: row;
+}
+.beforeAfter:before, .beforeAfter:after{
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid;
+  margin: auto;
+}
+.beforeAfter:before {
+  margin-right: 10px
+}
+.beforeAfter:after {
+  margin-left: 10px
+}
+
+.input-background{
+  background-color: #ECF2F8;
+  border: none;
+}
+
+.icon-style{
+  background-color: red;
+  height: 40px;
+  width: 40px;
+}
+
