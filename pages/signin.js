@@ -2,8 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { CgFacebook } from "react-icons/cg";
+import { Context } from "../contaxt";
+import { useContext } from "react";
 
 const Signin = () => {
+  const {state} =  useContext(Context)
   const {
     register,
     handleSubmit,
@@ -26,6 +29,7 @@ const Signin = () => {
           <div className="container ">
             <div className="text-center ">
               <h2>Sign in to Clever</h2>
+              
               <div className="icon-style d-inline">
                 <FcGoogle />
               </div>

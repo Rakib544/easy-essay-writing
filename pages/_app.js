@@ -1,5 +1,6 @@
 import Head from "next/head";
 import "../styles/globals.css";
+import { Provider, provider } from '../contaxt/index'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -27,7 +28,9 @@ function MyApp({ Component, pageProps }) {
           crossOrigin="anonymous"
         ></script>
       </Head>
-      <Component {...pageProps} />
+      <Provider>
+        <Component {...pageProps} />
+      </Provider>
     </>
   );
 }

@@ -1,10 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
 import AdminFaqCard from "../../src/components/AdminFaqCard/AdminFaqCard";
-=======
-
-import Card from "../../src/components/Card/Card";
->>>>>>> 1534153f151f6d746c4fcd6bbc81a89b915b680a
 import Navbar from "../../src/components/navbar/Navbar";
 import ProfileCard from "../../src/components/profileCard/profileCard";
 import { cardData } from "../../src/data/pricedata";
@@ -13,14 +8,6 @@ const Edit = () => {
   return (
     <>
       <Navbar />
-<<<<<<< HEAD
-      <div className="container my-5">
-        <ProfileCard />
-        <p className="bg-white py-2 px-5 d-inline-block fs-4 fw-bold my-4">
-          Banner Info
-        </p>
-        <AdminFaqCard/>
-=======
       <div className="bg-light">
         <div className="container my-5">
           <ProfileCard />
@@ -127,7 +114,6 @@ const Edit = () => {
           </div>
 
         </div>
->>>>>>> 1534153f151f6d746c4fcd6bbc81a89b915b680a
       </div>
     </>
   );
