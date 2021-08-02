@@ -1,9 +1,15 @@
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
 import { CgFacebook } from "react-icons/cg";
+<<<<<<< HEAD
 import { Context } from "../contaxt";
 import { useContext } from "react";
+=======
+import { FcGoogle } from "react-icons/fc";
+import bannerImg from "../images/login-img.png";
+>>>>>>> d4a3d2c93127c7a99f189166a7a613c836015d9f
 
 const Signin = () => {
   const {state} =  useContext(Context)
@@ -17,68 +23,76 @@ const Signin = () => {
 
   return (
     <div className="overflow-hidden">
-      <div className="row d-flex align-items-center">
-        <div className="col-md-6">
-          <img
-            className="vh-100"
-            src="https://us.123rf.com/450wm/taira42/taira421802/taira42180200127/94682210-mystical-night-sky-background-with-full-moon-clouds-and-stars-moonlight-night-with-copy-space-for-wi.jpg?ver=6"
-            alt=""
-          />
+      <div className="row d-flex vh-100">
+        <div className="col-md-6 d-none d-md-block">
+          <Image src={bannerImg} alt="banner-img" />
         </div>
-        <div className="col-md-6 ">
+        <div className="col-md-6 mt-5 ">
           <div className="container ">
             <div className="text-center ">
+<<<<<<< HEAD
               <h2>Sign in to Clever</h2>
               
               <div className="icon-style d-inline">
                 <FcGoogle />
+=======
+              <h2 className="fw-bold text-secondary mb-5">Sign in to Clever</h2>
+              <div className="p-3 d-inline icon-bg">
+                <FcGoogle size={24} />
+>>>>>>> d4a3d2c93127c7a99f189166a7a613c836015d9f
               </div>
-              <div className="icon-style d-inline">
-                <CgFacebook />
+              <div className="p-3 d-inline ms-2 icon-bg">
+                <CgFacebook size={24} className="fb-icon-color" />
               </div>
             </div>
-            <p className="beforeAfter">or do it via email</p>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="mb-2">
-                <label className="form-label" htmlFor="email">
+            <small className="beforeAfter mt-4">or do it via email</small>
+            <form onSubmit={handleSubmit(onSubmit)} className="px-md-5">
+              <div className="my-2">
+                <label className="form-label fs-7" htmlFor="email">
                   Email
                 </label>
-                <input autoComplete = "off"
-                  className="form-control input-background"
+                <input
+                  autoComplete="off"
+                  className="form-control input-background py-2"
                   type="email"
                   id="email"
                   placeholder="@mail.com"
+                  defaultValue=""
                   {...register("email")}
                 />
               </div>
               <div className="mb-2">
-                <label className="form-label" htmlFor="password">
+                <label className="form-label fs-7" htmlFor="password">
                   Password
                 </label>
-                <input autoComplete = "off"
-                  className="form-control input-background"
+                <input
+                  autoComplete="off"
+                  className="form-control input-background py-2"
                   type="password"
                   id="password"
+                  defaultValue=""
                   placeholder="Password"
                   {...register("password", { required: true })}
                 />
               </div>
-              <div className="d-flex justify-content-end mt-2">
-                <p style={{ color: "blue" }}>Forget password</p>
-              </div>
-              {errors.exampleRequired && <span>This field is required</span>}
-              <button
-                className="btn btn-lg btn-primary w-100 mt-3"
-                type="submit"
+              <small
+                style={{ cursor: "pointer" }}
+                className="text-primary fs-7 d-block text-end"
               >
+                Forget password
+              </small>
+              {errors.exampleRequired && <span>This field is required</span>}
+              <button className="btn btn-primary w-100 mt-3" type="submit">
                 log in
               </button>
             </form>
-            <small
-              style={{ color: "#868B99" }}
-              className="d-block mt-4 text-center"
-            >
-              &#169; 2021 Dribble All right reserved
+            <small className="text-center d-block mt-1">
+              <strong>
+                Don't have any account?{" "}
+                <Link href="/signup" className="text-primary">
+                  <a>singup</a>
+                </Link>{" "}
+              </strong>
             </small>
           </div>
         </div>
