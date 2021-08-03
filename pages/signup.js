@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { CgFacebook } from "react-icons/cg";
 import { FcGoogle } from "react-icons/fc";
 import bannerImg from "../images/login-img.png";
+import logo from "../images/logo.png";
 
 const Signup = () => {
   const {
@@ -15,19 +16,29 @@ const Signup = () => {
   } = useForm();
   const onSubmit = (data) => console.log(data);
   return (
-    <div className="overflow-hidden">
-      <div className="row d-flex align-items-center vh-100">
+    <div className="overflow-hidden position-relative">
+      <div
+        className="position-absolute top-0 left-0 m-5 d-none d-md-block"
+        style={{ zIndex: "999999" }}
+      >
+        <Link href="/">
+          <a>
+            <Image src={logo} alt="logo" height="50px" width="130px" />
+          </a>
+        </Link>
+      </div>
+      <div className="row d-flex align-items-center">
         <div className="col-md-6 d-none d-md-block vh-100 position-relative">
           <Image src={bannerImg} alt="banner-img" />
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6 mb-2">
           <div className="container ">
             <div className="text-center">
-              <p className="fw-bold text-secondary mb-4">Sign in to Clever</p>
-              <div className="p-3 d-inline icon-bg">
+              <p className="fw-bold text-secondary mb-4">Sign up to Clever</p>
+              <div className="p-3 d-inline icon-bg cursor-pointer">
                 <FcGoogle size={24} />
               </div>
-              <div className="p-3 d-inline ms-2 icon-bg">
+              <div className="p-3 d-inline ms-2 icon-bg cursor-pointer">
                 <CgFacebook size={24} className="fb-icon-color" />
               </div>
             </div>
@@ -35,7 +46,7 @@ const Signup = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="px-md-5">
               <div className="row">
                 <div className="mb-1 col-12 col-md-6">
-                  <label className="form-label fs-20" htmlFor="firstName">
+                  <label className="form-label fs-14" htmlFor="firstName">
                     First Name
                   </label>
                   <input
@@ -49,7 +60,7 @@ const Signup = () => {
                   />
                 </div>
                 <div className="mb-2 col-12 col-md-6">
-                  <label className="form-label fs-20" htmlFor="lastName">
+                  <label className="form-label fs-14" htmlFor="lastName">
                     Last Name
                   </label>
                   <input
@@ -64,7 +75,7 @@ const Signup = () => {
                 </div>
               </div>
               <div className="mb-2">
-                <label className="form-label fs-20" htmlFor="email">
+                <label className="form-label fs-14" htmlFor="email">
                   Email
                 </label>
                 <input
@@ -78,7 +89,7 @@ const Signup = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="form-label fs-20" htmlFor="phone">
+                <label className="form-label fs-14" htmlFor="phone">
                   Phone
                 </label>
                 <input
@@ -91,7 +102,7 @@ const Signup = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="form-label fs-20" htmlFor="password">
+                <label className="form-label fs-14" htmlFor="password">
                   Password
                 </label>
                 <input
@@ -105,7 +116,7 @@ const Signup = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="form-label fs-20" htmlFor="password">
+                <label className="form-label fs-14" htmlFor="password">
                   Confirm Password
                 </label>
                 <input

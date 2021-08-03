@@ -7,8 +7,8 @@ const OrderInfoCard = () => {
   const router = useRouter();
 
   return (
-    <div className="bg-light mt-5 pt-5 mb-5 pb-5 ">
-      <div className="container bg-white p-5 ">
+    <div className="mt-5 pt-5 mb-5 pb-5">
+      <div className="container bg-white p-5 box-shadow rounded-3 ">
         <div className="row  d-flex align-items-center border-bottom pb-4 mb-3">
           <div className="col-md-3 ">
             <p className="text-primary fs-22 fw-bold">Order - 65213</p>
@@ -35,7 +35,7 @@ const OrderInfoCard = () => {
           ) : (
             ""
           )}
-          <div className="col-md-2 ms-auto d-flex flex-column align-items-center">
+          <div className="col-md-2 ms-md-start d-flex flex-column align-items-center">
             <p className="text-primary fs-22 fw-bold">Order-Action</p>
             <button type="button" class="btn btn-success text-white px-5 py-2">
               Complete
@@ -44,24 +44,24 @@ const OrderInfoCard = () => {
         </div>
         <div className="row  d-flex justify-content-center align-items-center ">
           <div className="col-md-3 ">
-            <p className="fs-18 fw-regular">Customer Name</p>
+            <p className="fs-18 fw-bold">Customer Name</p>
             <p className="text-muted">Kawsar Ahmmed</p>
           </div>
           <div className="col-md-3">
-            <p className="fs-18 fw-regular">Customer Mail</p>
+            <p className="fs-18 fw-regular fw-bold">Customer Mail</p>
             <p className="text-muted">kawsarahmmedr@gmail.com</p>
           </div>
           <div className="col-md-2 d-flex flex-column">
-            <p className="fs-18 fw-regular">Order Amount</p>
+            <p className="fs-18 fw-bold">Order Amount</p>
             <p className="text-muted">$12</p>
           </div>
           <div className="col-md-2 d-flex flex-column  ">
-            <p className="text-danger fs-18 fw-regular">Delivery Time</p>
+            <p className="text-danger fs-18 fw-bold">Delivery Time</p>
             <p className="text-primary">2 Days</p>
           </div>
           <div className="col-md-2 d-flex flex-column  ">
-            <p className="text-primary fs-18 fw-regular">Quantity</p>
-            <p className="text-muted">1</p>
+            <p className="text-primary fs-18 fw-bold">Quantity</p>
+            <p className="text-muted">1 Items</p>
           </div>
         </div>
       </div>

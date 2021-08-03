@@ -4,7 +4,9 @@ import styles from "./profileCard.module.css";
 
 const ProfileCard = () => {
   return (
-    <div className={`${styles.profileCard} row d-flex align-items-center`}>
+    <div
+      className={`${styles.profileCard} row d-flex align-items-center box-shadow`}
+    >
       <div className="col-3 p-4">
         <Image src={profileImg} height="60" width="60" alt="profile" />
       </div>

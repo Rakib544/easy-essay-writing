@@ -31,8 +31,8 @@
 }
 
 .styleCard:hover,
-.styleCard:hover h2,
-.styleCard:hover h1 {
+.styleCard:hover p,
+.styleCard:hover p {
   background: #0262fa;
   color: #ffffff;
 }

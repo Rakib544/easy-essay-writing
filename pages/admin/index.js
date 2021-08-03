@@ -1,9 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
-import AdminFaqCard from "../../src/components/AdminFaqCard/AdminFaqCard";
-=======
 import Card from "../../src/components/Card/Card";
->>>>>>> d4a3d2c93127c7a99f189166a7a613c836015d9f
 import Navbar from "../../src/components/navbar/Navbar";
 import ProfileCard from "../../src/components/profileCard/profileCard";
 import { cardData } from "../../src/data/pricedata";
@@ -16,12 +12,14 @@ const Edit = () => {
         <div className="container my-5">
           <ProfileCard />
 
-          <p className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold my-4">
+          <p className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold my-4 box-shadow">
             Banner Info
           </p>
 
-          <div className="bg-white py-4 px-5 my-4">
-            <p className="border rounded d-inline-block fw-bold fs-22 py-2 px-4">Title -</p>
+          <div className="bg-white py-4 px-5 my-4 box-shadow">
+            <p className="border rounded d-inline-block fw-bold fs-22 py-2 px-4">
+              Title -
+            </p>
             <div className="mt-4 mb-4 d-flex justify-content-between align-items-center">
               <p className="fs-22 fw-bold">
                 Have a project that you’re stuck on? We’re here to help. Rates
@@ -53,12 +51,14 @@ const Edit = () => {
             </div>
           </div>
 
-          <p className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold my-4">
+          <p className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold my-4 box-shadow">
             About
           </p>
 
-          <div className="bg-white py-4 px-5 my-4">
-            <p className="border rounded fs-22 fw-bold d-inline-block py-2 px-4">Title -</p>
+          <div className="bg-white py-4 px-5 my-4 box-shadow">
+            <p className="border rounded fs-22 fw-bold d-inline-block py-2 px-4">
+              Title -
+            </p>
             <div className="mt-4 mb-4 d-flex justify-content-between align-items-center">
               <p className="fs-22 fw-bold">Plagiarism-free work Guaranteed!</p>
               <button
@@ -98,12 +98,14 @@ const Edit = () => {
             </div>
           </div>
 
-          <p className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold fw-bold my-4">
+          <p className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold fw-bold my-4 box-shadow">
             Our Process
           </p>
 
-          <div className="bg-white py-4 px-5 my-4">
-            <p className="border rounded d-inline-block py-2 fs-22 fw-bold px-4">Title -</p>
+          <div className="bg-white py-4 px-5 my-4 box-shadow">
+            <p className="border rounded d-inline-block py-2 fs-22 fw-bold px-4">
+              Title -
+            </p>
             <div className="mt-4 mb-4 d-flex justify-content-between align-items-center">
               <p className="fs-22 fw-bold">Our Process</p>
               <button
@@ -148,7 +150,9 @@ const Edit = () => {
                   </button>
                 </div>
 
-                <p className="fs-18 fw-bold">Give us a description of your project.</p>
+                <p className="fs-18 fw-bold">
+                  Give us a description of your project.
+                </p>
                 <div className="mt-4 mb-4 d-flex justify-content-between align-items-center">
                   <p className="border fs-16 fw-bold rounded d-inline-block py-2 px-4">
                     Content
@@ -169,11 +173,11 @@ const Edit = () => {
             </div>
           </div>
 
-          <p className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold my-4">
+          <p className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold my-4 box-shadow">
             Pricing
           </p>
 
-          <div className="bg-white py-4 px-5 my-4">
+          <div className="py-4 px-5 my-4">
             <div className="row">
               {cardData.map((data) => (
                 <Card keys={data.id} data={data} />
@@ -181,11 +185,11 @@ const Edit = () => {
             </div>
           </div>
 
-          <p className="bg-white fs-26 fw-bold py-2 px-5 d-inline-block my-4">
+          <p className="bg-white fs-26 fw-bold py-2 px-5 d-inline-block my-4 box-shadow">
             FAQ
           </p>
 
-          <div className="bg-white py-4 px-5 my-4">
+          <div className="bg-white py-4 px-5 my-4 box-shadow">
             <div className="row">
               <div className="col-md-6">
                 <div className="mb-4">

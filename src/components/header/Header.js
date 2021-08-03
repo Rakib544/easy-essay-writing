@@ -13,7 +13,9 @@ const Header = () => {
           as <span className="banner-text">$0.048/</span>word!
         </p>
         <div className={styles.text}>
-          <p className={`${styles.paragraphText} fs-16`}>
+          <p
+            className={`${styles.paragraphText} fs-16 text-center text-md-start`}
+          >
             Enjoy plagiarism-free, quality writing performed by dozens of
             accomplished scholars.Types of Work: Articles, Blog Posts, Personal
             Narratives, Academic-Level Essays, and Much More.

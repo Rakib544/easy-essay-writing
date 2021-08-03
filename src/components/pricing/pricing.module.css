@@ -39,10 +39,6 @@
   background: #0262fa;
   color: #ffffff;
 }
-.pricingTitle {
-  font-size: 38px;
-  font-weight: bolder;
-}
 
 .styleCard:hover .pricingBtn {
   background-color: #fff;

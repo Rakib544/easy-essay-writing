@@ -1,20 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-
-import { Context } from "../contaxt";
-import { useContext } from "react";
-import bannerImg from "../images/login-img.png";
-import { CgFacebook, CgPassword } from "react-icons/cg";
+import { CgFacebook } from "react-icons/cg";
 import { FcGoogle } from "react-icons/fc";
-import firebase from "../firebase";
+import bannerImg from "../images/login-img.png";
+import logo from "../images/logo.png";
 
 const Signin = () => {
-  const [email, setEmail] = useState("");
-  const [Pass, setPass] = useState("");
-  const { state } = useContext(Context)
-  
   const {
     register,
     handleSubmit,
@@ -24,26 +17,42 @@ const Signin = () => {
   const onSubmit = (data) => console.log(data);
 
   return (
-    <div className="overflow-hidden">
-      <div className="row d-flex vh-100">
+    <div className="overflow-hidden position-relative">
+      <div
+        className="position-absolute top-0 left-0 m-5 d-none d-md-block"
+        style={{ zIndex: "999999" }}
+      >
+        <Link href="/">
+          <a>
+            <Image src={logo} alt="logo" height="50px" width="130px" />
+          </a>
+        </Link>
+      </div>
+      <div className="row d-flex vh-100 align-items-center">
         <div className="col-md-6 d-none d-md-block">
           <Image src={bannerImg} alt="banner-img" />
         </div>
-        <div className="col-md-6 mt-5 ">
+        <div className="col-md-6 mb-5 pb-5">
           <div className="container ">
             <div className="text-center ">
-              <p className="fw-bold text-secondary fs-57 mb-5">Sign in to Clever</p>
-              <div className="p-3 d-inline icon-bg">
+              <p className="fw-bold text-secondary fs-50">Sign in to Clever</p>
+              <div className="p-3 d-inline icon-bg cursor-pointer">
                 <FcGoogle size={24} />
               </div>
-              <div className="p-3 d-inline ms-2 icon-bg">
-                <CgFacebook size={24} className="fb-icon-color" />
+              <div className="p-3 d-inline ms-2 icon-bg cursor-pointer">
+                <CgFacebook
+                  size={24}
+                  className="fb-icon-color cursor-pointer"
+                />
               </div>
             </div>
             <p className="beforeAfter mt-4 fs-15">or do it via email</p>
-            <form onSubmit={handleSubmit(onSubmit)} className="px-md-5">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="px-md-5 mx-md-5 px-3"
+            >
               <div className="my-2">
-                <label className="form-label fs-20" htmlFor="email">
+                <label className="form-label fs-14" htmlFor="email">
                   Email
                 </label>
                 <input
@@ -57,7 +66,7 @@ const Signin = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="form-label fs-20" htmlFor="password">
+                <label className="form-label fs-14" htmlFor="password">
                   Password
                 </label>
                 <input
@@ -72,7 +81,7 @@ const Signin = () => {
               </div>
               <small
                 style={{ cursor: "pointer" }}
-                className="text-primary fs-18 d-block text-end"
+                className="text-primary fs-6 d-block text-end"
               >
                 Forget password
               </small>

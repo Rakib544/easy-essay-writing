@@ -1,9 +1,9 @@
-import Plagiarism from "../src/components/plagiarism/plagiarism";
-import Process from '../src/components/process/Process';
-import Pricing from "../src/components/pricing/pricing";
 import Footer from "../src/components/footer/footer";
 import Header from "../src/components/header/Header";
 import Navbar from "../src/components/navbar/Navbar";
+import Plagiarism from "../src/components/plagiarism/plagiarism";
+import Pricing from "../src/components/pricing/pricing";
+import Process from "../src/components/process/Process";
 import Question from "../src/components/Question/Question";
 
 export default function Home() {
@@ -13,7 +13,9 @@ export default function Home() {
       <Header />
       <Plagiarism />
       <Process />
-      <Pricing />
+      <div className="mx-4 mx-md-0">
+        <Pricing />
+      </div>
       <Question />
       <Footer />
     </div>

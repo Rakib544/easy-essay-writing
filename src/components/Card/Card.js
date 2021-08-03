@@ -12,7 +12,7 @@ const Card = ({ data }) => {
       <div
         className={`${
           styles.styleCard
-        } mx-auto d-flex justify-content-center align-items-center mx-3 mb-3 p-3 ${
+        } mx-auto d-flex justify-content-center align-items-center mx-3 mb-3 px-3 py-md-4 py-3 box-shadow ${
           data.status === "active" ? `${styles.active}` : ""
         }`}
       >
@@ -20,7 +20,9 @@ const Card = ({ data }) => {
           <p className="fw-bold fs-20">Delivery within</p>
           <p className={`${styles.dateStyle} fs-30`}>{data.dueDate} Days</p>
           <span className="fw-bold">
-            <p className={`${styles.priceStyle} fs-60 d-inline`}>${data.price}</p>
+            <p className={`${styles.priceStyle} fs-60 d-inline`}>
+              ${data.price}
+            </p>
             /page
           </span>
           <p className="fw-bold fs-4">or</p>
