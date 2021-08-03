@@ -1,18 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { CgFacebook } from "react-icons/cg";
-<<<<<<< HEAD
+
 import { Context } from "../contaxt";
 import { useContext } from "react";
-=======
-import { FcGoogle } from "react-icons/fc";
 import bannerImg from "../images/login-img.png";
->>>>>>> d4a3d2c93127c7a99f189166a7a613c836015d9f
+import { CgFacebook, CgPassword } from "react-icons/cg";
+import { FcGoogle } from "react-icons/fc";
+import firebase from "../firebase";
 
 const Signin = () => {
-  const {state} =  useContext(Context)
+  const [email, setEmail] = useState("");
+  const [Pass, setPass] = useState("");
+  const { state } = useContext(Context)
+  
   const {
     register,
     handleSubmit,
@@ -30,16 +32,9 @@ const Signin = () => {
         <div className="col-md-6 mt-5 ">
           <div className="container ">
             <div className="text-center ">
-<<<<<<< HEAD
-              <h2>Sign in to Clever</h2>
-              
-              <div className="icon-style d-inline">
-                <FcGoogle />
-=======
               <h2 className="fw-bold text-secondary mb-5">Sign in to Clever</h2>
               <div className="p-3 d-inline icon-bg">
                 <FcGoogle size={24} />
->>>>>>> d4a3d2c93127c7a99f189166a7a613c836015d9f
               </div>
               <div className="p-3 d-inline ms-2 icon-bg">
                 <CgFacebook size={24} className="fb-icon-color" />
