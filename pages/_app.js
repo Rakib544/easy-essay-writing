@@ -1,5 +1,7 @@
 import Head from "next/head";
 import "../styles/globals.css";
+import { Provider, provider } from '../contaxt/index'
+import FirebaseAuth from "../src/components/FirebaseAuth";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -27,7 +29,11 @@ function MyApp({ Component, pageProps }) {
           crossOrigin="anonymous"
         ></script>
       </Head>
-      <Component {...pageProps} />
+      <Provider>
+        <FirebaseAuth>
+          <Component {...pageProps} />
+        </FirebaseAuth>
+      </Provider>
     </>
   );
 }

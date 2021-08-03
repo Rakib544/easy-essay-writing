@@ -1,12 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { CgFacebook } from "react-icons/cg";
-import { FcGoogle } from "react-icons/fc";
+
+import { Context } from "../contaxt";
+import { useContext } from "react";
 import bannerImg from "../images/login-img.png";
+import { CgFacebook, CgPassword } from "react-icons/cg";
+import { FcGoogle } from "react-icons/fc";
+import firebase from "../firebase";
 
 const Signin = () => {
+  const [email, setEmail] = useState("");
+  const [Pass, setPass] = useState("");
+  const { state } = useContext(Context)
+  
   const {
     register,
     handleSubmit,
