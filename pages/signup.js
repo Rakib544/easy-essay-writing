@@ -23,7 +23,7 @@ const Signup = () => {
         <div className="col-md-6">
           <div className="container ">
             <div className="text-center">
-              <h3 className="fw-bold text-secondary mb-4">Sign in to Clever</h3>
+              <p className="fw-bold text-secondary mb-4">Sign in to Clever</p>
               <div className="p-3 d-inline icon-bg">
                 <FcGoogle size={24} />
               </div>
@@ -31,11 +31,11 @@ const Signup = () => {
                 <CgFacebook size={24} className="fb-icon-color" />
               </div>
             </div>
-            <p className="beforeAfter mt-4">or do it via email</p>
+            <p className="beforeAfter fs-15 mt-4">or do it via email</p>
             <form onSubmit={handleSubmit(onSubmit)} className="px-md-5">
               <div className="row">
                 <div className="mb-1 col-12 col-md-6">
-                  <label className="form-label fs-7" htmlFor="firstName">
+                  <label className="form-label fs-20" htmlFor="firstName">
                     First Name
                   </label>
                   <input
@@ -49,7 +49,7 @@ const Signup = () => {
                   />
                 </div>
                 <div className="mb-2 col-12 col-md-6">
-                  <label className="form-label fs-7" htmlFor="lastName">
+                  <label className="form-label fs-20" htmlFor="lastName">
                     Last Name
                   </label>
                   <input
@@ -64,7 +64,7 @@ const Signup = () => {
                 </div>
               </div>
               <div className="mb-2">
-                <label className="form-label fs-7" htmlFor="email">
+                <label className="form-label fs-20" htmlFor="email">
                   Email
                 </label>
                 <input
@@ -78,7 +78,7 @@ const Signup = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="form-label fs-7" htmlFor="phone">
+                <label className="form-label fs-20" htmlFor="phone">
                   Phone
                 </label>
                 <input
@@ -91,7 +91,7 @@ const Signup = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="form-label fs-7" htmlFor="password">
+                <label className="form-label fs-20" htmlFor="password">
                   Password
                 </label>
                 <input
@@ -105,7 +105,7 @@ const Signup = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="form-label fs-7" htmlFor="password">
+                <label className="form-label fs-20" htmlFor="password">
                   Confirm Password
                 </label>
                 <input

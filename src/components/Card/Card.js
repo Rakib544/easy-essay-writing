@@ -17,10 +17,10 @@ const Card = ({ data }) => {
         }`}
       >
         <div className="card-body text-center">
-          <p className="fw-bold">Delivery within</p>
-          <h1 className={`${styles.dateStyle}`}>{data.dueDate} Days</h1>
+          <p className="fw-bold fs-20">Delivery within</p>
+          <p className={`${styles.dateStyle} fs-30`}>{data.dueDate} Days</p>
           <span className="fw-bold">
-            <h2 className={`${styles.priceStyle} d-inline`}>${data.price}</h2>
+            <p className={`${styles.priceStyle} fs-60 d-inline`}>${data.price}</p>
             /page
           </span>
           <p className="fw-bold fs-4">or</p>

@@ -11,12 +11,12 @@ const plagiarism = () => {
         </div>
         <div className="col-md-6">
           <div className="text-center text-md-start fw-bolder">
-            <h1 className="fs-1 mt-2">
+            <p className="fs-48 mt-2 fw-bold">
               Plagiarism-free work
               <br />
               Guaranteed!
-            </h1>
-            <span style={{ fontSize: "16px" }}>
+            </p>
+            <span className="fs-16">
               No more stressing about your writing needs, just schedule an
               assignment for Easy Essay Writing and we’ll do the stressing for
               you!
@@ -25,7 +25,7 @@ const plagiarism = () => {
               style={{ backgroundColor: "#E2E6FF" }}
               className="btn d-block mt-4 py-2 px-5 rounded-pill mx-auto mx-md-0"
             >
-              <span style={{ color: "#566DF2", fontSize: "16px" }}>
+              <span className="fs-16" style={{ color: "#566DF2"}}>
                 Learn More
               </span>
             </button>

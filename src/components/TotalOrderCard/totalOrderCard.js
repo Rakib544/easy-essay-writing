@@ -8,14 +8,14 @@ const TotalOrderCard = () => {
       <div className="d-flex">
         <Image src={profileImg} alt="profile" height="50" width="50" />
         <div className="ms-3">
-          <h6 className={styles.name}>kawsarahmmedr</h6>
-          <small className={styles.email}>kawsarahmmedr@gmail.com</small>
+          <p className={`${styles.name} fs-28 fw-bold`}>kawsarahmmedr</p>
+          <small className={`${styles.email} fs-16`}>kawsarahmmedr@gmail.com</small>
         </div>
       </div>
       <div className={`p-4 ${styles.border} my-4`}>
         <small className={styles.totalOrder}>Total Orders</small>
-        <h1 className={styles.totalItemsText}>5 - Items</h1>
-        <p className={styles.lastOrderDateText}>Last Order - 23 Oct, 2021</p>
+        <p className={`${styles.totalItemsText} fs-48 fw-bold`}>5 - Items</p>
+        <p className={`${styles.lastOrderDateText} fs-19`}>Last Order - 23 Oct, 2021</p>
       </div>
       <button className={`btn ${styles.pricingBtn}`}>New Order</button>
     </div>
