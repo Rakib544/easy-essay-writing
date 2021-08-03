@@ -178,7 +178,7 @@ const Edit = () => {
           </p>
 
           <div className="py-4 px-5 my-4">
-            <div className="row">
+            <div className="row px-md-5 mx-md-5">
               {cardData.map((data) => (
                 <Card keys={data.id} data={data} />
               ))}

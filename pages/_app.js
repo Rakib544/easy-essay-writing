@@ -1,7 +1,13 @@
 import Head from "next/head";
+import { createContext, useState } from "react";
+
 import "../styles/globals.css";
+export const UserContext = createContext();
 
 function MyApp({ Component, pageProps }) {
+
+  const [signedUser, setSignedUser] = useState({});
+
   return (
     <>
       <Head>
@@ -27,7 +33,11 @@ function MyApp({ Component, pageProps }) {
           crossOrigin="anonymous"
         ></script>
       </Head>
-      <Component {...pageProps} />
+
+      <UserContext.Provider value={[signedUser, setSignedUser]}>
+        <Component {...pageProps} />
+      </UserContext.Provider>
+
     </>
   );
 }
