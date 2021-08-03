@@ -24,7 +24,7 @@ const Signin = () => {
         <div className="col-md-6 mt-5 ">
           <div className="container ">
             <div className="text-center ">
-              <h2 className="fw-bold text-secondary mb-5">Sign in to Clever</h2>
+              <p className="fw-bold text-secondary fs-57 mb-5">Sign in to Clever</p>
               <div className="p-3 d-inline icon-bg">
                 <FcGoogle size={24} />
               </div>
@@ -32,10 +32,10 @@ const Signin = () => {
                 <CgFacebook size={24} className="fb-icon-color" />
               </div>
             </div>
-            <small className="beforeAfter mt-4">or do it via email</small>
+            <p className="beforeAfter mt-4 fs-15">or do it via email</p>
             <form onSubmit={handleSubmit(onSubmit)} className="px-md-5">
               <div className="my-2">
-                <label className="form-label fs-7" htmlFor="email">
+                <label className="form-label fs-20" htmlFor="email">
                   Email
                 </label>
                 <input
@@ -49,7 +49,7 @@ const Signin = () => {
                 />
               </div>
               <div className="mb-2">
-                <label className="form-label fs-7" htmlFor="password">
+                <label className="form-label fs-20" htmlFor="password">
                   Password
                 </label>
                 <input
@@ -64,7 +64,7 @@ const Signin = () => {
               </div>
               <small
                 style={{ cursor: "pointer" }}
-                className="text-primary fs-7 d-block text-end"
+                className="text-primary fs-18 d-block text-end"
               >
                 Forget password
               </small>

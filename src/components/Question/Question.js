@@ -10,8 +10,8 @@ const Question = () => {
   return (
     <div className={styles.question}>
       <div style={{ marginRight: "20%", paddingBottom: "7%" }}>
-        <h1>Have question?</h1>
-        <h1 className="fw-bold">We have answers!</h1>
+        <p className="fs-44">Have question?</p>
+        <p className="fw-bold fs-44">We have answers!</p>
       </div>
 
       <div className="col-12 col-md-8 col-lg-7 mx-auto position-relative bg-white p-3 p-md-5">

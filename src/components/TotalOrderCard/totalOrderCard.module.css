@@ -1,11 +1,9 @@
 .name {
-  font-size: 28px;
   line-height: 20px;
   font-weight: bold;
 }
 
 .email {
-  font-size: 16px;
   color: #c9c9c9;
 }
 
@@ -34,13 +32,11 @@
 }
 
 .totalItemsText {
-  font-size: 40px;
   line-height: 20px;
   color: #0254f9;
 }
 
 .lastOrderDateText {
-  font-size: 14px;
   font-weight: bold;
   color: #ed0000;
 }

@@ -11,8 +11,8 @@ const PendingOrders = () => {
         <div className="d-flex flex-column flex-md-row">
           <ProfileCard />
           <div className="ms-md-5 mt-5 mt-md-0 p-5 bg-white rounded-3">
-            <h3 className="fw-bold">Total Pending Orders</h3>
-            <h2 className="text-danger">40</h2>
+            <p className="fw-bold fs-28">Total Pending Orders</p>
+            <p className="text-danger fs-50">40</p>
           </div>
         </div>
         <OrderInfoCard />

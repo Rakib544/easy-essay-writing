@@ -5,15 +5,6 @@
   background-size: cover;
   width: 100%;
 }
-
-.headingText {
-  font-size: 48px;
-}
-
-.paragraphText {
-  font-size: 16px;
-}
-
 .text {
   width: 50%;
 }
@@ -26,14 +17,10 @@
   }
 
   .headingText {
-    font-size: 22px;
-    margin-top: 18px;
+   margin-top: 18px;
     line-height: 30px;
   }
 
-  .paragraphText {
-    font-size: 16px;
-  }
   .text {
     width: 100%;
   }
