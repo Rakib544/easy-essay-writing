@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { CgFacebook } from "react-icons/cg";
 import { FcGoogle } from "react-icons/fc";
@@ -8,6 +8,7 @@ import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
 
 const Signin = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -86,7 +87,11 @@ const Signin = () => {
                 Forget password
               </small>
               {errors.exampleRequired && <span>This field is required</span>}
-              <button className="btn btn-primary w-100 mt-3" type="submit">
+              <button
+                onClick={() => router.push("/admin")}
+                className="btn btn-primary w-100 mt-3"
+                type="submit"
+              >
                 log in
               </button>
             </form>
