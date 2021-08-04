@@ -1,11 +1,10 @@
 import Head from "next/head";
 import { createContext, useState } from "react";
-
 import "../styles/globals.css";
+
 export const UserContext = createContext();
 
 function MyApp({ Component, pageProps }) {
-
   const [signedUser, setSignedUser] = useState({});
 
   return (
@@ -21,7 +20,7 @@ function MyApp({ Component, pageProps }) {
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
-          crossOrigin
+          crossOrigin="anonymous"
         ></link>
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap"
@@ -37,7 +36,6 @@ function MyApp({ Component, pageProps }) {
       <UserContext.Provider value={[signedUser, setSignedUser]}>
         <Component {...pageProps} />
       </UserContext.Provider>
-
     </>
   );
 }
