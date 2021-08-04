@@ -51,7 +51,7 @@ const OrderList = () => {
           </p>
           <div className="row">
             {cardData.map((data) => (
-              <Card keys={data.id} data={data} />
+              <Card key={data.id} data={data} />
             ))}
           </div>
         </div>

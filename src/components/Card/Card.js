@@ -18,15 +18,15 @@ const Card = ({ data }) => {
       >
         <div className="card-body text-center">
           <p className="fw-bold fs-20">Delivery within</p>
-          <p className={`${styles.dateStyle} fs-30`}>{data.dueDate} Days</p>
+          <p className={`${styles.dateStyle} fs-30`}>{data.deliveryDay} Days</p>
           <span className="fw-bold">
             <p className={`${styles.priceStyle} fs-60 d-inline`}>
-              ${data.price}
+              ${data.perPage}
             </p>
             /page
           </span>
           <p className="fw-bold fs-4">or</p>
-          <p className={`${styles.wordStyle}`}>250 word</p>
+          <p className={`${styles.wordStyle}`}>{data.wordPerPage} word</p>
           <button className={`${styles.pricingBtn} btn`}>Order Now</button>
         </div>
       </div>
