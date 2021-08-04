@@ -6,7 +6,7 @@ import processSectionImg from "../../../images/Grupo 257.svg";
 import { processCardData } from "../../data/processCardData";
 import styles from "./process.module.css";
 
-const Process = () => {
+const Process = ({processData}) => {
   return (
     <div className={`${styles.processSectionBg} py-5`}>
       <div className="container position-relative">
@@ -14,11 +14,9 @@ const Process = () => {
           <Image src={processSectionImg} alt="img" height="125" width="125" />
         </div>
         <div className="col-12 col-md-8 col-lg-7 mx-auto">
-          <h1 className={`${styles.processSectionTitle} fs-48`}>Our Process</h1>
+          <h1 className={`${styles.processSectionTitle} fs-48`}>{processData?.title}</h1>
           <p className="text-center mb-5 fs-16">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry’s standard dummy text
-            ever since the 1500s
+            {processData?.headerDetails}
           </p>
         </div>
         <div className="row text-center">

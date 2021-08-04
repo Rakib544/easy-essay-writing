@@ -4,12 +4,13 @@ import { VscRemove } from "react-icons/vsc";
 import styles from "./Question.module.css";
 
 const QuestionCard = ({ data }) => {
+  console.log(data,'dar')
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <div className={`${styles.acc} my-3 `}>
-        <p className="fs-24">{data.title}</p>
+        <p className="fs-24">{data.question}</p>
         <span
           onClick={() => setIsOpen(!isOpen)}
           type="button"
@@ -23,7 +24,7 @@ const QuestionCard = ({ data }) => {
         </span>
       </div>
       <div className="collapse" id={data.id}>
-        <div className="card card-body border-0">{data.text}</div>
+        <div className="card card-body border-0">{data?.answer}</div>
       </div>
     </>
   );
