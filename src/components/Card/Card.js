@@ -17,6 +17,11 @@ const Card = ({ data }) => {
         }`}
       >
         <div className="card-body text-center">
+          {router.pathname === "/admin" && (
+            <button className="btn btn-primary d-block ms-auto mb-2">
+              Edit
+            </button>
+          )}
           <p className="fw-bold fs-20">Delivery within</p>
           <p className={`${styles.dateStyle} fs-30`}>{data.dueDate} Days</p>
           <span className="fw-bold">
