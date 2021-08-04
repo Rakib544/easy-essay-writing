@@ -17,7 +17,6 @@ const OrderList = () => {
       <div className="container mt-4">
         <div className="row">
           <div className="col-12 col-md-4 col-lg-4">
-            {" "}
             <TotalOrderCard />
           </div>
           <div className="col-12 col-md-8 bg-white">
@@ -25,7 +24,7 @@ const OrderList = () => {
               <div className="row p-4">
                 {orderData.map((order) => (
                   <div key={order.id} className="row shadow-sm py-2 my-2">
-                    <p className="col-4 pt-3 text-primary fw-bold">
+                    <p className="col-4 pt-3 text-primary">
                       Order - {order._id}
                     </p>
                     <p className="col-4 pt-3">Order-Date: {order.date}</p>

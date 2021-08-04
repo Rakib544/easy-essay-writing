@@ -9,7 +9,7 @@ const QuestionCard = ({ data }) => {
   return (
     <>
       <div className={`${styles.acc} my-3 `}>
-        <p>{data.title}</p>
+        <p className="fs-24">{data.title}</p>
         <span
           onClick={() => setIsOpen(!isOpen)}
           type="button"

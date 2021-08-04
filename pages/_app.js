@@ -1,10 +1,13 @@
 import Head from "next/head";
+import { createContext, useState } from "react";
+
 import "../styles/globals.css";
-import { Provider, provider } from '../contaxt/index'
-import firebase from "../firebase";
-import FirebaseAuth from "../src/components/FirebaseAuth";
+export const UserContext = createContext();
 
 function MyApp({ Component, pageProps }) {
+
+  const [signedUser, setSignedUser] = useState({});
+
   return (
     <>
       <Head>
@@ -30,11 +33,11 @@ function MyApp({ Component, pageProps }) {
           crossOrigin="anonymous"
         ></script>
       </Head>
-      <Provider>
-        {/* <FirebaseAuth> */}
-          <Component {...pageProps} />
-        {/* </FirebaseAuth> */}
-      </Provider>
+
+      <UserContext.Provider value={[signedUser, setSignedUser]}>
+        <Component {...pageProps} />
+      </UserContext.Provider>
+
     </>
   );
 }

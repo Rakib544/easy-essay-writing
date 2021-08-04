@@ -4,14 +4,16 @@ import styles from "./profileCard.module.css";
 
 const ProfileCard = () => {
   return (
-    <div className={`${styles.profileCard} row d-flex align-items-center`}>
+    <div
+      className={`${styles.profileCard} row d-flex align-items-center box-shadow`}
+    >
       <div className="col-3 p-4">
         <Image src={profileImg} height="60" width="60" alt="profile" />
       </div>
       <div className="col-9">
-        <h6 className={styles.name}>Kawsar Ahmed</h6>
-        <small className={styles.email}>kawsarahmmedr@gmail.com</small>
-        <button className={styles.btn}>Admin</button>
+        <p className="fs-28 fw-bold">Kawsar Ahmed</p>
+        <p className={`${styles.email} fs-16`}>kawsarahmmedr@gmail.com</p>
+        <button className={`${styles.btn} fs-18`}>Admin</button>
       </div>
     </div>
   );
