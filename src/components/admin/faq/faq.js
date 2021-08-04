@@ -14,12 +14,7 @@ const Faq = () => {
                             <div className="d-flex align-items-center justify-content-between">
                                 <p className="pb-3 fs-24 fw-bold">How long does it take?</p>
                                 <button
-                                    className="btn"
-                                    style={{
-                                        border: "none",
-                                        color: "blue",
-                                        fontWeight: "700",
-                                    }}
+                                    className="btn-style"
                                 >
                                     Edit
                                 </button>
@@ -128,12 +123,7 @@ const Faq = () => {
                                 <div className="d-flex align-items-center justify-content-between pb-2">
                                     <p className="fs-22 fw-bold">Facebook</p>
                                     <button
-                                        className="btn"
-                                        style={{
-                                            border: "none",
-                                            color: "blue",
-                                            fontWeight: "700",
-                                        }}
+                                        className="btn-style"
                                     >
                                         Edit
                                     </button>
@@ -151,12 +141,7 @@ const Faq = () => {
                                 <div className="d-flex align-items-center justify-content-between pb-2">
                                     <p className="fs-22 fw-bold">Instagram</p>
                                     <button
-                                        className="btn"
-                                        style={{
-                                            border: "none",
-                                            color: "blue",
-                                            fontWeight: "700",
-                                        }}
+                                        className="btn-style"
                                     >
                                         Edit
                                     </button>
@@ -174,12 +159,7 @@ const Faq = () => {
                                 <div className="d-flex align-items-center justify-content-between pb-2">
                                     <p className="fs-22 fw-bold">LinkedIn</p>
                                     <button
-                                        className="btn"
-                                        style={{
-                                            border: "none",
-                                            color: "blue",
-                                            fontWeight: "700",
-                                        }}
+                                        className="btn-style"
                                     >
                                         Edit
                                     </button>
@@ -197,12 +177,7 @@ const Faq = () => {
                                 <div className="d-flex align-items-center justify-content-between pb-2">
                                     <p className="fs-22 fw-bold">Twiter</p>
                                     <button
-                                        className="btn"
-                                        style={{
-                                            border: "none",
-                                            color: "blue",
-                                            fontWeight: "700",
-                                        }}
+                                        className="btn-style"
                                     >
                                         Edit
                                     </button>

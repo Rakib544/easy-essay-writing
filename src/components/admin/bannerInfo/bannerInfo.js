@@ -17,8 +17,7 @@ const BannerInfo = () => {
                         as low as $0.048/word!
                     </p>
                     <button
-                        className="btn"
-                        style={{ border: "none", color: "blue", fontWeight: "700" }}
+                        className="btn-style"
                     >
                         Edit
                     </button>
@@ -34,8 +33,7 @@ const BannerInfo = () => {
                         Personal Narratives, Academic-Level Essays, and Much More.
                     </p>
                     <button
-                        className="btn"
-                        style={{ border: "none", color: "blue", fontWeight: "700" }}
+                        className="btn-style"
                     >
                         Edit
                     </button>

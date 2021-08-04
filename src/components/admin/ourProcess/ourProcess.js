@@ -14,8 +14,7 @@ const OurProcess = () => {
                 <div className="mt-4 mb-4 d-flex justify-content-between align-items-center">
                     <p className="fs-22 fw-bold">Our Process</p>
                     <button
-                        className="btn"
-                        style={{ border: "none", color: "blue", fontWeight: "700" }}
+                        className="btn-style"
                     >
                         Edit
                     </button>
@@ -31,8 +30,7 @@ const OurProcess = () => {
                         text ever since the 1500s
                     </p>
                     <button
-                        className="btn"
-                        style={{ border: "none", color: "blue", fontWeight: "700" }}
+                        className="btn-style"
                     >
                         Edit
                     </button>
@@ -48,8 +46,7 @@ const OurProcess = () => {
                                 Title -
                             </p>
                             <button
-                                className="btn"
-                                style={{ border: "none", color: "blue", fontWeight: "700" }}
+                                className="btn-style"
                             >
                                 Edit
                             </button>
@@ -63,8 +60,7 @@ const OurProcess = () => {
                                 Content
                             </p>
                             <button
-                                className="btn"
-                                style={{ border: "none", color: "blue", fontWeight: "700" }}
+                                className="btn-style"
                             >
                                 Edit
                             </button>
