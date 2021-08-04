@@ -4,10 +4,11 @@ import { useForm } from 'react-hook-form';
 const About = () => {
 
     const [aboutData, setAboutData] = useState({});
-    const { title, headerDetails, buttonText } = aboutData;
-    const [showTitle, setShowTitle] = useState(false);
-    const [showHeaderDetails, setShowHeaderDetails] = useState(false);
-    const [showButton, setShowButton] = useState(false);
+    const { _id, title, headerDetails, buttonText } = aboutData;
+    const [number, setNumber] = useState(0);
+    const titleValue = title;
+    const headerDetailsValue = headerDetails;
+    const buttonTextValue = buttonText;
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
@@ -15,27 +16,30 @@ const About = () => {
         fetch('http://localhost:8080/about')
             .then(res => res.json())
             .then(data => setAboutData(data[0]));
-    }, []);
+    }, [number]);
 
-    const handleTitle = () => {
-        setShowTitle(true);
-        setShowHeaderDetails(false);
-        setShowButton(false);
-    }
+    const onSubmit = (data) => {
+        const title = data.title || titleValue;
+        const headerDetails = data.headerDetails || headerDetailsValue;
+        const buttonText = data.buttonText || buttonTextValue;
 
-    const handleHeader = () => {
-        setShowTitle(false);
-        setShowHeaderDetails(true);
-        setShowButton(false);
-    }
-
-    const handleButton = () => {
-        setShowTitle(false);
-        setShowHeaderDetails(false);
-        setShowButton(true);
-    }
-
-    const onSubmit = data => console.log(data);
+        fetch(`http://localhost:8080/about/update/${_id}`, {
+            method: 'PUT',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                title,
+                headerDetails,
+                buttonText
+            })
+        })
+            .then(res => res.json())
+            .then(result => {
+                if(result) {
+                    setAboutData(result);
+                    setNumber(number + 1);
+                }
+            })
+    };
 
     return (
         <>
@@ -48,9 +52,9 @@ const About = () => {
                     Title -
                 </p>
                 <div className="mt-4 mb-4 d-flex justify-content-between align-items-center">
-                    <p className="fs-22 fw-bold">{title}</p>
+                    <p className="fs-22 fw-bold">{titleValue}</p>
                     <button
-                        className="btn-style" onClick={handleTitle} data-bs-toggle="modal" data-bs-target="#aboutModal"
+                        className="btn-style" data-bs-toggle="modal" data-bs-target="#aboutModal1"
                     >
                         Edit
                     </button>
@@ -60,9 +64,9 @@ const About = () => {
                     Header - Details
                 </p>
                 <div className="mt-4 mb-3 d-flex justify-content-between align-items-center">
-                    <p className="fs-16">{headerDetails}</p>
+                    <p className="fs-16">{headerDetailsValue}</p>
                     <button
-                        className="btn-style"  onClick={handleHeader} data-bs-toggle="modal" data-bs-target="#aboutModal"
+                        className="btn-style" data-bs-toggle="modal" data-bs-target="#aboutModal2"
                     >
                         Edit
                     </button>
@@ -70,35 +74,61 @@ const About = () => {
 
                 <h5 className="border rounded d-inline-block py-2 px-4">Button</h5>
                 <div className="mt-4 mb-3 d-flex justify-content-between align-items-center">
-                    <p className="text-primary fs-18">{buttonText}</p>
+                    <p className="text-primary fs-18">{buttonTextValue}</p>
                     <button
-                        className="btn-style"  onClick={handleButton} data-bs-toggle="modal" data-bs-target="#aboutModal"
+                        className="btn-style" data-bs-toggle="modal" data-bs-target="#aboutModal3"
                     >
                         Edit
                     </button>
                 </div>
             </div>
 
-            <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="aboutModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
-                                {showTitle && 'Title'}
-                                {showHeaderDetails && 'Header - Details'}
-                                {showButton && 'Button'}
-                            </h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Title</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form onSubmit={handleSubmit(onSubmit)}>
-                                <input defaultValue="" value={`${showTitle && `${title}`} ${showHeaderDetails && `${headerDetails}`} ${showButton && `${buttonText}`}`} />
-                                <input type="submit" />
+                                <textarea rows="5" cols="5" defaultValue={titleValue} {...register("title")} name='title' id='title' class="form-control mb-2"></textarea>
+                                <input type="submit" className="btn btn-primary" value="Save Changes" data-bs-dismiss="modal" />
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="aboutModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Header - Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <textarea rows="5" cols="5" defaultValue={headerDetailsValue} {...register("headerDetails")} name='headerDetails' id='headerDetails' class="form-control mb-2"></textarea>
+                                <input type="submit" className="btn btn-primary" value="Save Changes" data-bs-dismiss="modal" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="aboutModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Button</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <textarea rows="5" cols="5" defaultValue={buttonTextValue} {...register("buttonText")} name='buttonText' id='headerDetails' class="form-control mb-2"></textarea>
+                                <input type="submit" className="btn btn-primary" value="Save Changes" data-bs-dismiss="modal" />
+                            </form>
                         </div>
                     </div>
                 </div>
