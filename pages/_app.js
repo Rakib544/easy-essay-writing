@@ -1,6 +1,7 @@
 import Head from "next/head";
 import "../styles/globals.css";
 import { Provider, provider } from '../contaxt/index'
+import firebase from "../firebase";
 import FirebaseAuth from "../src/components/FirebaseAuth";
 
 function MyApp({ Component, pageProps }) {
@@ -30,9 +31,9 @@ function MyApp({ Component, pageProps }) {
         ></script>
       </Head>
       <Provider>
-        <FirebaseAuth>
+        {/* <FirebaseAuth> */}
           <Component {...pageProps} />
-        </FirebaseAuth>
+        {/* </FirebaseAuth> */}
       </Provider>
     </>
   );

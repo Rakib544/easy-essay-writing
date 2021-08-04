@@ -7,13 +7,25 @@ import { FcGoogle } from "react-icons/fc";
 import bannerImg from "../images/login-img.png";
 
 const Signup = () => {
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  const onSubmit = (data) => {
+    console.log(data)
+    firebase.auth().ceateUserWithEmailAndPassword(data.email, data.password)
+    .then((user) =>{
+      console.log('regestir',user)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  };
+
   return (
     <div className="overflow-hidden">
       <div className="row d-flex align-items-center vh-100">

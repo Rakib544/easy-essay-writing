@@ -1,8 +1,9 @@
-import React, { useEffect, useContext, Children } from 'react';
-import firebase from '../../firebase';
+import React, { useEffect, useContext} from 'react';
+import firebase from "firebase/app";
 import { Context } from '../../contaxt';
 
-const FirebaseAuth = () => {
+
+const FirebaseAuth = ({Children}) => {
     const { dispatch } = useContext(Context)
     useEffect(() => {
         return firebase.auth().onAuthStateChanged((user) => {
@@ -17,7 +18,7 @@ const FirebaseAuth = () => {
                 })
             }
         })
-    })
+    }, [])
     return (
         <div>
         {

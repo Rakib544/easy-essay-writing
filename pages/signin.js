@@ -2,26 +2,34 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-
 import { Context } from "../contaxt";
 import { useContext } from "react";
 import bannerImg from "../images/login-img.png";
 import { CgFacebook, CgPassword } from "react-icons/cg";
 import { FcGoogle } from "react-icons/fc";
-import firebase from "../firebase";
+//
+import { firebaseConfig } from "../firebase";
+import firebase from "firebase/app";
+import 'firebase/auth'
+// Initialize Firebase
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+
+//
 
 const Signin = () => {
-  const [email, setEmail] = useState("");
-  const [Pass, setPass] = useState("");
-  const { state } = useContext(Context)
-  
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  const onSubmit = async (data) => 
+    console.log(data)
+    
 
   return (
     <div className="overflow-hidden">

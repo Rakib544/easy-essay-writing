@@ -1,9 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
-import AdminFaqCard from "../../src/components/AdminFaqCard/AdminFaqCard";
-=======
 import Card from "../../src/components/Card/Card";
->>>>>>> d4a3d2c93127c7a99f189166a7a613c836015d9f
 import Navbar from "../../src/components/navbar/Navbar";
 import ProfileCard from "../../src/components/profileCard/profileCard";
 import { cardData } from "../../src/data/pricedata";
