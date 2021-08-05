@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../../src/components/navbar/Navbar";
 import OrderInfoCard from "../../src/components/orderInfoCard/orderInfoCard";
+import withAuth from "../../src/components/privateRoute";
 import ProfileCard from "../../src/components/profileCard/profileCard";
 
 const CompleteOrders = () => {
@@ -21,4 +22,4 @@ const CompleteOrders = () => {
   );
 };
 
-export default CompleteOrders;
+export default withAuth(CompleteOrders);

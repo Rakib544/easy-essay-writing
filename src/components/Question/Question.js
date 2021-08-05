@@ -6,7 +6,8 @@ import { faqData } from "../../data/faqData";
 import styles from "./Question.module.css";
 import QuestionCard from "./QuestionCard";
 
-const Question = () => {
+const Question = ({faqData}) => {
+  
   return (
     <div className={styles.question}>
       <div className="pe-md-5 me-md-5 pb-md-5">

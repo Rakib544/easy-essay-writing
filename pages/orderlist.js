@@ -2,15 +2,16 @@ import React from "react";
 import Card from "../src/components/Card/Card";
 import Navbar from "../src/components/navbar/Navbar";
 import OrderDownloadCard from "../src/components/orderDownloadCard/orderDownloadCard";
+import withAuth from "../src/components/privateRoute";
 import TotalOrderCard from "../src/components/TotalOrderCard/totalOrderCard";
 import { orderData } from "../src/data/orderData";
-import { cardData } from "../src/data/pricedata";
 
 const obj = {
   isTrue: false,
 };
 
-const OrderList = () => {
+const OrderList = ({ cardData }) => {
+  console.log(cardData);
   return (
     <>
       <Navbar />
@@ -51,7 +52,7 @@ const OrderList = () => {
           </p>
           <div className="row">
             {cardData.map((data) => (
-              <Card keys={data.id} data={data} />
+              <Card key={data.id} data={data} />
             ))}
           </div>
         </div>
@@ -60,4 +61,15 @@ const OrderList = () => {
   );
 };
 
-export default OrderList;
+export default withAuth(OrderList);
+
+export async function getServerSideProps() {
+  const res = await fetch("http://localhost:8080/priceCard");
+  const cardData = await res.json();
+
+  return {
+    props: {
+      cardData,
+    },
+  };
+}

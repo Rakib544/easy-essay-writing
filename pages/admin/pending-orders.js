@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../../src/components/navbar/Navbar";
 import OrderInfoCard from "../../src/components/orderInfoCard/orderInfoCard";
+import withAuth from "../../src/components/privateRoute";
 import ProfileCard from "../../src/components/profileCard/profileCard";
 
 const PendingOrders = () => {
@@ -21,4 +22,4 @@ const PendingOrders = () => {
   );
 };
 
-export default PendingOrders;
+export default withAuth(PendingOrders);
