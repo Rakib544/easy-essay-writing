@@ -1,6 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import FaqCard from '../faqCard/faqCard';
+import FooterCard from '../footerCard/footerCard';
 
 const Faq = () => {
+
+    const [faqCardsData, setFaqCardsData] = useState([]);
+    const [footerCardsData, setFooterCardsData] = useState([]);
+    const [number, setNumber] = useState(0);
+
+    useEffect(() => {
+        fetch('http://localhost:8080/faq')
+            .then(res => res.json())
+            .then(data => setFaqCardsData(data));
+    }, [number]);
+
+    useEffect(() => {
+        fetch('http://localhost:8080/footerIcons')
+            .then(res => res.json())
+            .then(data => setFooterCardsData(data));
+    }, [number]);
+
     return (
         <>
             <p className="bg-white fs-26 fw-bold py-2 px-5 d-inline-block my-4 box-shadow">
@@ -10,105 +29,13 @@ const Faq = () => {
             <div className="bg-white py-4 px-5 my-4 box-shadow">
                 <div className="row">
                     <div className="col-md-6">
-                        <div className="mb-4">
-                            <div className="d-flex align-items-center justify-content-between">
-                                <p className="pb-3 fs-24 fw-bold">How long does it take?</p>
-                                <button
-                                    className="btn-style"
-                                >
-                                    Edit
-                                </button>
-                            </div>
-                            <p className="fs-18">
-                                You will select exactly when you need the essay while
-                                filling out the order form. Occasionally the work will be
-                                finished before the due date.
-                            </p>
-                        </div>
 
-                        <div className="mb-4">
-                            <div className="d-flex align-items-center justify-content-between">
-                                <h4 className="pb-3">How long does it take?</h4>
-                                <button
-                                    className="btn"
-                                    style={{
-                                        border: "none",
-                                        color: "blue",
-                                        fontWeight: "700",
-                                    }}
-                                >
-                                    Edit
-                                </button>
-                            </div>
-                            <p className="text-muted">
-                                You will select exactly when you need the essay while
-                                filling out the order form. Occasionally the work will be
-                                finished before the due date.
-                            </p>
-                        </div>
+                        {
+                            faqCardsData.map((faqCardData, index) => (
+                                <FaqCard faqCardData={faqCardData} key={faqCardData._id} index={index} setNumber={setNumber} number={number} />
+                            ))
+                        }
 
-                        <div className="mb-4">
-                            <div className="d-flex align-items-center justify-content-between">
-                                <h4 className="pb-3">How long does it take?</h4>
-                                <button
-                                    className="btn"
-                                    style={{
-                                        border: "none",
-                                        color: "blue",
-                                        fontWeight: "700",
-                                    }}
-                                >
-                                    Edit
-                                </button>
-                            </div>
-                            <p className="text-muted">
-                                You will select exactly when you need the essay while
-                                filling out the order form. Occasionally the work will be
-                                finished before the due date.
-                            </p>
-                        </div>
-
-                        <div className="mb-4">
-                            <div className="d-flex align-items-center justify-content-between">
-                                <h4 className="pb-3">How long does it take?</h4>
-                                <button
-                                    className="btn"
-                                    style={{
-                                        border: "none",
-                                        color: "blue",
-                                        fontWeight: "700",
-                                    }}
-                                >
-                                    Edit
-                                </button>
-                            </div>
-                            <p className="text-muted">
-                                You will select exactly when you need the essay while
-                                filling out the order form. Occasionally the work will be
-                                finished before the due date.
-                            </p>
-                        </div>
-
-                        <div className="mb-4">
-                            <div className="d-flex align-items-center justify-content-between">
-                                <h4 className="pb-3">How long does it take?</h4>
-                                <button
-                                    className="btn"
-                                    style={{
-                                        border: "none",
-                                        color: "blue",
-                                        fontWeight: "700",
-                                    }}
-                                >
-                                    Edit
-                                </button>
-                            </div>
-                            <p className="text-muted">
-                                You will select exactly when you need the essay while
-                                filling out the order form. Occasionally the work will be
-                                finished before the due date.
-                            </p>
-                        </div>
                     </div>
 
                     <div className="col-md-6">
@@ -119,77 +46,12 @@ const Faq = () => {
                                 </p>
                             </div>
 
-                            <div className="pb-3">
-                                <div className="d-flex align-items-center justify-content-between pb-2">
-                                    <p className="fs-22 fw-bold">Facebook</p>
-                                    <button
-                                        className="btn-style"
-                                    >
-                                        Edit
-                                    </button>
-                                </div>
-                                <input
-                                    style={{ backgroundColor: "#F4F8FF", color: "blue" }}
-                                    className="form-control"
-                                    type=""
-                                    name=""
-                                    value="https://www.facebook.com/"
-                                />
-                            </div>
+                            {
+                                footerCardsData.map((footerCardData, index) => (
+                                    <FooterCard footerCardData={footerCardData} key={footerCardData._id} index={index} setNumber={setNumber} number={number} />
+                                ))
+                            }
 
-                            <div className="pb-3">
-                                <div className="d-flex align-items-center justify-content-between pb-2">
-                                    <p className="fs-22 fw-bold">Instagram</p>
-                                    <button
-                                        className="btn-style"
-                                    >
-                                        Edit
-                                    </button>
-                                </div>
-                                <input
-                                    style={{ backgroundColor: "#F4F8FF", color: "blue" }}
-                                    className="form-control"
-                                    type=""
-                                    name=""
-                                    value="https://www.facebook.com/"
-                                />
-                            </div>
-
-                            <div className="pb-3">
-                                <div className="d-flex align-items-center justify-content-between pb-2">
-                                    <p className="fs-22 fw-bold">LinkedIn</p>
-                                    <button
-                                        className="btn-style"
-                                    >
-                                        Edit
-                                    </button>
-                                </div>
-                                <input
-                                    style={{ backgroundColor: "#F4F8FF", color: "blue" }}
-                                    className="form-control"
-                                    type=""
-                                    name=""
-                                    value="https://www.facebook.com/"
-                                />
-                            </div>
-
-                            <div className="pb-3">
-                                <div className="d-flex align-items-center justify-content-between pb-2">
-                                    <p className="fs-22 fw-bold">Twiter</p>
-                                    <button
-                                        className="btn-style"
-                                    >
-                                        Edit
-                                    </button>
-                                </div>
-                                <input
-                                    style={{ backgroundColor: "#F4F8FF", color: "blue" }}
-                                    className="form-control"
-                                    type=""
-                                    name=""
-                                    value="https://www.facebook.com/"
-                                />
-                            </div>
                         </div>
                     </div>
                 </div>
