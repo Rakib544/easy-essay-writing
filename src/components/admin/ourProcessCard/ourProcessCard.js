@@ -21,7 +21,7 @@ const OurProcessCard = ({ processCardData, index, setNumber, number }) => {
         })
             .then(res => res.json())
             .then(result => {
-                if(result) {
+                if (result) {
                     console.log(result)
                     setNumber(number + 1);
                 }
@@ -30,31 +30,33 @@ const OurProcessCard = ({ processCardData, index, setNumber, number }) => {
 
     return (
         <>
-            <div className="col-md-4 pb-3">
-                <p className="text-primary fs-18 fw-bold mb-2">Item - {index + 1}</p>
-                <div className="mt-4 mb-4 d-flex justify-content-between align-items-center">
-                    <p className="border rounded fs-16 fw-bold  d-inline-block py-2 px-4">
-                        Title -
-                    </p>
-                    <button
-                        className="btn-style" data-bs-toggle="modal" data-bs-target={`#processCardModal${index + 1}`}
-                    >
-                        Edit
-                    </button>
-                </div>
-                <p className="fs-18 fw-bold">{title}</p>
+            <div className="col-md-4">
+                <div className="p-3 mb-3 box-shadow-processCard">
+                    <p className="text-primary fs-18 fw-bold mb-2">Item - {index + 1}</p>
+                    <div className="mt-4 mb-4 d-flex justify-content-between align-items-center">
+                        <p className="border rounded fs-16 fw-bold  d-inline-block py-2 px-4">
+                            Title -
+                        </p>
+                        <button
+                            className="btn-style" data-bs-toggle="modal" data-bs-target={`#processCardModal${index + 1}`}
+                        >
+                            Edit
+                        </button>
+                    </div>
+                    <p className="fs-18 fw-bold">{title}</p>
 
-                <div className="mt-4 mb-4 d-flex justify-content-between align-items-center">
-                    <p className="border fs-16 fw-bold rounded d-inline-block py-2 px-4">
-                        Content
-                    </p>
-                    <button
-                        className="btn-style" data-bs-toggle="modal" data-bs-target={`#processModalCard${index + 1}`}
-                    >
-                        Edit
-                    </button>
+                    <div className="mt-4 mb-4 d-flex justify-content-between align-items-center">
+                        <p className="border fs-16 fw-bold rounded d-inline-block py-2 px-4">
+                            Content
+                        </p>
+                        <button
+                            className="btn-style" data-bs-toggle="modal" data-bs-target={`#processModalCard${index + 1}`}
+                        >
+                            Edit
+                        </button>
+                    </div>
+                    <p className="fs-16">{content}</p>
                 </div>
-                <p className="fs-16">{content}</p>
             </div>
 
             <div class="modal fade" id={`processCardModal${index + 1}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
