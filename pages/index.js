@@ -12,13 +12,14 @@ export default function Home({
   processData,
   faqData,
   priceCardData,
+  processCardData,
 }) {
   return (
     <div>
       <Navbar />
       <Header bannerData={bannerData} />
       <Plagiarism aboutData={aboutData} />
-      <Process processData={processData} />
+      <Process processData={processData} processCardData={processCardData} />
       <div className="mx-4 mx-md-0">
         <Pricing priceCardData={priceCardData} />
       </div>
@@ -54,6 +55,11 @@ export async function getServerSideProps() {
   );
   const priceCardData = await priceCardResponse.json();
 
+  const processCardResponse = await fetch(
+    "https://essay-essay-writing.herokuapp.com/processCard"
+  );
+  const processCardData = await processCardResponse.json();
+
   return {
     props: {
       bannerData: bannerData[0],
@@ -61,6 +67,7 @@ export async function getServerSideProps() {
       processData: processData[0],
       faqData,
       priceCardData,
+      processCardData,
     },
   };
 }

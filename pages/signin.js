@@ -1,28 +1,25 @@
+import firebase from "firebase/app";
+import "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { CgFacebook } from "react-icons/cg";
 import { FcGoogle } from "react-icons/fc";
-
-import firebase from "firebase/app";
-import "firebase/auth";
-import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
-
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
-import { useContext } from "react";
+import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
 import { UserContext } from "./_app";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
-}
-else {
+} else {
   firebase.app();
 }
 
 const Signin = () => {
-
+  const [showSpinner, setShowSpinner] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -31,38 +28,50 @@ const Signin = () => {
     formState: { errors },
   } = useForm();
   const [signedUser, setSignedUser] = useContext(UserContext);
-  console.log(signedUser)
-  const onSubmit = (data) => {
+  console.log(signedUser);
 
+  const onSubmit = (data) => {
+    setShowSpinner(true);
     const email = data.email;
     const password = data.password;
 
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(res => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((res) => {
         const { displayName, email, phoneNumber, photoURL } = res.user;
         const loggedUser = {
           name: displayName,
           email: email,
           phoneNumber: phoneNumber,
-          photoURL: photoURL
-        }
-        setSignedUser(loggedUser);
-        if (email === 'kamon@gmail.com') {
-          router.push('/admin');
-        }
-        else {
-          router.push('/orderlist');
-        }
+          photoURL: photoURL,
+        };
+
+        fetch("https://essay-essay-writing.herokuapp.com/admin", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(loggedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setSignedUser(data);
+            setShowSpinner(false);
+            if (data.userType === "user") {
+              router.push("/orderlist");
+            } else {
+              router.push("/admin");
+            }
+          });
       })
       .catch((error) => {
+        setShowSpinner(false);
         var errorCode = error.code;
         var errorMessage = error.message;
       });
-  }
+  };
 
   return (
     <div className="overflow-hidden position-relative">
-
       <div
         className="position-absolute top-0 left-0 m-5 d-none d-md-block"
         style={{ zIndex: "999999" }}
@@ -75,13 +84,21 @@ const Signin = () => {
       </div>
 
       <div className="row d-flex vh-100 align-items-center">
-
         <div className="col-md-6 d-none d-md-block">
           <Image src={bannerImg} alt="banner-img" />
         </div>
 
         <div className="col-md-6 mb-5 pb-5">
           <div className="container ">
+            {showSpinner ? (
+              <div className="d-flex justify-content-center">
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
             <div className="text-center ">
               <p className="fw-bold text-secondary fs-50">Sign in to Clever</p>
               <div className="p-3 d-inline icon-bg cursor-pointer">
@@ -100,7 +117,6 @@ const Signin = () => {
               onSubmit={handleSubmit(onSubmit)}
               className="px-3 px-md-5 mx-md-5"
             >
-
               <div className="my-2">
                 <label className="form-label fs-14" htmlFor="email">
                   Email
@@ -114,7 +130,12 @@ const Signin = () => {
                   defaultValue=""
                   {...register("email", { required: true })}
                 />
-                {errors.email && (<span role="alert" className="text-danger"> Email required </span>)}
+                {errors.email && (
+                  <span role="alert" className="text-danger">
+                    {" "}
+                    Email required{" "}
+                  </span>
+                )}
               </div>
 
               <div className="mb-2">
@@ -130,7 +151,12 @@ const Signin = () => {
                   placeholder="Password"
                   {...register("password", { required: true }, { min: 8 })}
                 />
-                {errors.password && (<span role="alert" className="text-danger"> Password required & must contain at least 8 character </span>)}
+                {errors.password && (
+                  <span role="alert" className="text-danger">
+                    {" "}
+                    Password required & must contain at least 8 character{" "}
+                  </span>
+                )}
               </div>
 
               <small
@@ -141,10 +167,7 @@ const Signin = () => {
               </small>
 
               {errors.exampleRequired && <span>This field is required</span>}
-              <button
-                className="btn btn-primary w-100 mt-3"
-                type="submit"
-              >
+              <button className="btn btn-primary w-100 mt-3" type="submit">
                 Sign In
               </button>
             </form>

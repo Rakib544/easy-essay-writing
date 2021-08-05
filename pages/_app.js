@@ -1,9 +1,13 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import Head from "next/head";
+import Router from "next/router";
+import nProgress from "nprogress";
+import "nprogress/nprogress.css";
 import { createContext, useEffect, useState } from "react";
 import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
 import "../styles/globals.css";
+nProgress.configure({ showSpinner: false });
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -15,6 +19,15 @@ export const UserContext = createContext();
 
 function MyApp({ Component, pageProps }) {
   const [signedUser, setSignedUser] = useState({});
+
+  //showing n-progress
+  Router.events.on("routeChangeStart", (url) => {
+    nProgress.start();
+  });
+
+  Router.events.on("routeChangeComplete", (url) => {
+    nProgress.done();
+  });
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
@@ -58,6 +71,13 @@ function MyApp({ Component, pageProps }) {
           integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
           crossOrigin="anonymous"
         ></script>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"
+          integrity="sha512-42kB9yDlYiCEfx2xVwq0q7hT4uf26FUgSIZBK8uiaEnTdShXjwr8Ip1V4xGJMg3mHkUt9nNuTDxunHF0/EgxLQ=="
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+        />
       </Head>
 
       <UserContext.Provider value={[signedUser, setSignedUser]}>

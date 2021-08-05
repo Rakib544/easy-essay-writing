@@ -18,12 +18,13 @@
 
 .name {
   font-size: 28px;
-  line-height: 20px;
+  line-height: 10px;
   font-weight: bold;
 }
 
 .email {
   color: #c9c9c9;
+  line-height: 10px;
 }
 
 @media only screen and (max-width: 600px) {

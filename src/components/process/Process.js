@@ -3,10 +3,10 @@ import React from "react";
 import aboutImg from "../../../images/Group 57.svg";
 import Image2 from "../../../images/Grupo 246.svg";
 import processSectionImg from "../../../images/Grupo 257.svg";
-import { processCardData } from "../../data/processCardData";
 import styles from "./process.module.css";
 
-const Process = ({processData}) => {
+const Process = ({ processData, processCardData }) => {
+  console.log(processCardData);
   return (
     <div className={`${styles.processSectionBg} py-5`}>
       <div className="container position-relative">
@@ -14,26 +14,26 @@ const Process = ({processData}) => {
           <Image src={processSectionImg} alt="img" height="125" width="125" />
         </div>
         <div className="col-12 col-md-8 col-lg-7 mx-auto">
-          <h1 className={`${styles.processSectionTitle} fs-48`}>{processData?.title}</h1>
-          <p className="text-center mb-5 fs-16">
-            {processData?.headerDetails}
-          </p>
+          <h1 className={`${styles.processSectionTitle} fs-48`}>
+            {processData?.title}
+          </h1>
+          <p className="text-center mb-5 fs-16">{processData?.headerDetails}</p>
         </div>
         <div className="row text-center">
           {processCardData.map((data) => (
             <div
               className="col-12 col-sm-6 col-md-4 col-lg-3 rounded-3"
-              key={data.id}
+              key={data._id}
             >
               <div className={`${styles.processCard} pt-2 px-2  h-100 mx-1`}>
                 <div
-                  className={`${styles.processSectionImageBg} d-flex justify-content-center align-items-center`}
+                  className={` mt-2 d-flex justify-content-center align-items-center`}
                 >
                   <Image
-                    src={data.img}
-                    alt={data.name}
-                    width="90px"
-                    height="90px"
+                    src={data.image}
+                    alt={data.title}
+                    width="262px"
+                    height="200px"
                   />
                 </div>
                 <p
@@ -41,7 +41,7 @@ const Process = ({processData}) => {
                 >
                   {data.title}
                 </p>
-                <p className="text-center pb-5 fs-16">{data.text}</p>
+                <p className="text-center pb-5 fs-16">{data.content}</p>
               </div>
             </div>
           ))}

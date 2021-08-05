@@ -1,4 +1,5 @@
-import React from "react";
+import Link from "next/link";
+import { BsArrowLeft } from "react-icons/bs";
 import Navbar from "../../src/components/navbar/Navbar";
 import OrderInfoCard from "../../src/components/orderInfoCard/orderInfoCard";
 import withAuth from "../../src/components/privateRoute";
@@ -8,11 +9,17 @@ const CompleteOrders = ({ orderData }) => {
   return (
     <>
       <Navbar />
+      <div className="container mt-3">
+        <BsArrowLeft size={28} className="text-primary" />
+        <Link href="/">
+          <a className="text-primary">Back To Home</a>
+        </Link>
+      </div>
       <div className="container my-5">
         <div className="d-flex flex-column flex-md-row">
           <ProfileCard />
-          <div className="ms-md-5 mt-5 mt-md-0 p-5 bg-white rounded-3 box-shadow ">
-            <p className="fw-bold fs-28">Total Completed Orders</p>
+          <div className="ms-md-5 mt-5 mt-md-0 px-5 py-2 bg-white rounded-3 box-shadow ">
+            <p className="fw-bold fs-28 pt-5">Total Completed Orders</p>
             <p className="text-primary fs-50">{orderData.length}</p>
           </div>
         </div>

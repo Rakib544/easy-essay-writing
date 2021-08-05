@@ -1,4 +1,6 @@
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { BsArrowLeft } from "react-icons/bs";
 import About from "../../src/components/admin/about/about";
 import BannerInfo from "../../src/components/admin/bannerInfo/bannerInfo";
 import Faq from "../../src/components/admin/faq/faq";
@@ -21,6 +23,12 @@ const Edit = ({ priceCardData }) => {
       <Navbar />
       <div className="bg-light">
         <div className="container my-5">
+          <div className="container my-3">
+            <BsArrowLeft size={28} className="text-primary" />
+            <Link href="/">
+              <a className="text-primary">Back To Home</a>
+            </Link>
+          </div>
           <ProfileCard />
           <BannerInfo />
           <About aboutData={aboutData} />
