@@ -17,7 +17,7 @@ const About = () => {
   } = useForm();
 
   useEffect(() => {
-    fetch("http://localhost:8080/about")
+    fetch("https://essay-essay-writing.herokuapp.com/about")
       .then((res) => res.json())
       .then((data) => setAboutData(data[0]));
   }, [number]);
@@ -27,7 +27,7 @@ const About = () => {
     const headerDetails = data.headerDetails || headerDetailsValue;
     const buttonText = data.buttonText || buttonTextValue;
 
-    fetch(`http://localhost:8080/about/update/${_id}`, {
+    fetch(`https://essay-essay-writing.herokuapp.com/about/update/${_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

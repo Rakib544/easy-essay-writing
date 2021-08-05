@@ -1,11 +1,15 @@
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../../../pages/_app";
 import styles from "./card.module.css";
 
 const Card = ({ data, index }) => {
   const [signedUser] = useContext(UserContext);
+  const [deliveriesDay, setDeliveriesDay] = useState("");
+  const [perPageData, setPerPageData] = useState("");
+  const [wordPerPageData, setWordPerPageData] = useState("");
+
   const { deliveryDay, perPage, wordPerPage } = data;
 
   const deliveryDayValue = deliveryDay;
@@ -27,7 +31,7 @@ const Card = ({ data, index }) => {
     const perPage = data.perPage || perPageValue;
     const wordPerPage = data.wordPerPage || wordPerPageValue;
 
-    fetch(`http://localhost:8080/priceCard/update/${id}`, {
+    fetch(`https://essay-essay-writing.herokuapp.com/priceCard/update/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -39,6 +43,9 @@ const Card = ({ data, index }) => {
       .then((res) => res.json())
       .then((result) => {
         if (result) {
+          setDeliveriesDay(result.deliveryDay);
+          setPerPageData(result.perPage);
+          setWordPerPageData(result.wordPerPage);
         }
       });
   };
@@ -70,7 +77,7 @@ const Card = ({ data, index }) => {
 
   const handleOrderCard = () => {
     if (signedUser.email) {
-      fetch("http://localhost:8080/orderCard/post", {
+      fetch("https://essay-essay-writing.herokuapp.com/orderCard/post", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(orderDetails),
@@ -105,16 +112,18 @@ const Card = ({ data, index }) => {
             )}
             <p className="fw-bold fs-20">Delivery within</p>
             <p className={`${styles.dateStyle} fs-30`}>
-              {data.deliveryDay} Days
+              {deliveriesDay || data.deliveryDay} Days
             </p>
             <span className="fw-bold">
               <p className={`${styles.priceStyle} fs-60 d-inline`}>
-                ${data.perPage}
+                ${perPageData || data.perPage}
               </p>
               /page
             </span>
             <p className="fw-bold fs-4">or</p>
-            <p className={`${styles.wordStyle}`}>{data.wordPerPage} word</p>
+            <p className={`${styles.wordStyle}`}>
+              {wordPerPageData || data.wordPerPage} word
+            </p>
             <button
               className={`${styles.pricingBtn} btn`}
               onClick={handleOrderCard}

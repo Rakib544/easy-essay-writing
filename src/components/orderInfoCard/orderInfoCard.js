@@ -3,20 +3,35 @@ import React from "react";
 import { MdFileUpload } from "react-icons/md";
 import styles from "./orderInfoCard.module.css";
 
-const OrderInfoCard = ({ data }) => {
+const OrderInfoCard = ({ data, number, setNumber }) => {
   const router = useRouter();
+
+  const handleChangeStatus = () => {
+    fetch(
+      `https://essay-essay-writing.herokuapp.com/orderCard/update/orderStatus/${data._id}`,
+      {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ orderStatus: "Completed" }),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setNumber(number + 1));
+  };
 
   return (
     <div className="my-3">
       <div className="container bg-white p-5 box-shadow rounded-3 ">
         <div className="row  d-flex align-items-center border-bottom pb-4 mb-3">
           <div className="col-md-3 ">
-            <p className="text-primary fs-22 fw-bold">Order - {data._id}</p>
-            <p className="text-success fs-18">Order - Date: {data.orderDate}</p>
+            <p className="text-primary fs-16 fw-bold">Order - {data._id}</p>
+            <p className="text-success fs-18">
+              Order - Date: {data.orderDate.slice(0, 10)}
+            </p>
           </div>
           <div className="col-md-3">
             <p className="text-danger fs-18">
-              Delivery - Date: {data.deliveryDate}
+              Delivery - Date: {data.deliveryDate.slice(0, 10)}
             </p>
           </div>
           {router.pathname === "/admin/pending-orders" ? (
@@ -37,9 +52,13 @@ const OrderInfoCard = ({ data }) => {
           ) : (
             ""
           )}
-          <div className="col-md-2 ms-md-start d-flex flex-column align-items-center">
+          <div className="col-md-2 ms-auto d-flex flex-column align-items-center">
             <p className="text-primary fs-22 fw-bold">Order-Action</p>
-            <button type="button" class="btn btn-success text-white px-5 py-2">
+            <button
+              onClick={handleChangeStatus}
+              type="button"
+              class="btn btn-success text-white px-5 py-2"
+            >
               Complete
             </button>
           </div>

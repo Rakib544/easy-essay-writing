@@ -29,19 +29,29 @@ export default function Home({
 }
 
 export async function getServerSideProps() {
-  const bannerResponse = await fetch("http://localhost:8080/banner");
+  const bannerResponse = await fetch(
+    "https://essay-essay-writing.herokuapp.com/banner"
+  );
   const bannerData = await bannerResponse.json();
 
-  const aboutResponse = await fetch("http://localhost:8080/about");
+  const aboutResponse = await fetch(
+    "https://essay-essay-writing.herokuapp.com/about"
+  );
   const aboutData = await aboutResponse.json();
 
-  const processResponse = await fetch("http://localhost:8080/process");
+  const processResponse = await fetch(
+    "https://essay-essay-writing.herokuapp.com/process"
+  );
   const processData = await processResponse.json();
 
-  const faqResponse = await fetch("http://localhost:8080/faq");
+  const faqResponse = await fetch(
+    "https://essay-essay-writing.herokuapp.com/faq"
+  );
   const faqData = await faqResponse.json();
 
-  const priceCardResponse = await fetch("http://localhost:8080/priceCard");
+  const priceCardResponse = await fetch(
+    "https://essay-essay-writing.herokuapp.com/priceCard"
+  );
   const priceCardData = await priceCardResponse.json();
 
   return {

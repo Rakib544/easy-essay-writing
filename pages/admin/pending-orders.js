@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../src/components/navbar/Navbar";
 import OrderInfoCard from "../../src/components/orderInfoCard/orderInfoCard";
 import withAuth from "../../src/components/privateRoute";
 import ProfileCard from "../../src/components/profileCard/profileCard";
 
-const PendingOrders = ({ orderData }) => {
+const PendingOrders = () => {
+  const [number, setNumber] = useState(0);
+  const [orderData, setOrderData] = useState([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await fetch(
+        "https://essay-essay-writing.herokuapp.com/orderCard/pending"
+      );
+      const orderData = await res.json();
+      setOrderData(orderData);
+    };
+    loadData();
+  }, [number]);
+
   return (
     <>
       <Navbar />
@@ -18,23 +32,17 @@ const PendingOrders = ({ orderData }) => {
         </div>
         <div className="my-5">
           {orderData.map((data) => (
-            <OrderInfoCard data={data} key={data._id} />
+            <OrderInfoCard
+              data={data}
+              key={data._id}
+              number={number}
+              setNumber={setNumber}
+            />
           ))}
         </div>
       </div>
     </>
   );
 };
-
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:8080/orderCard/");
-  const orderData = await res.json();
-
-  return {
-    props: {
-      orderData,
-    },
-  };
-}
 
 export default withAuth(PendingOrders);

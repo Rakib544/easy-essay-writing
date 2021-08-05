@@ -64,7 +64,9 @@ const OrderList = ({ cardData }) => {
 export default withAuth(OrderList);
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:8080/priceCard");
+  const res = await fetch(
+    "https://essay-essay-writing.herokuapp.com/priceCard"
+  );
   const cardData = await res.json();
 
   return {

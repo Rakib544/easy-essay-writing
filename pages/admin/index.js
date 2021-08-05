@@ -11,7 +11,7 @@ import ProfileCard from "../../src/components/profileCard/profileCard";
 const Edit = ({ priceCardData }) => {
   const [aboutData, setAboutData] = useState({});
   useEffect(() => {
-    fetch("http://localhost:8080/about")
+    fetch("https://essay-essay-writing.herokuapp.com/about")
       .then((res) => res.json())
       .then((data) => setAboutData(data[0]));
   }, []);
@@ -34,7 +34,9 @@ const Edit = ({ priceCardData }) => {
 };
 
 export async function getServerSideProps() {
-  const priceCardResponse = await fetch("http://localhost:8080/priceCard");
+  const priceCardResponse = await fetch(
+    "https://essay-essay-writing.herokuapp.com/priceCard"
+  );
   const priceCardData = await priceCardResponse.json();
 
   return {
