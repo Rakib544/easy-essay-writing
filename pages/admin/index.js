@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import About from "../../src/components/admin/about/about";
-import BannerInfo from "../../src/components/admin/bannerInfo/BannerInfo";
+import BannerInfo from "../../src/components/admin/bannerInfo/bannerInfo";
 import Faq from "../../src/components/admin/faq/faq";
 import OurProcess from "../../src/components/admin/ourProcess/ourProcess";
 import Pricing from "../../src/components/admin/pricing/pricing";
