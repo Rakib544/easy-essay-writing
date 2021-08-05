@@ -6,7 +6,13 @@ import Pricing from "../src/components/pricing/pricing";
 import Process from "../src/components/process/Process";
 import Question from "../src/components/Question/Question";
 
-export default function Home({ bannerData, aboutData, processData,faqData,priceCardData }) {
+export default function Home({
+  bannerData,
+  aboutData,
+  processData,
+  faqData,
+  priceCardData,
+}) {
   return (
     <div>
       <Navbar />
@@ -34,7 +40,7 @@ export async function getServerSideProps() {
 
   const faqResponse = await fetch("http://localhost:8080/faq");
   const faqData = await faqResponse.json();
-  
+
   const priceCardResponse = await fetch("http://localhost:8080/priceCard");
   const priceCardData = await priceCardResponse.json();
 

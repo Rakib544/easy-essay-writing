@@ -5,9 +5,10 @@ import Faq from "../../src/components/admin/faq/faq";
 import OurProcess from "../../src/components/admin/ourProcess/ourProcess";
 import Pricing from "../../src/components/admin/pricing/pricing";
 import Navbar from "../../src/components/navbar/Navbar";
+import withAuth from "../../src/components/privateRoute";
 import ProfileCard from "../../src/components/profileCard/profileCard";
 
-const Edit = () => {
+const Edit = ({ priceCardData }) => {
   const [aboutData, setAboutData] = useState({});
   useEffect(() => {
     fetch("http://localhost:8080/about")
@@ -23,7 +24,7 @@ const Edit = () => {
           <BannerInfo />
           <About aboutData={aboutData} />
           <OurProcess />
-          <Pricing />
+          <Pricing priceCardData={priceCardData} />
           <Faq />
         </div>
       </div>
@@ -31,4 +32,15 @@ const Edit = () => {
   );
 };
 
-export default Edit;
+export async function getServerSideProps() {
+  const priceCardResponse = await fetch("http://localhost:8080/priceCard");
+  const priceCardData = await priceCardResponse.json();
+
+  return {
+    props: {
+      priceCardData,
+    },
+  };
+}
+
+export default withAuth(Edit);

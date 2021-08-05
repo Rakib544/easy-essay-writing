@@ -1,11 +1,32 @@
+import firebase from "firebase/app";
+import "firebase/auth";
 import Head from "next/head";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
 import "../styles/globals.css";
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+} else {
+  firebase.app();
+}
 
 export const UserContext = createContext();
 
 function MyApp({ Component, pageProps }) {
   const [signedUser, setSignedUser] = useState({});
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      console.log("user", user);
+      if (user) {
+        setSignedUser(user);
+      } else {
+        setSignedUser({});
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   return (
     <>
