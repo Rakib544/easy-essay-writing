@@ -20,7 +20,13 @@ function MyApp({ Component, pageProps }) {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       console.log("user", user);
       if (user) {
-        setSignedUser(user);
+        const loggedUser = {
+          name: user.displayName,
+          email: user.email,
+          phoneNumber: user.phoneNumber,
+          photoURL: user.photoURL,
+        }
+        setSignedUser(loggedUser);
       } else {
         setSignedUser({});
       }
