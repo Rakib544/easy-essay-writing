@@ -44,7 +44,7 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
               </div>
               <div className="col-md-2 d-flex flex-column align-items-center">
                 <p className="text-primary fs-22 fw-bold">File - Delivery</p>
-                <button type="button" class="btn btn-primary text-white">
+                <button type="button" className="btn btn-primary text-white">
                   Upload file <MdFileUpload className="ms-3" size={28} />
                 </button>
               </div>

@@ -121,6 +121,7 @@ const OurProcess = () => {
                 aria-label="Close"
               ></button>
             </div>
+<<<<<<< HEAD
             <div class="modal-body">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <textarea
@@ -182,6 +183,41 @@ const OurProcess = () => {
                   data-bs-dismiss="modal"
                 />
               </form>
+=======
+
+            <div className="modal fade" id="processModal1" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Title</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <textarea rows="5" cols="5" defaultValue={titleValue} {...register("title")} name='title' id='title' className="form-control mb-2"></textarea>
+                                <input type="submit" className="btn btn-primary" value="Save Changes" data-bs-dismiss="modal" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="modal fade" id="processModal2" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Header - Details</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <textarea rows="5" cols="5" defaultValue={headerDetailsValue} {...register("headerDetails")} name='headerDetails' id='headerDetails' className="form-control mb-2"></textarea>
+                                <input type="submit" className="btn btn-primary" value="Save Changes" data-bs-dismiss="modal" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+>>>>>>> 66b500a1a4397b4a0bb7914947bbb4d6b4d8be06
             </div>
           </div>
         </div>
