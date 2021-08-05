@@ -3,26 +3,28 @@ import React from "react";
 import { MdFileUpload } from "react-icons/md";
 import styles from "./orderInfoCard.module.css";
 
-const OrderInfoCard = () => {
+const OrderInfoCard = ({ data }) => {
   const router = useRouter();
 
   return (
-    <div className="mt-5 pt-5 mb-5 pb-5">
+    <div className="my-3">
       <div className="container bg-white p-5 box-shadow rounded-3 ">
         <div className="row  d-flex align-items-center border-bottom pb-4 mb-3">
           <div className="col-md-3 ">
-            <p className="text-primary fs-22 fw-bold">Order - 65213</p>
-            <p className="text-success fs-18">Order - Date: 23 Set - 2021</p>
+            <p className="text-primary fs-22 fw-bold">Order - {data._id}</p>
+            <p className="text-success fs-18">Order - Date: {data.orderDate}</p>
           </div>
           <div className="col-md-3">
-            <p className="text-danger fs-18">Delivery - Date: 23 Set - 2021</p>
+            <p className="text-danger fs-18">
+              Delivery - Date: {data.deliveryDate}
+            </p>
           </div>
           {router.pathname === "/admin/pending-orders" ? (
             <>
               <div className="col-md-2 d-flex flex-column align-items-center">
                 <p className="text-primary fw-bold fs-22">Order-status</p>
                 <button className={`${styles.admin}`} type="">
-                  Work in progress
+                  {data.orderStatus}
                 </button>
               </div>
               <div className="col-md-2 d-flex flex-column align-items-center">
@@ -45,23 +47,23 @@ const OrderInfoCard = () => {
         <div className="row  d-flex justify-content-center align-items-center ">
           <div className="col-md-3 ">
             <p className="fs-18 fw-bold">Customer Name</p>
-            <p className="text-muted">Kawsar Ahmmed</p>
+            <p className="text-muted">{data.customerName}</p>
           </div>
           <div className="col-md-3">
             <p className="fs-18 fw-regular fw-bold">Customer Mail</p>
-            <p className="text-muted">kawsarahmmedr@gmail.com</p>
+            <p className="text-muted">{data.customerEmail}</p>
           </div>
           <div className="col-md-2 d-flex flex-column">
             <p className="fs-18 fw-bold">Order Amount</p>
-            <p className="text-muted">$12</p>
+            <p className="text-muted">${data.orderAmount}</p>
           </div>
           <div className="col-md-2 d-flex flex-column  ">
             <p className="text-danger fs-18 fw-bold">Delivery Time</p>
-            <p className="text-primary">2 Days</p>
+            <p className="text-primary">{data.deliveryTime} Days</p>
           </div>
           <div className="col-md-2 d-flex flex-column  ">
             <p className="text-primary fs-18 fw-bold">Quantity</p>
-            <p className="text-muted">1 Items</p>
+            <p className="text-muted">{data.quantity} Items</p>
           </div>
         </div>
       </div>

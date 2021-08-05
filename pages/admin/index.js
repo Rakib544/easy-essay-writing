@@ -15,6 +15,7 @@ const Edit = ({ priceCardData }) => {
       .then((res) => res.json())
       .then((data) => setAboutData(data[0]));
   }, []);
+
   return (
     <>
       <Navbar />

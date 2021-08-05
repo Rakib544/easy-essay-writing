@@ -1,17 +1,17 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { UserContext } from "../../../pages/_app";
 import styles from "./card.module.css";
 
 const Card = ({ data, index }) => {
+  const [signedUser] = useContext(UserContext);
   const { deliveryDay, perPage, wordPerPage } = data;
 
   const deliveryDayValue = deliveryDay;
   const perPageValue = perPage;
   const wordPerPageValue = wordPerPage;
   const id = data._id;
-
-  const [number, setNumber] = useState(0);
 
   const {
     register,
@@ -39,9 +39,45 @@ const Card = ({ data, index }) => {
       .then((res) => res.json())
       .then((result) => {
         if (result) {
-          setNumber(number + 1);
         }
       });
+  };
+
+  //
+  let value;
+  if (data.deliveryDay.endsWith("+")) {
+    value = parseInt(data.deliveryDay.split("")[0]);
+  } else if (data.deliveryDay.includes("-")) {
+    value = data.deliveryDay.split("-")[1];
+  } else {
+    value = data.deliveryDay;
+  }
+
+  const deliveryDate = (value) => {
+    return new Date(new Date().getTime() + value * 24 * 60 * 60 * 1000);
+  };
+
+  const orderDetails = {};
+  orderDetails.orderDate = new Date();
+  orderDetails.orderStatus = "Work In Progress";
+  orderDetails.deliveryDate = deliveryDate(value);
+  orderDetails.file = "";
+  orderDetails.customerName = signedUser.name;
+  orderDetails.customerEmail = signedUser.email;
+  orderDetails.orderAmount = data.perPage;
+  orderDetails.deliveryTime = data.deliveryDay;
+  orderDetails.quantity = "1";
+
+  const handleOrderCard = () => {
+    if (signedUser.email) {
+      fetch("http://localhost:8080/orderCard/post", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(orderDetails),
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    }
   };
   return (
     <>
@@ -79,7 +115,12 @@ const Card = ({ data, index }) => {
             </span>
             <p className="fw-bold fs-4">or</p>
             <p className={`${styles.wordStyle}`}>{data.wordPerPage} word</p>
-            <button className={`${styles.pricingBtn} btn`}>Order Now</button>
+            <button
+              className={`${styles.pricingBtn} btn`}
+              onClick={handleOrderCard}
+            >
+              Order Now
+            </button>
           </div>
         </div>
       </div>
