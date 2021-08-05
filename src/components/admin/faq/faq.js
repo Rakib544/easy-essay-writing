@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from "react";
-import FaqCard from "../faqCard/faqCard";
-import FooterCard from "../footerCard/footerCard";
+import React, { useEffect, useState } from 'react';
+import FaqCard from '../faqCard/faqCard';
+import FooterCard from '../footerCard/footerCard';
 
 const Faq = () => {
+
   const [faqCardsData, setFaqCardsData] = useState([]);
   const [footerCardsData, setFooterCardsData] = useState([]);
   const [number, setNumber] = useState(0);
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/faq")
-      .then((res) => res.json())
-      .then((data) => setFaqCardsData(data));
+    fetch('http://localhost:8080/faq')
+      .then(res => res.json())
+      .then(data => setFaqCardsData(data));
   }, [number]);
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/footerIcons")
-      .then((res) => res.json())
-      .then((data) => setFooterCardsData(data));
+    fetch('http://localhost:8080/footerIcons')
+      .then(res => res.json())
+      .then(data => setFooterCardsData(data));
   }, [number]);
 
   return (
@@ -28,15 +29,13 @@ const Faq = () => {
       <div className="bg-white py-4 px-5 my-4 box-shadow">
         <div className="row">
           <div className="col-md-6">
-            {faqCardsData.map((faqCardData, index) => (
-              <FaqCard
-                faqCardData={faqCardData}
-                key={faqCardData._id}
-                index={index}
-                setNumber={setNumber}
-                number={number}
-              />
-            ))}
+
+            {
+              faqCardsData.map((faqCardData, index) => (
+                <FaqCard faqCardData={faqCardData} key={faqCardData._id} index={index} setNumber={setNumber} number={number} />
+              ))
+            }
+
           </div>
 
           <div className="col-md-6">
@@ -47,15 +46,12 @@ const Faq = () => {
                 </p>
               </div>
 
-              {footerCardsData.map((footerCardData, index) => (
-                <FooterCard
-                  footerCardData={footerCardData}
-                  key={footerCardData._id}
-                  index={index}
-                  setNumber={setNumber}
-                  number={number}
-                />
-              ))}
+              {
+                footerCardsData.map((footerCardData, index) => (
+                  <FooterCard footerCardData={footerCardData} key={footerCardData._id} index={index} setNumber={setNumber} number={number} />
+                ))
+              }
+
             </div>
           </div>
         </div>

@@ -17,7 +17,7 @@ const About = () => {
   } = useForm();
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/about")
+    fetch("http://localhost:8080/about")
       .then((res) => res.json())
       .then((data) => setAboutData(data[0]));
   }, [number]);
@@ -27,7 +27,7 @@ const About = () => {
     const headerDetails = data.headerDetails || headerDetailsValue;
     const buttonText = data.buttonText || buttonTextValue;
 
-    fetch(`https://essay-essay-writing.herokuapp.com/about/update/${_id}`, {
+    fetch(`http://localhost:8080/about/update/${_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -94,26 +94,26 @@ const About = () => {
       </div>
 
       <div
-        className="modal fade"
+        class="modal fade"
         id="aboutModal1"
-        tabIndex="-1"
+        tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
                 Title
               </h5>
               <button
                 type="button"
-                className="btn-close"
+                class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">
+            <div class="modal-body">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <textarea
                   rows="5"
@@ -122,7 +122,7 @@ const About = () => {
                   {...register("title")}
                   name="title"
                   id="title"
-                  className="form-control mb-2"
+                  class="form-control mb-2"
                 ></textarea>
                 <input
                   type="submit"
@@ -137,26 +137,26 @@ const About = () => {
       </div>
 
       <div
-        className="modal fade"
+        class="modal fade"
         id="aboutModal2"
-        tabIndex="-1"
+        tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
                 Header - Details
               </h5>
               <button
                 type="button"
-                className="btn-close"
+                class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">
+            <div class="modal-body">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <textarea
                   rows="5"
@@ -165,7 +165,7 @@ const About = () => {
                   {...register("headerDetails")}
                   name="headerDetails"
                   id="headerDetails"
-                  className="form-control mb-2"
+                  class="form-control mb-2"
                 ></textarea>
                 <input
                   type="submit"
@@ -180,26 +180,26 @@ const About = () => {
       </div>
 
       <div
-        className="modal fade"
+        class="modal fade"
         id="aboutModal3"
-        tabIndex="-1"
+        tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
                 Button
               </h5>
               <button
                 type="button"
-                className="btn-close"
+                class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">
+            <div class="modal-body">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <textarea
                   rows="5"
@@ -208,7 +208,7 @@ const About = () => {
                   {...register("buttonText")}
                   name="buttonText"
                   id="headerDetails"
-                  className="form-control mb-2"
+                  class="form-control mb-2"
                 ></textarea>
                 <input
                   type="submit"
