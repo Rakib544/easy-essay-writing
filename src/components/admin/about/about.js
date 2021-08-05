@@ -94,26 +94,26 @@ const About = () => {
       </div>
 
       <div
-        class="modal fade"
+        className="modal fade"
         id="aboutModal1"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
+        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
                 Title
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <textarea
                   rows="5"
@@ -122,7 +122,7 @@ const About = () => {
                   {...register("title")}
                   name="title"
                   id="title"
-                  class="form-control mb-2"
+                  className="form-control mb-2"
                 ></textarea>
                 <input
                   type="submit"
@@ -137,26 +137,26 @@ const About = () => {
       </div>
 
       <div
-        class="modal fade"
+        className="modal fade"
         id="aboutModal2"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
+        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
                 Header - Details
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <textarea
                   rows="5"
@@ -165,7 +165,7 @@ const About = () => {
                   {...register("headerDetails")}
                   name="headerDetails"
                   id="headerDetails"
-                  class="form-control mb-2"
+                  className="form-control mb-2"
                 ></textarea>
                 <input
                   type="submit"
@@ -180,26 +180,26 @@ const About = () => {
       </div>
 
       <div
-        class="modal fade"
+        className="modal fade"
         id="aboutModal3"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
+        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
                 Button
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <textarea
                   rows="5"
@@ -208,7 +208,7 @@ const About = () => {
                   {...register("buttonText")}
                   name="buttonText"
                   id="headerDetails"
-                  class="form-control mb-2"
+                  className="form-control mb-2"
                 ></textarea>
                 <input
                   type="submit"

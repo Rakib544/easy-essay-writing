@@ -48,17 +48,17 @@ const FooterCard = ({ footerCardData, index, setNumber, number }) => {
                 />
             </div>
 
-            <div class="modal fade" id={`footerModalCard${index + 1}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">FAQ</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal fade" id={`footerModalCard${index + 1}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">FAQ</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <label className="form-label fs-14" htmlFor="answer">{titleValue}</label>
-                                <input type="text" defaultValue={link} {...register("link")} name='link' id='link' class="form-control mb-2" />
+                                <input type="text" defaultValue={link} {...register("link")} name='link' id='link' className="form-control mb-2" />
                                 <input type="submit" className="btn btn-primary" value="Save Changes" data-bs-dismiss="modal" />
                             </form>
                         </div>
