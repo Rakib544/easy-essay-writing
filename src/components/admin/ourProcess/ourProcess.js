@@ -50,7 +50,7 @@ const OurProcess = () => {
     fetch("https://essay-essay-writing.herokuapp.com/processCard")
       .then((res) => res.json())
       .then((data) => setProcessCardsData(data));
-  }, [number]);
+  }, []);
 
   return (
     <>
@@ -121,103 +121,91 @@ const OurProcess = () => {
                 aria-label="Close"
               ></button>
             </div>
-<<<<<<< HEAD
-            <div class="modal-body">
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <textarea
-                  rows="5"
-                  cols="5"
-                  defaultValue={titleValue}
-                  {...register("title")}
-                  name="title"
-                  id="title"
-                  class="form-control mb-2"
-                ></textarea>
-                <input
-                  type="submit"
-                  className="btn btn-primary"
-                  value="Save Changes"
-                  data-bs-dismiss="modal"
-                />
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div
-        class="modal fade"
-        id="processModal2"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
-                Header - Details
-              </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <textarea
-                  rows="5"
-                  cols="5"
-                  defaultValue={headerDetailsValue}
-                  {...register("headerDetails")}
-                  name="headerDetails"
-                  id="headerDetails"
-                  class="form-control mb-2"
-                ></textarea>
-                <input
-                  type="submit"
-                  className="btn btn-primary"
-                  value="Save Changes"
-                  data-bs-dismiss="modal"
-                />
-              </form>
-=======
-
-            <div className="modal fade" id="processModal1" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Title</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            <form onSubmit={handleSubmit(onSubmit)}>
-                                <textarea rows="5" cols="5" defaultValue={titleValue} {...register("title")} name='title' id='title' className="form-control mb-2"></textarea>
-                                <input type="submit" className="btn btn-primary" value="Save Changes" data-bs-dismiss="modal" />
-                            </form>
-                        </div>
-                    </div>
+            <div
+              className="modal fade"
+              id="processModal1"
+              tabIndex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">
+                      Title
+                    </h5>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <textarea
+                        rows="5"
+                        cols="5"
+                        defaultValue={titleValue}
+                        {...register("title")}
+                        name="title"
+                        id="title"
+                        className="form-control mb-2"
+                      ></textarea>
+                      <input
+                        type="submit"
+                        className="btn btn-primary"
+                        value="Save Changes"
+                        data-bs-dismiss="modal"
+                      />
+                    </form>
+                  </div>
                 </div>
+              </div>
             </div>
 
-            <div className="modal fade" id="processModal2" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Header - Details</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            <form onSubmit={handleSubmit(onSubmit)}>
-                                <textarea rows="5" cols="5" defaultValue={headerDetailsValue} {...register("headerDetails")} name='headerDetails' id='headerDetails' className="form-control mb-2"></textarea>
-                                <input type="submit" className="btn btn-primary" value="Save Changes" data-bs-dismiss="modal" />
-                            </form>
-                        </div>
-                    </div>
+            <div
+              className="modal fade"
+              id="processModal2"
+              tabIndex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">
+                      Header - Details
+                    </h5>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <textarea
+                        rows="5"
+                        cols="5"
+                        defaultValue={headerDetailsValue}
+                        {...register("headerDetails")}
+                        name="headerDetails"
+                        id="headerDetails"
+                        className="form-control mb-2"
+                      ></textarea>
+                      <input
+                        type="submit"
+                        className="btn btn-primary"
+                        value="Save Changes"
+                        data-bs-dismiss="modal"
+                      />
+                    </form>
+                  </div>
                 </div>
->>>>>>> 66b500a1a4397b4a0bb7914947bbb4d6b4d8be06
+              </div>
             </div>
           </div>
         </div>

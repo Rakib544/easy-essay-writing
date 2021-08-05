@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import OurProcessCard from "../ourProcessCard/ourProcessCard";
 
-const OurProcess = () => {
-  const [processData, setProcessData] = useState({});
-  const { _id, title, headerDetails } = processData;
-  const [number, setNumber] = useState(0);
-  const titleValue = title;
-  const headerDetailsValue = headerDetails;
-
+const OurProcessCard = ({ processCardData, index, setNumber, number }) => {
+  const { _id, title, content } = processCardData;
   const {
     register,
     handleSubmit,
@@ -16,94 +10,68 @@ const OurProcess = () => {
     formState: { errors },
   } = useForm();
 
-  const [processCardsData, setProcessCardsData] = useState([]);
-
-  useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/process")
-      .then((res) => res.json())
-      .then((data) => setProcessData(data[0]));
-  }, [number]);
-
   const onSubmit = (data) => {
-    const title = data.title || titleValue;
-    const headerDetails = data.headerDetails || headerDetailsValue;
+    const title = data.title;
+    const content = data.content;
 
-    fetch(`https://essay-essay-writing.herokuapp.com/${_id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title,
-        headerDetails,
-      }),
-    })
+    fetch(
+      `https://essay-essay-writing.herokuapp.com/processCard/update/${_id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title,
+          content,
+        }),
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         if (result) {
           console.log(result);
-          setProcessData(result);
           setNumber(number + 1);
         }
       });
   };
 
-  useEffect(() => {
-    fetch("http://localhost:8080/processCard")
-      .then((res) => res.json())
-      .then((data) => setProcessCardsData(data));
-  }, [number]);
-
   return (
     <>
-      <p className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold fw-bold my-4 box-shadow">
-        Our Process
-      </p>
+      <div className="col-md-4">
+        <div className="p-3 mb-3 box-shadow-processCard">
+          <p className="text-primary fs-18 fw-bold mb-2">Item - {index + 1}</p>
+          <div className="mt-4 mb-4 d-flex justify-content-between align-items-center">
+            <p className="border rounded fs-16 fw-bold  d-inline-block py-2 px-4">
+              Title -
+            </p>
+            <button
+              className="btn-style"
+              data-bs-toggle="modal"
+              data-bs-target={`#processCardModal${index + 1}`}
+            >
+              Edit
+            </button>
+          </div>
+          <p className="fs-18 fw-bold">{title}</p>
 
-      <div className="bg-white py-4 px-5 my-4 box-shadow">
-        <p className="border rounded d-inline-block py-2 fs-22 fw-bold px-4">
-          Title -
-        </p>
-        <div className="mt-4 mb-4 d-flex justify-content-between align-items-center">
-          <p className="fs-22 fw-bold">{titleValue}</p>
-          <button
-            className="btn-style"
-            data-bs-toggle="modal"
-            data-bs-target="#processModal1"
-          >
-            Edit
-          </button>
-        </div>
-
-        <p className="border fs-22 fw-bold rounded d-inline-block py-2 px-4">
-          Header - Details
-        </p>
-        <div className="mt-4 mb-3 d-flex justify-content-between align-items-center">
-          <p className="fs-16">{headerDetailsValue}</p>
-          <button
-            className="btn-style"
-            data-bs-toggle="modal"
-            data-bs-target="#processModal2"
-          >
-            Edit
-          </button>
-        </div>
-
-        <p className="text-primary fs-22 fw-bold mb-5">Items</p>
-        <div className="row mt-2">
-          {processCardsData.map((processCardData, index) => (
-            <OurProcessCard
-              processCardData={processCardData}
-              key={processCardData._id}
-              index={index}
-              setNumber={setNumber}
-              number={number}
-            />
-          ))}
+          <div className="mt-4 mb-4 d-flex justify-content-between align-items-center">
+            <p className="border fs-16 fw-bold rounded d-inline-block py-2 px-4">
+              Content
+            </p>
+            <button
+              className="btn-style"
+              data-bs-toggle="modal"
+              data-bs-target={`#processModalCard${index + 1}`}
+            >
+              Edit
+            </button>
+          </div>
+          <p className="fs-16">{content}</p>
         </div>
       </div>
 
       <div
         class="modal fade"
-        id="processModal1"
+        id={`processCardModal${index + 1}`}
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -126,7 +94,7 @@ const OurProcess = () => {
                 <textarea
                   rows="5"
                   cols="5"
-                  defaultValue={titleValue}
+                  defaultValue={title}
                   {...register("title")}
                   name="title"
                   id="title"
@@ -146,7 +114,7 @@ const OurProcess = () => {
 
       <div
         class="modal fade"
-        id="processModal2"
+        id={`processModalCard${index + 1}`}
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -155,7 +123,7 @@ const OurProcess = () => {
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">
-                Header - Details
+                Content
               </h5>
               <button
                 type="button"
@@ -169,12 +137,13 @@ const OurProcess = () => {
                 <textarea
                   rows="5"
                   cols="5"
-                  defaultValue={headerDetailsValue}
-                  {...register("headerDetails")}
-                  name="headerDetails"
-                  id="headerDetails"
+                  defaultValue={content}
+                  {...register("content")}
+                  name="content"
+                  id="content"
                   class="form-control mb-2"
                 ></textarea>
+                {/* <input type="hidden" name="_id" defaultValue={processCardData._id} {...register("_id")} id='_id' /> */}
                 <input
                   type="submit"
                   className="btn btn-primary"
@@ -190,4 +159,4 @@ const OurProcess = () => {
   );
 };
 
-export default OurProcess;
+export default OurProcessCard;
