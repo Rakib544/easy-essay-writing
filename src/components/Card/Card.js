@@ -84,6 +84,9 @@ const Card = ({ data, index }) => {
       })
         .then((res) => res.json())
         .then((data) => console.log(data));
+      console.log(orderDetails);
+    } else {
+      console.log("Problem");
     }
   };
   return (

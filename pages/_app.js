@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
           email: user.email,
           phoneNumber: user.phoneNumber,
           photoURL: user.photoURL,
-        }
+        };
         setSignedUser(loggedUser);
       } else {
         setSignedUser({});
