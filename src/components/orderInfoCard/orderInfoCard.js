@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { MdFileUpload } from "react-icons/md";
 import styles from "./orderInfoCard.module.css";
 
 const OrderInfoCard = ({ data, number, setNumber }) => {
+  const [file, setFile] = useState(null);
   const router = useRouter();
 
   const handleChangeStatus = () => {
@@ -17,6 +18,12 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
     )
       .then((res) => res.json())
       .then((data) => setNumber(number + 1));
+  };
+
+  const handleFileUpload = (e) => {
+    const data = new FormData();
+    data.append("files", e.target.files[0]);
+    console.log(data);
   };
 
   return (
@@ -44,9 +51,16 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
               </div>
               <div className="col-md-2 d-flex flex-column align-items-center">
                 <p className="text-primary fs-22 fw-bold">File - Delivery</p>
-                <button type="button" className="btn btn-primary text-white">
+                <label htmlFor="file" className="btn btn-primary text-white">
                   Upload file <MdFileUpload className="ms-3" size={28} />
-                </button>
+                  <input
+                    type="file"
+                    id="file"
+                    className="d-none"
+                    name="file"
+                    onChange={handleFileUpload}
+                  />
+                </label>
               </div>
             </>
           ) : (
