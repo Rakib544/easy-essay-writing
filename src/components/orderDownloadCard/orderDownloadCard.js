@@ -1,13 +1,23 @@
 import React from "react";
 
-const OrderDownloadCard = () => {
+const OrderDownloadCard = ({ singleOrderDetails }) => {
+  const status = singleOrderDetails.orderStatus;
   return (
     <div className="row p-5 d-flex align-items-center flex-direction-column">
       <div className="col-12 col-md-7">
         <div className="bg-light p-5 mb-4">
-          <button className="btn btn-danger">Work In Progress</button>
-          <p className="mt-3  fw-bold">
-            <span className="fs-18 text-primary">Next Delivery:</span> <span className="fs-27 text-danger">21 July, 2021</span>
+          <button
+            className={`btn ${
+              status === "Completed" ? "btn-style" : "work-in-progress"
+            }`}
+          >
+            {singleOrderDetails.orderStatus}
+          </button>
+          <p className="mt-3  fw-bold d-flex align-items-center flex-column flex-md-row">
+            <span className="fs-18 text-primary me-1">Next Delivery:</span>{" "}
+            <span className="fs-27 text-danger">
+              {singleOrderDetails.deliveryDate.slice(0, 10)}
+            </span>
           </p>
         </div>
         <div className="p-5 bg-primary">

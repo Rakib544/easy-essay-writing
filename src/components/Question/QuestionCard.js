@@ -4,7 +4,6 @@ import { VscRemove } from "react-icons/vsc";
 import styles from "./Question.module.css";
 
 const QuestionCard = ({ data }) => {
-  console.log(data,'dar')
   const [isOpen, setIsOpen] = useState(false);
 
   return (

@@ -31,7 +31,6 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      console.log("user", user);
       if (user) {
         const loggedUser = {
           name: user.displayName,

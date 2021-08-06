@@ -24,9 +24,7 @@ const Navbar = () => {
       .then(() => {
         setSignedUser({});
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
   const router = useRouter();
   const currentPath = router.pathname;

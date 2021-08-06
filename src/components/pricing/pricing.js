@@ -2,7 +2,6 @@ import React from "react";
 import Card from "../Card/Card";
 
 const Pricing = ({ priceCardData }) => {
-  console.log(priceCardData, "gay");
   return (
     <div className="container">
       <p className="text-center fs-48 fw-bold mb-3 mt-5">Pricing</p>

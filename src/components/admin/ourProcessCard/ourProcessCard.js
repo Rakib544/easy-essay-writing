@@ -28,7 +28,6 @@ const OurProcessCard = ({ processCardData, index, setNumber, number }) => {
       .then((res) => res.json())
       .then((result) => {
         if (result) {
-          console.log(result);
           setNumber(number + 1);
         }
       });
