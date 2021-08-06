@@ -115,7 +115,8 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li
-                  className={`nav-item ${styles.navItem} mx-md-2 my-2 my-md-0`}
+                  className={`nav-item ${styles.navItem} mx-md-2 my-2 my-md-0 cursor-pointer`}
+                  onClick={logout}
                 >
                   Logout
                 </li>
@@ -163,7 +164,8 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li
-                  className={`nav-item ${styles.navItem} mx-md-2 my-2 my-md-0`}
+                  className={`nav-item ${styles.navItem} mx-md-2 my-2 my-md-0 cursor-pointer`}
+                  onClick={logout}
                 >
                   Logout
                 </li>
