@@ -28,7 +28,44 @@ const Signin = () => {
     formState: { errors },
   } = useForm();
   const [signedUser, setSignedUser] = useContext(UserContext);
-  console.log(signedUser);
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+  const googleSignin = () => {
+    setShowSpinner(true);
+    firebase
+      .auth()
+      .signInWithPopup(googleProvider)
+      .then((res) => {
+        const { displayName, email, phoneNumber, photoURL } = res.user;
+        const loggedUser = {
+          name: displayName,
+          email: email,
+          phoneNumber: phoneNumber,
+          photoURL: photoURL,
+        };
+        fetch("https://essay-essay-writing.herokuapp.com/admin", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(loggedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setSignedUser(data);
+            setShowSpinner(false);
+            if (data.userType === "user") {
+              router.push("/orderlist");
+            } else {
+              router.push("/admin");
+            }
+          });
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        var email = error.email;
+        var credential = error.credential;
+      });
+  };
 
   const onSubmit = (data) => {
     setShowSpinner(true);
@@ -101,10 +138,15 @@ const Signin = () => {
             )}
             <div className="text-center ">
               <p className="fw-bold text-secondary fs-50">Sign in to Clever</p>
-              <div className="p-3 d-inline icon-bg cursor-pointer">
+              <div
+                className="p-3 d-inline icon-bg cursor-pointer"
+                onClick={googleSignin}
+              >
                 <FcGoogle size={24} />
               </div>
-              <div className="p-3 d-inline ms-2 icon-bg cursor-pointer">
+              <div
+                className="p-3 d-inline ms-2 icon-bg cursor-pointer"
+              >
                 <CgFacebook
                   size={24}
                   className="fb-icon-color cursor-pointer"
