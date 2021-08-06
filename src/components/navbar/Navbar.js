@@ -114,6 +114,11 @@ const Navbar = () => {
                     </a>
                   </Link>
                 </li>
+                <li
+                  className={`nav-item ${styles.navItem} mx-md-2 my-2 my-md-0`}
+                >
+                  Logout
+                </li>
               </>
             )}
             {(router.pathname === "/admin" ||
@@ -156,6 +161,11 @@ const Navbar = () => {
                       Complete Orders
                     </a>
                   </Link>
+                </li>
+                <li
+                  className={`nav-item ${styles.navItem} mx-md-2 my-2 my-md-0`}
+                >
+                  Logout
                 </li>
               </>
             )}

@@ -1,17 +1,36 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Card from "../src/components/Card/Card";
 import Navbar from "../src/components/navbar/Navbar";
 import OrderDownloadCard from "../src/components/orderDownloadCard/orderDownloadCard";
 import withAuth from "../src/components/privateRoute";
 import TotalOrderCard from "../src/components/TotalOrderCard/totalOrderCard";
-import { orderData } from "../src/data/orderData";
+import { UserContext } from "./_app";
 
 const obj = {
-  isTrue: false,
+  isTrue: true,
 };
 
-const OrderList = ({ cardData }) => {
-  console.log(cardData);
+const OrderList = ({ cardData, userOrderData }) => {
+  const [userOrders, setUserOrders] = useState([]);
+
+  const [signedUser] = useContext(UserContext);
+  const email = signedUser.email;
+
+  useEffect(() => {
+    const loadData = async () => {
+      const userOrder = await fetch(
+        "https://essay-essay-writing.herokuapp.com/orderCard/userOrder",
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ email }),
+        }
+      );
+      const userOrderData = await userOrder.json();
+      setUserOrders(userOrderData);
+    };
+    loadData();
+  }, []);
   return (
     <>
       <Navbar />
@@ -22,21 +41,26 @@ const OrderList = ({ cardData }) => {
           </div>
           <div className="col-12 col-md-8 bg-white">
             {obj.isTrue ? (
-              <div className="row p-4">
-                {orderData.map((order) => (
-                  <div key={order.id} className="row shadow-sm py-2 my-2">
-                    <p className="col-4 pt-3 text-primary">
+              <div className="row p-4 scroll height">
+                {userOrders.map((order) => (
+                  <div
+                    key={order._id}
+                    className="row shadow-sm py-2 my-2 cursor-pointer"
+                  >
+                    <p className="col-12 col-md-4 pt-3 text-primary fw-bold">
                       Order - {order._id}
                     </p>
-                    <p className="col-4 pt-3">Order-Date: {order.date}</p>
+                    <p className="col-12 col-md-4 pt-3">
+                      Order-Date: {order.orderDate.slice(0, 10)}
+                    </p>
                     <button
-                      className={`col-4 my-2 btn ${
-                        order.status === "complete"
+                      className={`col-12 col-md-4 my-2 btn ${
+                        order.orderStatus === "Completed"
                           ? "btn-primary"
-                          : "btn-danger"
+                          : "work-in-progress"
                       }`}
                     >
-                      {order.status === "complete" ? "Complete" : "On Progress"}
+                      {order.orderStatus}
                     </button>
                   </div>
                 ))}
@@ -51,8 +75,8 @@ const OrderList = ({ cardData }) => {
             New Order
           </p>
           <div className="row">
-            {cardData.map((data) => (
-              <Card key={data.id} data={data} />
+            {cardData.map((data, index) => (
+              <Card key={data._id} data={data} index={index} />
             ))}
           </div>
         </div>
