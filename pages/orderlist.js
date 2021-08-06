@@ -1,4 +1,6 @@
+import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
+import { BsArrowLeft } from "react-icons/bs";
 import Card from "../src/components/Card/Card";
 import Navbar from "../src/components/navbar/Navbar";
 import OrderDownloadCard from "../src/components/orderDownloadCard/orderDownloadCard";
@@ -6,12 +8,10 @@ import withAuth from "../src/components/privateRoute";
 import TotalOrderCard from "../src/components/TotalOrderCard/totalOrderCard";
 import { UserContext } from "./_app";
 
-const obj = {
-  isTrue: true,
-};
-
-const OrderList = ({ cardData, userOrderData }) => {
+const OrderList = ({ cardData }) => {
+  const [showDetails, setShowDetails] = useState(false);
   const [userOrders, setUserOrders] = useState([]);
+  const [singleOrderDetails, setSingleOrderDetails] = useState({});
 
   const [signedUser] = useContext(UserContext);
   const email = signedUser.email;
@@ -31,6 +31,12 @@ const OrderList = ({ cardData, userOrderData }) => {
     };
     loadData();
   }, []);
+
+  const handleShowOrderDetails = (id) => {
+    const singleOrderDetails = userOrders.find((order) => order._id === id);
+    setSingleOrderDetails(singleOrderDetails);
+    setShowDetails(true);
+  };
   return (
     <>
       <Navbar />
@@ -40,33 +46,49 @@ const OrderList = ({ cardData, userOrderData }) => {
             <TotalOrderCard />
           </div>
           <div className="col-12 col-md-8 bg-white">
-            {obj.isTrue ? (
-              <div className="row p-4 scroll height">
+            {!showDetails ? (
+              <div className="d-flex flex-column p-4 scroll height">
                 {userOrders.map((order) => (
                   <div
-                    key={order._id}
-                    className="row shadow-sm py-2 my-2 cursor-pointer"
+                    className="my-2"
+                    onClick={() => handleShowOrderDetails(order._id)}
                   >
-                    <p className="col-12 col-md-4 pt-3 text-primary fw-bold">
-                      Order - {order._id}
-                    </p>
-                    <p className="col-12 col-md-4 pt-3">
-                      Order-Date: {order.orderDate.slice(0, 10)}
-                    </p>
-                    <button
-                      className={`col-12 col-md-4 my-2 btn ${
-                        order.orderStatus === "Completed"
-                          ? "btn-primary"
-                          : "work-in-progress"
-                      }`}
+                    <div
+                      key={order._id}
+                      className="row shadow-sm py-2 cursor-pointer"
                     >
-                      {order.orderStatus}
-                    </button>
+                      <p className="col-12 col-md-4 pt-3 text-primary fw-bold">
+                        Order - {order._id}
+                      </p>
+                      <p className="col-12 col-md-4 pt-3">
+                        Order-Date: {order.orderDate.slice(0, 10)}
+                      </p>
+                      <button
+                        className={`col-12 col-md-4 my-2 btn ${
+                          order.orderStatus === "Completed"
+                            ? "btn-primary"
+                            : "work-in-progress"
+                        }`}
+                      >
+                        {order.orderStatus}
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <OrderDownloadCard />
+              <>
+                <div
+                  className="container mt-3"
+                  onClick={() => setShowDetails(false)}
+                >
+                  <BsArrowLeft size={28} className="text-primary mr-4" />
+                  <Link href="/">
+                    <a className="text-primary">Back To Home</a>
+                  </Link>
+                </div>
+                <OrderDownloadCard singleOrderDetails={singleOrderDetails} />
+              </>
             )}
           </div>
         </div>

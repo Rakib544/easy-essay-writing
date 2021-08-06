@@ -6,7 +6,6 @@ import processSectionImg from "../../../images/Grupo 257.svg";
 import styles from "./process.module.css";
 
 const Process = ({ processData, processCardData }) => {
-  console.log(processCardData);
   return (
     <div className={`${styles.processSectionBg} py-5`}>
       <div className="container position-relative">

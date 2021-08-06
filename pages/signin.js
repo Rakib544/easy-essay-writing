@@ -28,7 +28,6 @@ const Signin = () => {
     formState: { errors },
   } = useForm();
   const [signedUser, setSignedUser] = useContext(UserContext);
-  console.log(signedUser);
 
   const onSubmit = (data) => {
     setShowSpinner(true);

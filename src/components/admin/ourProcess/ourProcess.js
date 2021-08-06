@@ -39,7 +39,6 @@ const OurProcess = () => {
       .then((res) => res.json())
       .then((result) => {
         if (result) {
-          console.log(result);
           setProcessData(result);
           setNumber(number + 1);
         }

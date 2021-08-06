@@ -83,8 +83,7 @@ const Card = ({ data, index }) => {
         body: JSON.stringify(orderDetails),
       })
         .then((res) => res.json())
-        .then((data) => console.log(data));
-      console.log(orderDetails);
+        .then((data) => {});
     } else {
       console.log("Problem");
     }

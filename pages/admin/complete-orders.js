@@ -1,11 +1,21 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { BsArrowLeft } from "react-icons/bs";
+import ReactPaginate from "react-paginate";
 import Navbar from "../../src/components/navbar/Navbar";
 import OrderInfoCard from "../../src/components/orderInfoCard/orderInfoCard";
 import withAuth from "../../src/components/privateRoute";
 import ProfileCard from "../../src/components/profileCard/profileCard";
 
-const CompleteOrders = ({ orderData }) => {
+const CompleteOrders = ({ orderData, totalData }) => {
+  const router = useRouter();
+
+  const totalPage = Math.ceil(totalData / 5);
+
+  const handlePageChange = (page) => {
+    router.push(`/admin/complete-orders?page=${page.selected + 1}`);
+  };
+
   return (
     <>
       <Navbar />
@@ -20,28 +30,45 @@ const CompleteOrders = ({ orderData }) => {
           <ProfileCard />
           <div className="ms-md-5 mt-5 mt-md-0 px-5 py-2 bg-white rounded-3 box-shadow ">
             <p className="fw-bold fs-28 pt-5">Total Completed Orders</p>
-            <p className="text-primary fs-50">{orderData.length}</p>
+            <p className="text-primary fs-50">{totalData}</p>
           </div>
         </div>
+        <div className="my-5 px-5 text-primary fs-24 fw-bold bg-white box-shadow">
+          <p className="py-3 ">Completed Order List</p>
+        </div>
         <div className="my-5">
-          {orderData.map((data) => (
+          {orderData?.map((data) => (
             <OrderInfoCard data={data} key={data._id} />
           ))}
+        </div>
+        <div className="d-flex justify-content-end">
+          <ReactPaginate
+            pageCount={totalPage}
+            onPageChange={handlePageChange}
+          />
         </div>
       </div>
     </>
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const page = context.query.page;
   const res = await fetch(
-    "https://essay-essay-writing.herokuapp.com/orderCard/completed"
+    "https://essay-essay-writing.herokuapp.com/orderCard/completed",
+    {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ page: page }),
+    }
   );
-  const orderData = await res.json();
-
+  const ordersData = await res.json();
+  const orderData = ordersData.result;
+  const totalData = ordersData.totalData;
   return {
     props: {
       orderData,
+      totalData,
     },
   };
 }
