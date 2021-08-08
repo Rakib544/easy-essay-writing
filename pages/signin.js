@@ -5,7 +5,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { CgFacebook } from "react-icons/cg";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+
 import { FcGoogle } from "react-icons/fc";
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
@@ -21,12 +23,21 @@ if (!firebase.apps.length) {
 const Signin = () => {
   const [showSpinner, setShowSpinner] = useState(false);
   const router = useRouter();
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().required("Email is required").email("Email is invalid"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(8, "Password must be at least 8 characters"),
+  });
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+
   const [signedUser, setSignedUser] = useContext(UserContext);
   const googleProvider = new firebase.auth.GoogleAuthProvider();
 
@@ -36,11 +47,10 @@ const Signin = () => {
       .auth()
       .signInWithPopup(googleProvider)
       .then((res) => {
-        const { displayName, email, phoneNumber, photoURL } = res.user;
+        const { displayName, email, photoURL } = res.user;
         const loggedUser = {
           name: displayName,
           email: email,
-          phoneNumber: phoneNumber,
           photoURL: photoURL,
         };
         fetch("https://essay-essay-writing.herokuapp.com/admin", {
@@ -60,10 +70,7 @@ const Signin = () => {
           });
       })
       .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        var email = error.email;
-        var credential = error.credential;
+        const errorMessage = error.message;
       });
   };
 
@@ -76,11 +83,10 @@ const Signin = () => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
-        const { displayName, email, phoneNumber, photoURL } = res.user;
+        const { displayName, email, photoURL } = res.user;
         const loggedUser = {
           name: displayName,
           email: email,
-          phoneNumber: phoneNumber,
           photoURL: photoURL,
         };
 
@@ -160,16 +166,13 @@ const Signin = () => {
                   className="form-control input-background py-2"
                   type="email"
                   id="email"
-                  placeholder="@mail.com"
+                  placeholder="example@email.com"
                   defaultValue=""
-                  {...register("email", { required: true })}
+                  {...register("email")}
                 />
-                {errors.email && (
-                  <span role="alert" className="text-danger">
-                    {" "}
-                    Email required{" "}
-                  </span>
-                )}
+                <span role="alert" className="text-danger">
+                  {errors.email?.message}
+                </span>
               </div>
 
               <div className="mb-2">
@@ -183,14 +186,11 @@ const Signin = () => {
                   id="password"
                   defaultValue=""
                   placeholder="Password"
-                  {...register("password", { required: true }, { min: 8 })}
+                  {...register("password")}
                 />
-                {errors.password && (
-                  <span role="alert" className="text-danger">
-                    {" "}
-                    Password required & must contain at least 8 character{" "}
-                  </span>
-                )}
+                <span role="alert" className="text-danger">
+                  {errors.password?.message}
+                </span>
               </div>
 
               <small
