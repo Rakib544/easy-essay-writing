@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { CgFacebook } from "react-icons/cg";
 import { FcGoogle } from "react-icons/fc";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -11,61 +12,101 @@ import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config
 
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
+import { useContext, useState } from "react";
+import { UserContext } from "./_app";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
-}
-else {
+} else {
   firebase.app();
 }
 
 const Signup = () => {
   const router = useRouter();
-
+  const [showSpinner, setShowSpinner] = useState(false);
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required("First Name is required"),
+    lastName: Yup.string().required("Last Name is required"),
+    email: Yup.string().required("Email is required").email("Email is invalid"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(8, "Password must be at least 8 characters"),
+    confirmPassword: Yup.string()
+      .required("Confirm Password is required")
+      .oneOf([Yup.ref("password"), null], "Confirm Password does not match"),
+  });
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+  const [setSignedUser] = useContext(UserContext);
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-  const onSubmit = (data) => {
+  const googleSignin = () => {
+    setShowSpinner(true);
+    firebase
+      .auth()
+      .signInWithPopup(googleProvider)
+      .then((res) => {
+        const { displayName, email, photoURL } = res.user;
+        const loggedUser = {
+          name: displayName,
+          email: email,
+          photoURL: photoURL,
+        };
+        fetch("https://essay-essay-writing.herokuapp.com/admin", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(loggedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setSignedUser(data);
+            setShowSpinner(false);
+            if (data.userType === "user") {
+              router.push("/orderlist");
+            } else {
+              router.push("/admin");
+            }
+          });
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+      });
+  };
 
+  const onSubmit = (data, e) => {
     const firstName = data.firstName;
     const lastName = data.lastName;
     const name = firstName + " " + lastName;
     const email = data.email;
-    const phone = data.phone;
-    const password1 = data.password;
-    const confirmPassword = data.confirmPassword;
+    const password = data.password;
 
-    let password;
-
-    if (password1 === confirmPassword) {
-      password = password1;
-    }
-
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-
-      .then(res => {
-        updateUserProfile(name, phone);
-        router.push('/signin');
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((res) => {
+        updateUserProfile(name);
+        e.target.reset();
+        router.push("/signin");
       })
       .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        const errorMessage = error.message;
       });
   };
 
-  const updateUserProfile = (name, phone) => {
+  const updateUserProfile = (name) => {
     const user = firebase.auth().currentUser;
 
     user.updateProfile({
       displayName: name,
-      photoURL: 'https://images.unsplash.com/photo-1532074205216-d0e1f4b87368?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBwcm9maWxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80',
-      phoneNumber: phone
-    })
-  }
+      photoURL:
+        "https://images.unsplash.com/photo-1532074205216-d0e1f4b87368?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBwcm9maWxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
+    });
+  };
 
   return (
     <div className="overflow-hidden position-relative">
@@ -81,7 +122,6 @@ const Signup = () => {
       </div>
 
       <div className="row d-flex align-items-center">
-
         <div className="col-md-6 d-none d-md-block vh-100 position-relative">
           <Image src={bannerImg} alt="banner-img" />
         </div>
@@ -90,18 +130,17 @@ const Signup = () => {
           <div className="container ">
             <div className="text-center">
               <p className="fw-bold text-secondary mb-4">Sign up to Clever</p>
-              <div className="p-3 d-inline icon-bg cursor-pointer">
+              <div
+                className="p-3 d-inline icon-bg cursor-pointer"
+                onClick={googleSignin}
+              >
                 <FcGoogle size={24} />
-              </div>
-              <div className="p-3 d-inline ms-2 icon-bg cursor-pointer">
-                <CgFacebook size={24} className="fb-icon-color" />
               </div>
             </div>
             <p className="beforeAfter fs-15 mt-4">or do it via email</p>
 
             <form onSubmit={handleSubmit(onSubmit)} className="px-md-5">
               <div className="row">
-
                 <div className="mb-1 col-12 col-md-6">
                   <label className="form-label fs-14" htmlFor="firstName">
                     First Name
@@ -113,9 +152,11 @@ const Signup = () => {
                     type="text"
                     defaultValue=""
                     placeholder="First Name"
-                    {...register("firstName", { required: true })}
+                    {...register("firstName")}
                   />
-                  {errors.firstName && (<span role="alert" className="text-danger"> First Name Required </span>)}
+                  <span role="alert" className="text-danger">
+                    {errors.firstName?.message}
+                  </span>
                 </div>
 
                 <div className="mb-2 col-12 col-md-6">
@@ -129,11 +170,12 @@ const Signup = () => {
                     id="lastName"
                     defaultValue=""
                     placeholder="Last Name"
-                    {...register("lastName", { required: true })}
+                    {...register("lastName")}
                   />
-                  {errors.lastName && (<span role="alert" className="text-danger"> Last Name Required </span>)}
+                  <span role="alert" className="text-danger">
+                    {errors.lastName?.message}
+                  </span>
                 </div>
-
               </div>
 
               <div className="mb-2">
@@ -146,25 +188,12 @@ const Signup = () => {
                   type="email"
                   id="email"
                   defaultValue=""
-                  placeholder="@mail.com"
-                  {...register("email", { required: true })}
+                  placeholder="example@email.com"
+                  {...register("email")}
                 />
-                {errors.email && (<span role="alert" className="text-danger"> Email Required </span>)}
-              </div>
-
-              <div className="mb-2">
-                <label className="form-label fs-14" htmlFor="phone">
-                  Phone
-                </label>
-                <input
-                  autoComplete="off"
-                  className="form-control input-background py-2"
-                  id="phone"
-                  defaultValue=""
-                  placeholder="Phone"
-                  {...register("phone", { required: true })}
-                />
-                {errors.phone && (<span role="alert" className="text-danger"> Phone Number Required </span>)}
+                <span role="alert" className="text-danger">
+                  {errors.email?.message}
+                </span>
               </div>
 
               <div className="mb-2">
@@ -178,9 +207,11 @@ const Signup = () => {
                   id="password"
                   defaultValue=""
                   placeholder="Password"
-                  {...register("password", { required: true })}
+                  {...register("password")}
                 />
-                {errors.password && (<span role="alert" className="text-danger"> Password Required </span>)}
+                <span role="alert" className="text-danger">
+                  {errors.password?.message}
+                </span>
               </div>
 
               <div className="mb-2">
@@ -194,15 +225,14 @@ const Signup = () => {
                   id="confirmPassword"
                   defaultValue=""
                   placeholder="Confirm Password"
-                  {...register("confirmPassword", { required: true })}
+                  {...register("confirmPassword")}
                 />
-                {errors.confirmPassword && (<span role="alert" className="text-danger"> Confirm Password Required </span>)}
+                <span role="alert" className="text-danger">
+                  {errors.confirmPassword?.message}
+                </span>
               </div>
 
-              <button
-                className="btn btn-primary w-100 mt-2"
-                type="submit"
-              >
+              <button className="btn btn-primary w-100 mt-2" type="submit">
                 Sign Up
               </button>
             </form>
@@ -215,9 +245,7 @@ const Signup = () => {
                 </Link>{" "}
               </strong>
             </small>
-
           </div>
-
         </div>
       </div>
     </div>
