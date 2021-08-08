@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import plagiarismBg from "../../../images/plagiarismBg.png";
+import plagiarismBg from "../../../images/section-2.svg";
 
 const plagiarism = ({ aboutData }) => {
   return (

@@ -1,10 +1,13 @@
 import React from "react";
+
+import Navbar from "../navbar/Navbar";
 import styles from "./Header.module.css";
 
 const Header = ({ bannerData }) => {
   return (
     <div className={`${styles.headerContainer}`}>
-      <div className="container pt-md-2 pt-2 text-white">
+      <Navbar />
+      <div className="container pt-md-2 text-white">
         <p className={`${styles.headingText} pt-md-5 pb-md-3 fs-48 fw-bold`}>
           {bannerData.title}
           {/* Have a project that you’re stuck on?
