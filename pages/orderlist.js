@@ -82,10 +82,10 @@ const OrderList = ({ cardData }) => {
                   className="container mt-3"
                   onClick={() => setShowDetails(false)}
                 >
-                  <BsArrowLeft size={28} className="text-primary mr-4" />
-                  <Link href="/">
-                    <a className="text-primary">Back To Home</a>
-                  </Link>
+                  <BsArrowLeft size={28} className="text-primary mr-4 cursor-pointer" />
+
+                    <span className="text-primary ms-2 cursor-pointer">Back</span>
+
                 </div>
                 <OrderDownloadCard singleOrderDetails={singleOrderDetails} />
               </>

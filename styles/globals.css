@@ -438,3 +438,11 @@ button {
   background: transparent;
 }
 
+#nprogress .bar {
+  background: #f1f1ef !important;
+}
+
+.Toastify__toast--success {
+  background-color: #07bc0c;
+  color: #fff;
+}
