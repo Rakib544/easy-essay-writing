@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import Payment from "../../../pages/payment";
 import { UserContext } from "../../../pages/_app";
 import styles from "./card.module.css";
 
@@ -130,6 +131,8 @@ const Card = ({ data, index, notify }) => {
             <button
               className={`${styles.pricingBtn} btn`}
               onClick={handleOrderCard}
+              data-bs-target={`#AA${index + 111}`}
+              data-bs-toggle="modal"
             >
               Order Now
             </button>
@@ -196,6 +199,33 @@ const Card = ({ data, index, notify }) => {
                   data-bs-dismiss="modal"
                 />
               </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="modal fade"
+        id={`AA${index + 111}`}
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Payment Card
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <Payment />
             </div>
           </div>
         </div>

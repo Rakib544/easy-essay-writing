@@ -1,32 +1,32 @@
-import React, { useState } from 'react';
-import { loadStripe } from '@stripe/stripe-js';
 import {
   CardElement,
   Elements,
   useElements,
   useStripe,
-} from '@stripe/react-stripe-js';
+} from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import React, { useState } from "react";
 
 const CARD_OPTIONS = {
-  iconStyle: 'solid',
+  iconStyle: "solid",
   style: {
     base: {
-      iconColor: '#c4f0ff',
-      color: '#fff',
+      iconColor: "#c4f0ff",
+      color: "#fff",
       fontWeight: 500,
-      fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
-      fontSize: '16px',
-      fontSmoothing: 'antialiased',
-      ':-webkit-autofill': {
-        color: '#fce883',
+      fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
+      fontSize: "16px",
+      fontSmoothing: "antialiased",
+      ":-webkit-autofill": {
+        color: "#fce883",
       },
-      '::placeholder': {
-        color: '#87bbfd',
+      "::placeholder": {
+        color: "#87bbfd",
       },
     },
     invalid: {
-      iconColor: '#ffc7ee',
-      color: '#ffc7ee',
+      iconColor: "#ffc7ee",
+      color: "#ffc7ee",
     },
   },
 };
@@ -66,11 +66,11 @@ const Field = ({
 
 const SubmitButton = ({ processing, error, children, disabled }) => (
   <button
-    className={`SubmitButton ${error ? 'SubmitButton--error' : ''}`}
+    className={`SubmitButton ${error ? "SubmitButton--error" : ""}`}
     type="submit"
     disabled={processing || disabled}
   >
-    {processing ? 'Processing...' : children}
+    {processing ? "Processing..." : children}
   </button>
 );
 
@@ -109,9 +109,9 @@ const CheckoutForm = () => {
   const [processing, setProcessing] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [billingDetails, setBillingDetails] = useState({
-    email: '',
-    phone: '',
-    name: '',
+    email: "",
+    phone: "",
+    name: "",
   });
 
   const handleSubmit = async (event) => {
@@ -124,7 +124,7 @@ const CheckoutForm = () => {
     }
 
     if (error) {
-      elements.getElement('card').focus();
+      elements.getElement("card").focus();
       return;
     }
 
@@ -133,7 +133,7 @@ const CheckoutForm = () => {
     }
 
     const payload = await stripe.createPaymentMethod({
-      type: 'card',
+      type: "card",
       card: elements.getElement(CardElement),
       billing_details: billingDetails,
     });
@@ -152,9 +152,9 @@ const CheckoutForm = () => {
     setProcessing(false);
     setPaymentMethod(null);
     setBillingDetails({
-      email: '',
-      phone: '',
-      name: '',
+      email: "",
+      phone: "",
+      name: "",
     });
   };
 
@@ -228,18 +228,18 @@ const CheckoutForm = () => {
 const ELEMENTS_OPTIONS = {
   fonts: [
     {
-      cssSrc: 'https://fonts.googleapis.com/css?family=Roboto',
+      cssSrc: "https://fonts.googleapis.com/css?family=Roboto",
     },
   ],
 };
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
+const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
 
-const App = () => {
+const Payment = () => {
   return (
-    <div className="AppWrapper ">
+    <div className="AppWrapper">
       <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
         <CheckoutForm />
       </Elements>
@@ -247,4 +247,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Payment;

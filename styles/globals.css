@@ -245,7 +245,7 @@ ul li {
   list-style: none;
 }
 
-/* // payment section  */ 
+/* // payment section  */
 * {
   box-sizing: border-box;
 }
@@ -259,9 +259,7 @@ button {
   border-style: none;
 }
 
-
 .AppWrapper {
-  width: 500px;
   height: 400px;
   position: relative;
 }
