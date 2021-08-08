@@ -1,6 +1,5 @@
 import Footer from "../src/components/footer/footer";
 import Header from "../src/components/header/Header";
-import Navbar from "../src/components/navbar/Navbar";
 import Plagiarism from "../src/components/plagiarism/plagiarism";
 import Pricing from "../src/components/pricing/pricing";
 import Process from "../src/components/process/Process";
@@ -16,8 +15,9 @@ export default function Home({
 }) {
   return (
     <div>
-      <Navbar />
-      <Header bannerData={bannerData} />
+      <div className="mb-md-5 pb-md-5">
+        <Header bannerData={bannerData} />
+      </div>
       <Plagiarism aboutData={aboutData} />
       <Process processData={processData} processCardData={processCardData} />
       <div className="mx-4 mx-md-0">

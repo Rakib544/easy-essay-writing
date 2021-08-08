@@ -1,10 +1,12 @@
 .headerContainer {
-  background-image: url("../../../images/background.png");
+  background-image: url("../../../images/Mask\ Group\ 16.svg");
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
+  background-color: #0254f9;
 }
+
 .text {
   width: 50%;
   line-height: 28px;
