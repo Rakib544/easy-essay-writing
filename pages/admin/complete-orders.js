@@ -2,9 +2,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { BsArrowLeft } from "react-icons/bs";
 import ReactPaginate from "react-paginate";
+import withAdminAuth from "../../src/components/AdminPrivateRoute";
 import Navbar from "../../src/components/navbar/Navbar";
 import OrderInfoCard from "../../src/components/orderInfoCard/orderInfoCard";
-import withAuth from "../../src/components/privateRoute";
 import ProfileCard from "../../src/components/profileCard/profileCard";
 
 const CompleteOrders = ({ orderData, totalData }) => {
@@ -73,4 +73,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default withAuth(CompleteOrders);
+export default withAdminAuth(CompleteOrders);

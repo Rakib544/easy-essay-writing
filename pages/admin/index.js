@@ -6,8 +6,8 @@ import BannerInfo from "../../src/components/admin/bannerInfo/bannerInfo";
 import Faq from "../../src/components/admin/faq/faq";
 import OurProcess from "../../src/components/admin/ourProcess/ourProcess";
 import Pricing from "../../src/components/admin/pricing/pricing";
+import withAdminAuth from "../../src/components/AdminPrivateRoute";
 import Navbar from "../../src/components/navbar/Navbar";
-import withAuth from "../../src/components/privateRoute";
 import ProfileCard from "../../src/components/profileCard/profileCard";
 
 const Edit = ({ priceCardData }) => {
@@ -54,4 +54,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default withAuth(Edit);
+export default withAdminAuth(Edit);

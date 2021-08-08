@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { MdFileUpload } from "react-icons/md";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styles from "./orderInfoCard.module.css";
 
 const OrderInfoCard = ({ data, number, setNumber }) => {
@@ -17,8 +19,13 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
       }
     )
       .then((res) => res.json())
-      .then((data) => setNumber(number + 1));
+      .then((data) => {
+        setNumber(number + 1);
+        notify();
+      });
   };
+
+  const notify = () => toast.success("Order Completed");
 
   const handleFileUpload = (e) => {
     const data = new FormData();
@@ -30,6 +37,17 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
     <div className="my-3">
       <div className="container bg-white p-5 box-shadow rounded-3 ">
         <div className="row  d-flex align-items-center border-bottom pb-4 mb-3">
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <div className="col-md-3 ">
             <p className="text-primary fs-16 fw-bold">Order - {data._id}</p>
             <p className="text-success fs-18">
@@ -68,13 +86,19 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
           )}
           <div className="col-md-2 ms-auto d-flex flex-column align-items-center">
             <p className="text-primary fs-22 fw-bold">Order-Action</p>
-            <button
-              onClick={handleChangeStatus}
-              type="button"
-              class="btn btn-success text-white px-5 py-2"
-            >
-              Complete
-            </button>
+            {router.pathname === "/admin/pending-orders" ? (
+              <button
+                onClick={handleChangeStatus}
+                type="button"
+                class="btn btn-success text-white px-5 py-2"
+              >
+                Complete
+              </button>
+            ) : (
+              <p className="bg-success px-3 py-2 rounded-3 text-white">
+                Completed
+              </p>
+            )}
           </div>
         </div>
         <div className="row  d-flex justify-content-center align-items-center ">

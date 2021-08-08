@@ -7,13 +7,20 @@ import "nprogress/nprogress.css";
 import { createContext, useEffect, useState } from "react";
 import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
 import "../styles/globals.css";
-nProgress.configure({ showSpinner: false });
+nProgress.configure(
+  { showSpinner: false },
+  {
+    template: "<div role='bar' className='bg-white'>...</div>",
+  }
+);
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 } else {
   firebase.app();
 }
+
+// nProgress.configure();
 
 export const UserContext = createContext();
 
@@ -28,6 +35,7 @@ function MyApp({ Component, pageProps }) {
   Router.events.on("routeChangeComplete", (url) => {
     nProgress.done();
   });
+  // Router.events.on("routeChangeError", () => nProgress.done());
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
