@@ -58,7 +58,13 @@ const Navbar = () => {
                 {signedUser.email ? (
                   <>
                     <li className="nav-item mx-md-3 my-2 my-md-0">
-                      <Link href="/admin">
+                      <Link
+                        href={`${
+                          signedUser.userType === "admin"
+                            ? "/admin"
+                            : "/orderlist"
+                        }`}
+                      >
                         <a
                           className={`${styles.navItem} mx-3 mx-md-0 text-white nav-link px-3`}
                         >

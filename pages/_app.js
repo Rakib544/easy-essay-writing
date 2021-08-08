@@ -19,9 +19,6 @@ if (!firebase.apps.length) {
 } else {
   firebase.app();
 }
-
-// nProgress.configure();
-
 export const UserContext = createContext();
 
 function MyApp({ Component, pageProps }) {
@@ -31,11 +28,10 @@ function MyApp({ Component, pageProps }) {
   Router.events.on("routeChangeStart", (url) => {
     nProgress.start();
   });
-
   Router.events.on("routeChangeComplete", (url) => {
     nProgress.done();
   });
-  // Router.events.on("routeChangeError", () => nProgress.done());
+  Router.events.on("routeChangeError", () => nProgress.done());
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
@@ -45,6 +41,7 @@ function MyApp({ Component, pageProps }) {
           email: user.email,
           phoneNumber: user.phoneNumber,
           photoURL: user.photoURL,
+          userType: "user",
         };
         setSignedUser(loggedUser);
       } else {
@@ -87,9 +84,11 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
 
+      {/* <AuthProvider> */}
       <UserContext.Provider value={[signedUser, setSignedUser]}>
         <Component {...pageProps} />
       </UserContext.Provider>
+      {/* </AuthProvider> */}
     </>
   );
 }
