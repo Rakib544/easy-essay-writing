@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const FaqCard = ({ faqCardData, index, setNumber, number }) => {
+const FaqCard = ({ faqCardData, index, setNumber, number, notify }) => {
   const { _id, question, answer } = faqCardData;
   const {
     register,
@@ -25,6 +25,7 @@ const FaqCard = ({ faqCardData, index, setNumber, number }) => {
       .then((res) => res.json())
       .then((result) => {
         if (result) {
+          notify();
           setNumber(number + 1);
         }
       });

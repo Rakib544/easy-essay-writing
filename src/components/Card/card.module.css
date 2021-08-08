@@ -14,7 +14,7 @@
   letter-spacing: 0px;
   color: #fff;
   opacity: 1;
-  transition: 0.3s;
+  transition: 0.1s;
 }
 .dateStyle {
   font-size: 30px;
@@ -57,4 +57,14 @@
 .active button {
   background-color: #fff;
   color: #0262fa;
+}
+
+.editBtn {
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  background-color: #3783fb;
+  color: #fff;
+  border: 1px solid #3783fb;
+  outline: none;
 }

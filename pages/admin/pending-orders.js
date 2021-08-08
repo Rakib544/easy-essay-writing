@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import ReactPaginate from "react-paginate";
-import "react-toastify/dist/ReactToastify.css";
 import withAdminAuth from "../../src/components/AdminPrivateRoute";
 import Navbar from "../../src/components/navbar/Navbar";
 import OrderInfoCard from "../../src/components/orderInfoCard/orderInfoCard";

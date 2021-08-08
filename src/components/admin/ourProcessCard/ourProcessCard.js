@@ -1,7 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const OurProcessCard = ({ processCardData, index, setNumber, number }) => {
+const OurProcessCard = ({
+  processCardData,
+  index,
+  setNumber,
+  number,
+  notify,
+}) => {
   const { _id, title, content } = processCardData;
   const {
     register,
@@ -28,6 +34,7 @@ const OurProcessCard = ({ processCardData, index, setNumber, number }) => {
       .then((res) => res.json())
       .then((result) => {
         if (result) {
+          notify();
           setNumber(number + 1);
         }
       });

@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const FooterCard = ({ footerCardData, index, setNumber, number }) => {
+const FooterCard = ({ footerCardData, index, setNumber, number, notify }) => {
   const { _id, title, link } = footerCardData;
   const titleValue = title;
   const {
@@ -29,6 +29,7 @@ const FooterCard = ({ footerCardData, index, setNumber, number }) => {
       .then((res) => res.json())
       .then((result) => {
         if (result) {
+          notify();
           setNumber(number + 1);
         }
       });

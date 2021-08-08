@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import OurProcessCard from "../ourProcessCard/ourProcessCard";
 
 const OurProcess = () => {
@@ -39,6 +41,7 @@ const OurProcess = () => {
       .then((res) => res.json())
       .then((result) => {
         if (result) {
+          notify();
           setProcessData(result);
           setNumber(number + 1);
         }
@@ -51,11 +54,25 @@ const OurProcess = () => {
       .then((data) => setProcessCardsData(data));
   }, [number]);
 
+  const notify = () => toast.success("Updated Successfully");
+
   return (
     <>
       <p className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold fw-bold my-4 box-shadow">
         Our Process
       </p>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
 
       <div className="bg-white py-4 px-5 my-4 box-shadow">
         <p className="border rounded d-inline-block py-2 fs-22 fw-bold px-4">
@@ -95,6 +112,7 @@ const OurProcess = () => {
               index={index}
               setNumber={setNumber}
               number={number}
+              notify={notify}
             />
           ))}
         </div>

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { UserContext } from "../../../pages/_app";
 import styles from "./card.module.css";
 
-const Card = ({ data, index }) => {
+const Card = ({ data, index, notify }) => {
   const [signedUser] = useContext(UserContext);
   const [deliveriesDay, setDeliveriesDay] = useState("");
   const [perPageData, setPerPageData] = useState("");
@@ -43,6 +43,7 @@ const Card = ({ data, index }) => {
       .then((res) => res.json())
       .then((result) => {
         if (result) {
+          notify();
           setDeliveriesDay(result.deliveryDay);
           setPerPageData(result.perPage);
           setWordPerPageData(result.wordPerPage);
@@ -105,7 +106,7 @@ const Card = ({ data, index }) => {
           <div className="card-body text-center">
             {router.pathname === "/admin" && (
               <button
-                className="btn btn-primary d-block ms-auto mb-2"
+                className={`${styles.editBtn} d-block ms-auto mb-2`}
                 data-bs-target={`#AA${index + 1}`}
                 data-bs-toggle="modal"
               >
