@@ -37,11 +37,12 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     const info = JSON.parse(localStorage.getItem("info"));
-    const decoded = jwt_decode(info);
-    if (decoded) {
+
+    try {
+      const decoded = jwt_decode(info);
       setSignedUser(decoded);
-    } else {
-      setSignedUser({});
+    } catch (err) {
+      console.log(err);
     }
   }, []);
 
