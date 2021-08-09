@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { FcGoogle } from "react-icons/fc";
 import bannerImg from "../images/login-img.png";
@@ -32,22 +34,39 @@ const Signin = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = (data) => {
-    setShowSpinner(true);
+  const onSubmit = (data,e) => {
     const email = data.email;
+    const config = {
+      url: 'http://localhost:3000/signin',
+      handleCodeInApp: true,
+    };
+
     firebase
       .auth()
-      .sendPasswordResetEmail(email)
+      .sendPasswordResetEmail(email, config)
       .then((res) => {
-       console.log(res)
+        toast.success(`Please check your email for password reset`);
+        e.target.reset();
       })
       .catch((error) => {
         const errorMessage = error.message;
+        toast.error(errorMessage);
       });
   };
 
   return (
     <div className="overflow-hidden position-relative">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div
         className="position-absolute top-0 left-0 m-5 d-none d-md-block"
         style={{ zIndex: "999999" }}
@@ -83,11 +102,8 @@ const Signin = () => {
             </div>
             <p className="beforeAfter mt-4 fs-15">or do it via email</p>
 
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="px-3 px-md-5 mx-md-5"
-            >
-              <div className="my-2">
+            <form onSubmit={handleSubmit(onSubmit)} className="px-md-5">
+              <div className="mb-2">
                 <label className="form-label fs-14" htmlFor="email">
                   Email
                 </label>
@@ -96,8 +112,8 @@ const Signin = () => {
                   className="form-control input-background py-2"
                   type="email"
                   id="email"
-                  placeholder="example@email.com"
                   defaultValue=""
+                  placeholder="example@email.com"
                   {...register("email")}
                 />
                 <span role="alert" className="text-danger">
@@ -105,8 +121,8 @@ const Signin = () => {
                 </span>
               </div>
 
-              <button className="btn btn-primary w-100 mt-3" type="submit">
-                Send
+              <button className="btn btn-primary w-100 mt-2" type="submit">
+                Submit
               </button>
             </form>
 

@@ -13,6 +13,8 @@ import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
 import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
 import { UserContext } from "./_app";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -74,6 +76,7 @@ const Signin = () => {
       })
       .catch((error) => {
         const errorMessage = error.message;
+        toast.error(errorMessage);
       });
   };
   const onSubmit = (data) => {
@@ -113,13 +116,24 @@ const Signin = () => {
       })
       .catch((error) => {
         setShowSpinner(false);
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        const errorMessage = error.message;
+        toast.error(errorMessage);
       });
   };
 
   return (
     <div className="overflow-hidden position-relative">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div
         className="position-absolute top-0 left-0 m-5 d-none d-md-block"
         style={{ zIndex: "999999" }}
