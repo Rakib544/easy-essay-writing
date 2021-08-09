@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const About = () => {
   const [aboutData, setAboutData] = useState({});
@@ -41,32 +40,18 @@ const About = () => {
       .then((res) => res.json())
       .then((result) => {
         if (result) {
-          notify();
+          toast.success("Updated Successfully");
           setAboutData(result);
           setNumber(number + 1);
         }
       });
   };
 
-  const notify = () => toast.success("Updated Successfully");
-
   return (
     <>
       <p className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold my-4 box-shadow">
         About
       </p>
-
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
 
       <div className="bg-white py-4 px-5 my-4 box-shadow">
         <p className="border rounded fs-22 fw-bold d-inline-block py-2 px-4">
