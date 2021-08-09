@@ -166,7 +166,9 @@ const Navbar = () => {
                   className={`nav-item ${styles.navItem} mx-md-2 my-2 my-md-0 cursor-pointer`}
                   onClick={logout}
                 >
-                  Logout
+                  <Link to="/">
+                    <a>Logout</a>
+                  </Link>
                 </li>
               </>
             )}
