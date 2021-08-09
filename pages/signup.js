@@ -76,7 +76,7 @@ const SignupComplete = () => {
   const onSubmit = (data, e) => {
     const email = data.email;
     const config = {
-      url: 'http://localhost:3000/signupComplete',
+      url: 'https://easy-essay-writing.vercel.app/signupComplete',
       handleCodeInApp: true,
     };
 

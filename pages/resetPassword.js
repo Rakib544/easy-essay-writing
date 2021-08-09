@@ -37,7 +37,7 @@ const Signin = () => {
   const onSubmit = (data,e) => {
     const email = data.email;
     const config = {
-      url: 'http://localhost:3000/signin',
+      url: 'https://easy-essay-writing.vercel.app/signin',
       handleCodeInApp: true,
     };
 
