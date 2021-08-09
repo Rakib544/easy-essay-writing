@@ -8,6 +8,7 @@ import logo from "../../../images/logo.png";
 import { UserContext } from "../../../pages/_app";
 import { firebaseConfig } from "../firebaseConfig/firebase.config";
 import styles from "./navbar.module.css";
+
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 } else {
@@ -15,16 +16,10 @@ if (!firebase.apps.length) {
 }
 
 const Navbar = () => {
-  const [signedUser] = useContext(UserContext);
-
+  const [signedUser, setSignedUser] = useContext(UserContext);
   const logout = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        setSignedUser({});
-      })
-      .catch((error) => {});
+    setSignedUser({});
+    localStorage.clear();
   };
   const router = useRouter();
   const currentPath = router.pathname;
@@ -55,12 +50,12 @@ const Navbar = () => {
           <div className="ms-auto navbar-nav mt-3 mt-md-0">
             {router.pathname === "/" && (
               <>
-                {signedUser.email ? (
+                {signedUser?.email ? (
                   <>
                     <li className="nav-item mx-md-3 my-2 my-md-0">
                       <Link
                         href={`${
-                          signedUser.userType === "admin"
+                          signedUser?.userType === "admin"
                             ? "/admin"
                             : "/orderlist"
                         }`}

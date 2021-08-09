@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import jwt_decode from "jwt-decode";
 import Head from "next/head";
 import Router from "next/router";
 import nProgress from "nprogress";
@@ -7,6 +8,7 @@ import "nprogress/nprogress.css";
 import { createContext, useEffect, useState } from "react";
 import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
 import "../styles/globals.css";
+
 nProgress.configure(
   { showSpinner: false },
   {
@@ -34,21 +36,13 @@ function MyApp({ Component, pageProps }) {
   Router.events.on("routeChangeError", () => nProgress.done());
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        const loggedUser = {
-          name: user.displayName,
-          email: user.email,
-          phoneNumber: user.phoneNumber,
-          photoURL: user.photoURL,
-          userType: "user",
-        };
-        setSignedUser(loggedUser);
-      } else {
-        setSignedUser({});
-      }
-    });
-    return () => unsubscribe();
+    const info = JSON.parse(localStorage.getItem("info"));
+    const decoded = jwt_decode(info);
+    if (decoded) {
+      setSignedUser(decoded);
+    } else {
+      setSignedUser({});
+    }
   }, []);
 
   return (
@@ -84,11 +78,9 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
 
-      {/* <AuthProvider> */}
       <UserContext.Provider value={[signedUser, setSignedUser]}>
         <Component {...pageProps} />
       </UserContext.Provider>
-      {/* </AuthProvider> */}
     </>
   );
 }

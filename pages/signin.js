@@ -1,14 +1,14 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import firebase from "firebase/app";
 import "firebase/auth";
+import jwt_encode from "jwt-encode";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-
 import { FcGoogle } from "react-icons/fc";
+import * as Yup from "yup";
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
 import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
@@ -62,6 +62,9 @@ const Signin = () => {
           .then((data) => {
             setSignedUser(data);
             setShowSpinner(false);
+            const token = jwt_encode(data, "secret");
+            localStorage.clear();
+            localStorage.setItem("info", token);
             if (data.userType === "user") {
               router.push("/orderlist");
             } else {
@@ -73,7 +76,6 @@ const Signin = () => {
         const errorMessage = error.message;
       });
   };
-
   const onSubmit = (data) => {
     setShowSpinner(true);
     const email = data.email;
@@ -99,6 +101,9 @@ const Signin = () => {
           .then((data) => {
             setSignedUser(data);
             setShowSpinner(false);
+            const token = jwt_encode(data, "secret");
+            localStorage.clear();
+            localStorage.setItem("info", JSON.stringify(token));
             if (data.userType === "user") {
               router.push("/orderlist");
             } else {
