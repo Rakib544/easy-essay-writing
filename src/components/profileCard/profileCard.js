@@ -12,7 +12,7 @@ const ProfileCard = () => {
     >
       <div className="col-3 p-4">
         <Image
-          src={signedUser.photoURL}
+          src={signedUser?.photoURL}
           height="78"
           width="78"
           className="rounded-circle"

@@ -1,21 +1,18 @@
+import firebase from "firebase/app";
+import "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import firebase from "firebase/app";
-import "firebase/auth";
-import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
-
+import { FcGoogle } from "react-icons/fc";
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
-import { useContext, useState } from "react";
-import { UserContext } from "./_app";
+import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
+import { useState } from "react";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -23,69 +20,32 @@ if (!firebase.apps.length) {
   firebase.app();
 }
 
-const SignupComplete = () => {
-  const router = useRouter();
+const Signin = () => {
   const [showSpinner, setShowSpinner] = useState(false);
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required("Email is required").email("Email is invalid")
+    email: Yup.string().required("Email is required").email("Email is invalid"),
   });
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
-  const [setSignedUser] = useContext(UserContext);
-  const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-  const googleSignin = () => {
-    setShowSpinner(true);
-    firebase
-      .auth()
-      .signInWithPopup(googleProvider)
-      .then((res) => {
-        const { displayName, email, photoURL } = res.user;
-        const loggedUser = {
-          name: displayName,
-          email: email,
-          photoURL: photoURL,
-        };
-        fetch("https://essay-essay-writing.herokuapp.com/admin", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(loggedUser),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            setSignedUser(data);
-            setShowSpinner(false);
-            if (data.userType === "user") {
-              router.push("/orderlist");
-            } else {
-              router.push("/admin");
-            }
-          });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        toast.error(errorMessage);
-      });
-  };
-
-  const onSubmit = (data, e) => {
+  const onSubmit = (data,e) => {
     const email = data.email;
     const config = {
-      url: 'http://localhost:3000/signupComplete',
+      url: 'http://localhost:3000/signin',
       handleCodeInApp: true,
     };
 
     firebase
       .auth()
-      .sendSignInLinkToEmail(email, config)
-      .then(() => {
-        window.localStorage.setItem("emailForSignIn", email);
-        toast.success(`Please check your email for complete your Registration`);
+      .sendPasswordResetEmail(email, config)
+      .then((res) => {
+        toast.success(`Please check your email for password reset`);
         e.target.reset();
       })
       .catch((error) => {
@@ -118,26 +78,31 @@ const SignupComplete = () => {
         </Link>
       </div>
 
-      <div className="row d-flex align-items-center">
-        <div className="col-md-6 d-none d-md-block vh-100 position-relative">
+      <div className="row d-flex vh-100 align-items-center">
+        <div className="col-md-6 d-none d-md-block">
           <Image src={bannerImg} alt="banner-img" />
         </div>
 
-        <div className="col-md-6 mb-2">
+        <div className="col-md-6 mb-5 pb-5">
           <div className="container ">
-            <div className="text-center">
-              <p className="fw-bold text-secondary mb-4">Sign up to Clever</p>
-              <div
-                className="p-3 d-inline icon-bg cursor-pointer"
-                onClick={googleSignin}
-              >
+            {showSpinner ? (
+              <div className="d-flex justify-content-center">
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+            <div className="text-center ">
+              <p className="fw-bold text-secondary fs-50">Sign in to Clever</p>
+              <div className="p-3 d-inline icon-bg cursor-pointer">
                 <FcGoogle size={24} />
               </div>
             </div>
-            <p className="beforeAfter fs-15 mt-4">or do it via email</p>
+            <p className="beforeAfter mt-4 fs-15">or do it via email</p>
 
             <form onSubmit={handleSubmit(onSubmit)} className="px-md-5">
-
               <div className="mb-2">
                 <label className="form-label fs-14" htmlFor="email">
                   Email
@@ -163,9 +128,9 @@ const SignupComplete = () => {
 
             <small className="text-center d-block mt-1">
               <strong>
-                Already have an account?{" "}
-                <Link href="/signin" className="text-primary">
-                  <a>Sign In</a>
+                Don't have any account?{" "}
+                <Link href="/signup" className="text-primary">
+                  <a>Sign Up</a>
                 </Link>{" "}
               </strong>
             </small>
@@ -176,4 +141,4 @@ const SignupComplete = () => {
   );
 };
 
-export default SignupComplete;
+export default Signin;
