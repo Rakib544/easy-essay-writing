@@ -2,8 +2,6 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -12,7 +10,7 @@ import { FcGoogle } from "react-icons/fc";
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
 import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
-import { UserContext } from "./_app";
+import { useState } from "react";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -22,12 +20,8 @@ if (!firebase.apps.length) {
 
 const Signin = () => {
   const [showSpinner, setShowSpinner] = useState(false);
-  const router = useRouter();
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),
-    password: Yup.string()
-      .required("Password is required")
-      .min(8, "Password must be at least 8 characters"),
   });
   const {
     register,
@@ -38,78 +32,17 @@ const Signin = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const [signedUser, setSignedUser] = useContext(UserContext);
-  const googleProvider = new firebase.auth.GoogleAuthProvider();
-
-  const googleSignin = () => {
-    setShowSpinner(true);
-    firebase
-      .auth()
-      .signInWithPopup(googleProvider)
-      .then((res) => {
-        const { displayName, email, photoURL } = res.user;
-        const loggedUser = {
-          name: displayName,
-          email: email,
-          photoURL: photoURL,
-        };
-        fetch("https://essay-essay-writing.herokuapp.com/admin", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(loggedUser),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            setSignedUser(data);
-            setShowSpinner(false);
-            if (data.userType === "user") {
-              router.push("/orderlist");
-            } else {
-              router.push("/admin");
-            }
-          });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-      });
-  };
-
   const onSubmit = (data) => {
     setShowSpinner(true);
     const email = data.email;
-    const password = data.password;
-
     firebase
       .auth()
-      .signInWithEmailAndPassword(email, password)
+      .sendPasswordResetEmail(email)
       .then((res) => {
-        const { displayName, email, photoURL } = res.user;
-        const loggedUser = {
-          name: displayName,
-          email: email,
-          photoURL: photoURL,
-        };
-
-        fetch("https://essay-essay-writing.herokuapp.com/admin", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(loggedUser),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            setSignedUser(data);
-            setShowSpinner(false);
-            if (data.userType === "user") {
-              router.push("/orderlist");
-            } else {
-              router.push("/admin");
-            }
-          });
+       console.log(res)
       })
       .catch((error) => {
-        setShowSpinner(false);
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        const errorMessage = error.message;
       });
   };
 
@@ -144,10 +77,7 @@ const Signin = () => {
             )}
             <div className="text-center ">
               <p className="fw-bold text-secondary fs-50">Sign in to Clever</p>
-              <div
-                className="p-3 d-inline icon-bg cursor-pointer"
-                onClick={googleSignin}
-              >
+              <div className="p-3 d-inline icon-bg cursor-pointer">
                 <FcGoogle size={24} />
               </div>
             </div>
@@ -175,36 +105,8 @@ const Signin = () => {
                 </span>
               </div>
 
-              <div className="mb-2">
-                <label className="form-label fs-14" htmlFor="password">
-                  Password
-                </label>
-                <input
-                  autoComplete="off"
-                  className="form-control input-background py-2"
-                  type="password"
-                  id="password"
-                  defaultValue=""
-                  placeholder="Password"
-                  {...register("password")}
-                />
-                <span role="alert" className="text-danger">
-                  {errors.password?.message}
-                </span>
-              </div>
-
-              <small
-              style={{ cursor: "pointer" }}
-              className="text-primary fs-6 d-block text-end"
-            >
-              <Link href="/resetPassword" className="text-primary">
-                <a>Forget password</a>
-              </Link>{" "}
-            </small>
-
-
               <button className="btn btn-primary w-100 mt-3" type="submit">
-                Sign In
+                Send
               </button>
             </form>
 
