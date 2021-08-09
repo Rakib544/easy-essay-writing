@@ -7,7 +7,6 @@ const withAdminAuth = (Component) => {
   const Auth = (props) => {
     const router = useRouter();
     const [signedUser] = useContext(UserContext);
-    console.log(signedUser);
 
     if (!signedUser.email) {
       return <Signin />;

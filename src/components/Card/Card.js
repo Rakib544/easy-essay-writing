@@ -71,8 +71,8 @@ const Card = ({ data, index, notify }) => {
   orderDetails.orderStatus = "Work In Progress";
   orderDetails.deliveryDate = deliveryDate(value);
   orderDetails.file = "";
-  orderDetails.customerName = signedUser.name;
-  orderDetails.customerEmail = signedUser.email;
+  orderDetails.customerName = signedUser?.name;
+  orderDetails.customerEmail = signedUser?.email;
   orderDetails.orderAmount = data.perPage;
   orderDetails.deliveryTime = data.deliveryDay;
   orderDetails.quantity = "1";
