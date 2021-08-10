@@ -1,11 +1,27 @@
 import Image from "next/image";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Navbar from "../src/components/navbar/Navbar";
 import styles from "../src/components/profileCard/profileCard.module.css";
 import { UserContext } from "./_app";
 
 const Profile = () => {
   const [signedUser] = useContext(UserContext);
+  const [referrerUsers, setReferrerUsers] = useState({});
+  const email = signedUser.email;
+
+  useEffect(() => {
+    fetch("http://localhost:8080/affiliateUser", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setReferrerUsers(data);
+      });
+  }, []);
+  console.log(referrerUsers);
   return (
     <div style={{ backgroundColor: "#F7FBFF" }}>
       <Navbar />
@@ -53,19 +69,25 @@ const Profile = () => {
                 <div className="col-12 col-md-4">
                   <div className="m-2 p-2 box-shadow bg-white">
                     <p className="fs-24 fw-bold">All Time Users</p>
-                    <p className="fs-50 fw-bold">20</p>
+                    <p className="fs-50 fw-bold">
+                      {referrerUsers?.allTimeCreatedUsers}
+                    </p>
                   </div>
                 </div>
                 <div className="col-12 col-md-4">
                   <div className="m-2 p-2 box-shadow bg-white">
                     <p className="fs-24 fw-bold">Last 7 Days</p>
-                    <p className="fs-50 fw-bold">20</p>
+                    <p className="fs-50 fw-bold">
+                      {referrerUsers?.lastSevenDayCreatedUsers}
+                    </p>
                   </div>
                 </div>
                 <div className="col-12 col-md-4">
                   <div className="m-2 p-2 box-shadow bg-white">
                     <p className="fs-24 fw-bold">Today</p>
-                    <p className="fs-50 fw-bold">20</p>
+                    <p className="fs-50 fw-bold">
+                      {referrerUsers?.lastOneDaysCreatedUser}
+                    </p>
                   </div>
                 </div>
               </div>

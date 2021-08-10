@@ -40,7 +40,7 @@ const Signin = () => {
   });
 
   const [signedUser, setSignedUser] = useContext(UserContext);
- 
+
   const onSubmit = (data) => {
     setShowSpinner(true);
     const email = data.email;
