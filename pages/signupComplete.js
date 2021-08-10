@@ -1,18 +1,16 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import firebase from "firebase/app";
+import "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
 import { toast } from "react-toastify";
-
-import firebase from "firebase/app";
-import "firebase/auth";
-import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
-
+import * as Yup from "yup";
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
-import { useEffect, useState } from "react";
+import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
 import GoogleLogin from "../src/components/googleLogin/googleLogin";
 
 if (!firebase.apps.length) {
@@ -24,6 +22,7 @@ if (!firebase.apps.length) {
 const SignupComplete = () => {
   const router = useRouter();
   const [showSpinner, setShowSpinner] = useState(false);
+
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("First Name is required"),
     lastName: Yup.string().required("Last Name is required"),
@@ -43,13 +42,14 @@ const SignupComplete = () => {
   });
 
   const [email, setEmail] = useState("");
+  const [referrerEmail, setReferrerEmail] = useState("");
 
   useEffect(() => {
     setEmail(window.localStorage.getItem("emailForSignIn", email));
+    setReferrerEmail(JSON.parse(window.localStorage.getItem("referrerEmail")));
   }, []);
 
   const onSubmit = (data, e) => {
-
     data.email = email;
     const firstName = data.firstName;
     const lastName = data.lastName;
@@ -60,6 +60,23 @@ const SignupComplete = () => {
       .createUserWithEmailAndPassword(data.email, data.password)
       .then((res) => {
         updateUserProfile(name);
+
+        const { email, photoURL } = res.user;
+        const loggedUser = {
+          name: name,
+          email: email,
+          photoURL: photoURL,
+          referrerEmail: referrerEmail,
+        };
+        console.log(loggedUser);
+        fetch("http://localhost:8080/admin", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(loggedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+
         window.localStorage.removeItem("emailForSignIn");
         e.target.reset();
         router.push("/signin");
@@ -78,6 +95,7 @@ const SignupComplete = () => {
       photoURL:
         "https://images.unsplash.com/photo-1532074205216-d0e1f4b87368?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBwcm9maWxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
     });
+    return;
   };
 
   return (

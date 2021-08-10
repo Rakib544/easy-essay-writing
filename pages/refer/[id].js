@@ -1,7 +1,26 @@
+import { useRouter } from "next/router";
+
 const ReferAccount = ({ data }) => {
-  console.log(data);
+  const router = useRouter();
+
+  const handleClick = () => {
+    window.localStorage.setItem(
+      "referrerEmail",
+      JSON.stringify(data.referrerEmail)
+    );
+    router.push("/signup");
+  };
+
   return (
-    <div>{data.referrerEmail ? <button>Continue</button> : <p>{data}</p>}</div>
+    <div>
+      {data.referrerEmail ? (
+        <button className="btn btn-primary" onClick={handleClick}>
+          Continue
+        </button>
+      ) : (
+        <p>{data}</p>
+      )}
+    </div>
   );
 };
 
