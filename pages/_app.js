@@ -36,14 +36,14 @@ function MyApp({ Component, pageProps }) {
   Router.events.on("routeChangeError", () => nProgress.done());
 
   useEffect(() => {
-    const info = JSON.parse(localStorage.getItem("info"));
-
     try {
+      const info = JSON.parse(localStorage.getItem("info"));
       const decoded = jwt_decode(info);
       setSignedUser(decoded);
     } catch (err) {
       console.log(err);
     }
+    return () => info();
   }, []);
 
   return (
