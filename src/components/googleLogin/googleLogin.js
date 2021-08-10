@@ -13,8 +13,8 @@ if (!firebase.apps.length) {
 }
 
 const GoogleLogin = () => {
-const [showSpinner, setShowSpinner] = useState(false);
-  const [setSignedUser] = useContext(UserContext);
+  const [showSpinner, setShowSpinner] = useState(false);
+  const [signedUser, setSignedUser] = useContext(UserContext);
   const googleProvider = new firebase.auth.GoogleAuthProvider();
 
   const googleSignin = () => {

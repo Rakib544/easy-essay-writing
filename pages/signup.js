@@ -22,7 +22,7 @@ if (!firebase.apps.length) {
   firebase.app();
 }
 
-const SignupComplete = () => {
+const Signup = () => {
   const router = useRouter();
   const [showSpinner, setShowSpinner] = useState(false);
   const validationSchema = Yup.object().shape({
@@ -184,4 +184,4 @@ const SignupComplete = () => {
   );
 };
 
-export default SignupComplete;
+export default Signup;
