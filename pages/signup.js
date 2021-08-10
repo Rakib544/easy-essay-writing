@@ -27,7 +27,7 @@ const SignupComplete = () => {
   const router = useRouter();
   const [showSpinner, setShowSpinner] = useState(false);
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required("Email is required").email("Email is invalid")
+    email: Yup.string().required("Email is required").email("Email is invalid"),
   });
   const {
     register,
@@ -76,7 +76,7 @@ const SignupComplete = () => {
   const onSubmit = (data, e) => {
     const email = data.email;
     const config = {
-      url: 'http://localhost:3000/signupComplete',
+      url: "http://localhost:3000/signupComplete",
       handleCodeInApp: true,
     };
 
@@ -137,7 +137,6 @@ const SignupComplete = () => {
             <p className="beforeAfter fs-15 mt-4">or do it via email</p>
 
             <form onSubmit={handleSubmit(onSubmit)} className="px-md-5">
-
               <div className="mb-2">
                 <label className="form-label fs-14" htmlFor="email">
                   Email

@@ -213,14 +213,13 @@ const Signin = () => {
               </div>
 
               <small
-              style={{ cursor: "pointer" }}
-              className="text-primary fs-6 d-block text-end"
-            >
-              <Link href="/resetPassword" className="text-primary">
-                <a>Forget password</a>
-              </Link>{" "}
-            </small>
-
+                style={{ cursor: "pointer" }}
+                className="text-primary fs-6 d-block text-end"
+              >
+                <Link href="/resetPassword" className="text-primary">
+                  <a>Forget password</a>
+                </Link>{" "}
+              </small>
 
               <button className="btn btn-primary w-100 mt-3" type="submit">
                 Sign In
