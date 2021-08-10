@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import OurProcessCard from "../ourProcessCard/ourProcessCard";
 
 const OurProcess = () => {
@@ -61,18 +60,6 @@ const OurProcess = () => {
       <p className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold fw-bold my-4 box-shadow">
         Our Process
       </p>
-
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
 
       <div className="bg-white py-4 px-5 my-4 box-shadow">
         <p className="border rounded d-inline-block py-2 fs-22 fw-bold px-4">

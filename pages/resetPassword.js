@@ -5,14 +5,13 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
-import { FcGoogle } from "react-icons/fc";
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
 import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
 import { useState } from "react";
+import GoogleLogin from "../src/components/googleLogin/googleLogin";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -56,17 +55,6 @@ const Signin = () => {
 
   return (
     <div className="overflow-hidden position-relative">
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
       <div
         className="position-absolute top-0 left-0 m-5 d-none d-md-block"
         style={{ zIndex: "999999" }}
@@ -94,13 +82,7 @@ const Signin = () => {
             ) : (
               ""
             )}
-            <div className="text-center ">
-              <p className="fw-bold text-secondary fs-50">Sign in to Clever</p>
-              <div className="p-3 d-inline icon-bg cursor-pointer">
-                <FcGoogle size={24} />
-              </div>
-            </div>
-            <p className="beforeAfter mt-4 fs-15">or do it via email</p>
+            <GoogleLogin />
 
             <form onSubmit={handleSubmit(onSubmit)} className="px-md-5">
               <div className="mb-2">

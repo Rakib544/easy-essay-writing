@@ -1,3 +1,6 @@
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Footer from "../src/components/footer/footer";
 import Header from "../src/components/header/Header";
 import Plagiarism from "../src/components/plagiarism/plagiarism";
@@ -15,6 +18,17 @@ export default function Home({
 }) {
   return (
     <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="mb-md-5 pb-md-5">
         <Header bannerData={bannerData} />
       </div>
