@@ -1,20 +1,19 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import firebase from "firebase/app";
+import "firebase/auth";
+import jwt_encode from "jwt-encode";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-import firebase from "firebase/app";
-import "firebase/auth";
-import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
-
+import * as Yup from "yup";
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
-import { useContext, useState } from "react";
+import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
 import { UserContext } from "./_app";
 
 if (!firebase.apps.length) {
@@ -27,7 +26,7 @@ const SignupComplete = () => {
   const router = useRouter();
   const [showSpinner, setShowSpinner] = useState(false);
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required("Email is required").email("Email is invalid")
+    email: Yup.string().required("Email is required").email("Email is invalid"),
   });
   const {
     register,
@@ -36,7 +35,7 @@ const SignupComplete = () => {
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
-  const [setSignedUser] = useContext(UserContext);
+  const [signedUser, setSignedUser] = useContext(UserContext);
   const googleProvider = new firebase.auth.GoogleAuthProvider();
 
   const googleSignin = () => {
@@ -58,8 +57,18 @@ const SignupComplete = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            setSignedUser(data);
+            const loggedUser = {
+              name: data.username,
+              email: data.userEmail,
+              userType: data.userType,
+              photoURL: data.photoURL,
+              id: data._id,
+            };
+            setSignedUser(loggedUser);
             setShowSpinner(false);
+            const token = jwt_encode(data, "secret");
+            localStorage.clear();
+            localStorage.setItem("info", token);
             if (data.userType === "user") {
               router.push("/orderlist");
             } else {
@@ -76,7 +85,7 @@ const SignupComplete = () => {
   const onSubmit = (data, e) => {
     const email = data.email;
     const config = {
-      url: 'http://localhost:3000/signupComplete',
+      url: "http://localhost:3000/signupComplete",
       handleCodeInApp: true,
     };
 
@@ -137,7 +146,6 @@ const SignupComplete = () => {
             <p className="beforeAfter fs-15 mt-4">or do it via email</p>
 
             <form onSubmit={handleSubmit(onSubmit)} className="px-md-5">
-
               <div className="mb-2">
                 <label className="form-label fs-14" htmlFor="email">
                   Email
