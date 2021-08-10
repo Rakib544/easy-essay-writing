@@ -6,7 +6,6 @@ import { UserContext } from "./_app";
 
 const Profile = () => {
   const [signedUser] = useContext(UserContext);
-  console.log(signedUser);
   return (
     <div style={{ backgroundColor: "#F7FBFF" }}>
       <Navbar />
@@ -40,7 +39,7 @@ const Profile = () => {
                 <button className="px-2 rounded-0 fs-15 btn-style">Copy</button>
                 <input
                   className="form-control rounded-0 affiliate-input-background"
-                  placeholder="User Link goes here"
+                  value={`http://localhost:3000/refer/${signedUser.id}`}
                 />
               </div>
             </div>
