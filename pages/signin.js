@@ -7,13 +7,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
 import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
+import GoogleLogin from "../src/components/googleLogin/googleLogin";
 import { UserContext } from "./_app";
 
 if (!firebase.apps.length) {
@@ -41,44 +40,7 @@ const Signin = () => {
   });
 
   const [signedUser, setSignedUser] = useContext(UserContext);
-  const googleProvider = new firebase.auth.GoogleAuthProvider();
-
-  const googleSignin = () => {
-    setShowSpinner(true);
-    firebase
-      .auth()
-      .signInWithPopup(googleProvider)
-      .then((res) => {
-        const { displayName, email, photoURL } = res.user;
-        const loggedUser = {
-          name: displayName,
-          email: email,
-          photoURL: photoURL,
-        };
-        fetch("https://essay-essay-writing.herokuapp.com/admin", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(loggedUser),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            setSignedUser(data);
-            setShowSpinner(false);
-            const token = jwt_encode(data, "secret");
-            localStorage.clear();
-            localStorage.setItem("info", token);
-            if (data.userType === "user") {
-              router.push("/orderlist");
-            } else {
-              router.push("/admin");
-            }
-          });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        toast.error(errorMessage);
-      });
-  };
+ 
   const onSubmit = (data) => {
     setShowSpinner(true);
     const email = data.email;
@@ -130,17 +92,6 @@ const Signin = () => {
 
   return (
     <div className="overflow-hidden position-relative">
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
       <div
         className="position-absolute top-0 left-0 m-5 d-none d-md-block"
         style={{ zIndex: "999999" }}
@@ -168,16 +119,7 @@ const Signin = () => {
             ) : (
               ""
             )}
-            <div className="text-center ">
-              <p className="fw-bold text-secondary fs-50">Sign in to Clever</p>
-              <div
-                className="p-3 d-inline icon-bg cursor-pointer"
-                onClick={googleSignin}
-              >
-                <FcGoogle size={24} />
-              </div>
-            </div>
-            <p className="beforeAfter mt-4 fs-15">or do it via email</p>
+            <GoogleLogin />
 
             <form
               onSubmit={handleSubmit(onSubmit)}

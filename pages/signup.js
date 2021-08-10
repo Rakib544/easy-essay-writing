@@ -1,20 +1,16 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import firebase from "firebase/app";
 import "firebase/auth";
-import jwt_encode from "jwt-encode";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
 import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
-import { UserContext } from "./_app";
+import GoogleLogin from "../src/components/googleLogin/googleLogin";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -22,8 +18,7 @@ if (!firebase.apps.length) {
   firebase.app();
 }
 
-const SignupComplete = () => {
-  const router = useRouter();
+const Signup = () => {
   const [showSpinner, setShowSpinner] = useState(false);
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),
@@ -35,52 +30,6 @@ const SignupComplete = () => {
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
-  const [signedUser, setSignedUser] = useContext(UserContext);
-  const googleProvider = new firebase.auth.GoogleAuthProvider();
-
-  const googleSignin = () => {
-    setShowSpinner(true);
-    firebase
-      .auth()
-      .signInWithPopup(googleProvider)
-      .then((res) => {
-        const { displayName, email, photoURL } = res.user;
-        const loggedUser = {
-          name: displayName,
-          email: email,
-          photoURL: photoURL,
-        };
-        fetch("https://essay-essay-writing.herokuapp.com/admin", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(loggedUser),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            const loggedUser = {
-              name: data.username,
-              email: data.userEmail,
-              userType: data.userType,
-              photoURL: data.photoURL,
-              id: data._id,
-            };
-            setSignedUser(loggedUser);
-            setShowSpinner(false);
-            const token = jwt_encode(data, "secret");
-            localStorage.clear();
-            localStorage.setItem("info", JSON.stringify(token));
-            if (data.userType === "user") {
-              router.push("/orderlist");
-            } else {
-              router.push("/admin");
-            }
-          });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        toast.error(errorMessage);
-      });
-  };
 
   const onSubmit = (data, e) => {
     const email = data.email;
@@ -105,17 +54,6 @@ const SignupComplete = () => {
 
   return (
     <div className="overflow-hidden position-relative">
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
       <div
         className="position-absolute top-0 left-0 m-5 d-none d-md-block"
         style={{ zIndex: "999999" }}
@@ -134,16 +72,7 @@ const SignupComplete = () => {
 
         <div className="col-md-6 mb-2">
           <div className="container ">
-            <div className="text-center">
-              <p className="fw-bold text-secondary mb-4">Sign up to Clever</p>
-              <div
-                className="p-3 d-inline icon-bg cursor-pointer"
-                onClick={googleSignin}
-              >
-                <FcGoogle size={24} />
-              </div>
-            </div>
-            <p className="beforeAfter fs-15 mt-4">or do it via email</p>
+            <GoogleLogin />
 
             <form onSubmit={handleSubmit(onSubmit)} className="px-md-5">
               <div className="mb-2">
@@ -184,4 +113,4 @@ const SignupComplete = () => {
   );
 };
 
-export default SignupComplete;
+export default Signup;
