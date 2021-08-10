@@ -8,13 +8,13 @@ import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
 import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
 import { UserContext } from "./_app";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -102,6 +102,7 @@ const Signin = () => {
         })
           .then((res) => res.json())
           .then((data) => {
+            console.log(data);
             setSignedUser(data);
             setShowSpinner(false);
             localStorage.clear();
@@ -213,14 +214,13 @@ const Signin = () => {
               </div>
 
               <small
-              style={{ cursor: "pointer" }}
-              className="text-primary fs-6 d-block text-end"
-            >
-              <Link href="/resetPassword" className="text-primary">
-                <a>Forget password</a>
-              </Link>{" "}
-            </small>
-
+                style={{ cursor: "pointer" }}
+                className="text-primary fs-6 d-block text-end"
+              >
+                <Link href="/resetPassword" className="text-primary">
+                  <a>Forget password</a>
+                </Link>{" "}
+              </small>
 
               <button className="btn btn-primary w-100 mt-3" type="submit">
                 Sign In
