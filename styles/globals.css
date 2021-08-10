@@ -209,6 +209,11 @@ a {
   border-radius: 5px;
 }
 
+.affiliate-input-background {
+  background-color: #cbdcff;
+  border: none;
+}
+
 .scroll {
   overflow-y: scroll;
 }

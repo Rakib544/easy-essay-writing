@@ -13,7 +13,7 @@ const Pricing = ({ priceCardData }) => {
       <div className="py-4 px-5 my-4">
         <div className="row px-md-5 mx-md-5">
           {priceCardData.map((data, index) => (
-            <Card key={data.id} data={data} index={index} notify={notify} />
+            <Card key={data._id} data={data} index={index} notify={notify} />
           ))}
         </div>
       </div>

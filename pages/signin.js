@@ -8,13 +8,13 @@ import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
 import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
 import { UserContext } from "./_app";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -102,11 +102,18 @@ const Signin = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            setSignedUser(data);
+            const loggedUser = {
+              name: data.username,
+              email: data.userEmail,
+              userType: data.userType,
+              photoURL: data.photoURL,
+              id: data._id,
+            };
+            setSignedUser(loggedUser);
             setShowSpinner(false);
-            localStorage.clear();
             const token = jwt_encode(data, "secret");
-            localStorage.setItem("info", JSON.stringify(token));
+            localStorage.clear();
+            localStorage.setItem("info", token);
             if (data.userType === "user") {
               router.push("/orderlist");
             } else {
