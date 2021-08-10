@@ -1,14 +1,19 @@
-const ReferAccount = ({ id }) => {
-  console.log(id);
-  return <div>Test</div>;
+const ReferAccount = ({ data }) => {
+  console.log(data);
+  return (
+    <div>{data.referrerEmail ? <button>Continue</button> : <p>{data}</p>}</div>
+  );
 };
 
 export async function getServerSideProps(context) {
   const id = context.query.id;
-  //   const res = await fetch("");
+  const res = await fetch(
+    `https://essay-essay-writing.herokuapp.com/admin/checkURL/${id}`
+  );
+  const data = await res.json();
   return {
     props: {
-      id,
+      data,
     },
   };
 }
