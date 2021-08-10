@@ -111,9 +111,9 @@ const Signin = () => {
             };
             setSignedUser(loggedUser);
             setShowSpinner(false);
-            const token = jwt_encode(data, "secret");
+            const token = jwt_encode(loggedUser, "secret");
             localStorage.clear();
-            localStorage.setItem("info", token);
+            localStorage.setItem("info", JSON.stringify(token));
             if (data.userType === "user") {
               router.push("/orderlist");
             } else {
