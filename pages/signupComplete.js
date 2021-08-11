@@ -56,9 +56,6 @@ const SignupComplete = () => {
     const lastName = data.lastName;
     const name = firstName + " " + lastName;
 
-    console.log(referrerEmail);
-    console.log(email, name);
-
     firebase
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password)
@@ -84,7 +81,6 @@ const SignupComplete = () => {
           )
             .then((res) => res.json())
             .then((data) => {
-              console.log(data);
               doAfterSignUp(e);
             });
         } else {
