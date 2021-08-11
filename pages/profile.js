@@ -6,11 +6,15 @@ import { UserContext } from "./_app";
 
 const Profile = () => {
   const [signedUser] = useContext(UserContext);
-  const [referrerUsers, setReferrerUsers] = useState({});
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [lastSevenDaysUsers, setLastSevenDaysUsers] = useState(0);
+  const [lastOneDaysUsers, setLastOneDaysUsers] = useState(0);
   const email = signedUser.email;
 
+  console.log(email);
+
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/affiliateUser", {
+    fetch("https://essay-essay-writing.herokuapp.com/affiliateUser/all", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email }),
@@ -18,10 +22,38 @@ const Profile = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setReferrerUsers(data);
+        setTotalUsers(data.allUsers);
       });
-  }, []);
-  console.log(referrerUsers);
+
+    fetch(
+      "https://essay-essay-writing.herokuapp.com/affiliateUser/lastSevenDays",
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ email }),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setLastSevenDaysUsers(data.lastSevenDaysUser);
+      });
+
+    fetch(
+      "https://essay-essay-writing.herokuapp.com/affiliateUser/lastOneDay",
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ email }),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setLastOneDaysUsers(data.lastOneDayUser);
+      });
+  }, [email]);
+
   return (
     <div style={{ backgroundColor: "#F7FBFF" }}>
       <Navbar />
@@ -69,25 +101,19 @@ const Profile = () => {
                 <div className="col-12 col-md-4">
                   <div className="m-2 p-2 box-shadow bg-white">
                     <p className="fs-24 fw-bold">All Time Users</p>
-                    <p className="fs-50 fw-bold">
-                      {referrerUsers?.allTimeCreatedUsers}
-                    </p>
+                    <p className="fs-50 fw-bold">{totalUsers}</p>
                   </div>
                 </div>
                 <div className="col-12 col-md-4">
                   <div className="m-2 p-2 box-shadow bg-white">
                     <p className="fs-24 fw-bold">Last 7 Days</p>
-                    <p className="fs-50 fw-bold">
-                      {referrerUsers?.lastSevenDayCreatedUsers}
-                    </p>
+                    <p className="fs-50 fw-bold">{lastSevenDaysUsers}</p>
                   </div>
                 </div>
                 <div className="col-12 col-md-4">
                   <div className="m-2 p-2 box-shadow bg-white">
                     <p className="fs-24 fw-bold">Today</p>
-                    <p className="fs-50 fw-bold">
-                      {referrerUsers?.lastOneDaysCreatedUser}
-                    </p>
+                    <p className="fs-50 fw-bold">{lastOneDaysUsers}</p>
                   </div>
                 </div>
               </div>
