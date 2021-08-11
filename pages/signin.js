@@ -51,16 +51,16 @@ const Signin = () => {
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
         const { displayName, email, photoURL } = res.user;
-        const loggedUser = {
+        const googleLoggedUser = {
           name: displayName,
           email: email,
           photoURL: photoURL,
         };
-
+        console.log(googleLoggedUser);
         fetch("https://essay-essay-writing.herokuapp.com/admin", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify(loggedUser),
+          body: JSON.stringify(googleLoggedUser),
         })
           .then((res) => res.json())
           .then((data) => {
@@ -71,6 +71,7 @@ const Signin = () => {
               photoURL: data.photoURL,
               id: data._id,
             };
+            console.log(data);
             setSignedUser(loggedUser);
             setShowSpinner(false);
             const token = jwt_encode(loggedUser, "secret");

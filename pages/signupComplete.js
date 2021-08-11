@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
@@ -45,7 +46,7 @@ const SignupComplete = () => {
   const [referrerEmail, setReferrerEmail] = useState("");
 
   useEffect(() => {
-    setEmail(window.localStorage.getItem("emailForSignIn", email));
+    setEmail(JSON.parse(window.localStorage.getItem("emailForSignIn", email)));
     setReferrerEmail(JSON.parse(window.localStorage.getItem("referrerEmail")));
   }, []);
 
@@ -55,36 +56,63 @@ const SignupComplete = () => {
     const lastName = data.lastName;
     const name = firstName + " " + lastName;
 
+    console.log(referrerEmail);
+    console.log(email, name);
+
     firebase
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password)
       .then((res) => {
         updateUserProfile(name);
 
-        const { email, photoURL } = res.user;
-        const loggedUser = {
+        const { email } = res.user;
+
+        const userObj = {
           name: name,
           email: email,
-          photoURL: photoURL,
           referrerEmail: referrerEmail,
         };
-        console.log(loggedUser);
-        fetch("http://localhost:8080/admin", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(loggedUser),
-        })
-          .then((res) => res.json())
-          .then((data) => console.log(data));
 
-        window.localStorage.removeItem("emailForSignIn");
-        e.target.reset();
-        router.push("/signin");
+        if (referrerEmail) {
+          fetch(
+            "https://essay-essay-writing.herokuapp.com/create/affiliateUser",
+            {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify(userObj),
+            }
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              doAfterSignUp(e);
+            });
+        } else {
+          fetch("https://essay-essay-writing.herokuapp.com/create/user", {
+            mode: "cors",
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ name, email }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              doAfterSignUp(e);
+            });
+        }
       })
       .catch((error) => {
         const errorMessage = error.message;
+        console.log(errorMessage);
         toast.error(errorMessage);
       });
+  };
+
+  const doAfterSignUp = (e) => {
+    window.localStorage.removeItem("emailForSignIn");
+    window.localStorage.removeItem("referrerEmail");
+    e.target.reset();
+    router.push("/signin");
   };
 
   const updateUserProfile = (name) => {

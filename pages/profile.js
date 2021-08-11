@@ -10,7 +10,7 @@ const Profile = () => {
   const email = signedUser.email;
 
   useEffect(() => {
-    fetch("http://localhost:8080/affiliateUser", {
+    fetch("https://essay-essay-writing.herokuapp.com/affiliateUser", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email }),
