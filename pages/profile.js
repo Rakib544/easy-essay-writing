@@ -55,7 +55,7 @@ const Profile = () => {
                 <button className="px-2 rounded-0 fs-15 btn-style">Copy</button>
                 <input
                   className="form-control rounded-0 affiliate-input-background"
-                  value={`http://localhost:3000/refer/${signedUser.id}`}
+                  value={`http://localhost:3000/refer/${signedUser._id}`}
                 />
               </div>
             </div>

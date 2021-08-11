@@ -64,18 +64,18 @@ const Signin = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            const loggedUser = {
-              name: data.username,
-              email: data.userEmail,
-              userType: data.userType,
-              photoURL: data.photoURL,
-              id: data._id,
-            };
-            console.log(data);
-            setSignedUser(loggedUser);
+            // const loggedUser = {
+            // //   name: data.username,
+            // //   email: data.userEmail,
+            // //   userType: data.userType,
+            // //   photoURL: data.photoURL,
+            // //   id: data._id,
+            // // };
+            // // console.log(data);
+            setSignedUser(data);
             setShowSpinner(false);
-            const token = jwt_encode(loggedUser, "secret");
-            localStorage.clear();
+            const token = jwt_encode(data, "secret");
+            localStorage.removeItem("info");
             localStorage.setItem("info", JSON.stringify(token));
             if (data.userType === "user") {
               router.push("/orderlist");
