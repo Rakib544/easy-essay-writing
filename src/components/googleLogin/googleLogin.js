@@ -6,7 +6,8 @@ import jwt_encode from "jwt-encode";
 import { firebaseConfig } from "../firebaseConfig/firebase.config";
 import { UserContext } from "../../../pages/_app";
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -66,6 +67,17 @@ const GoogleLogin = () => {
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="text-center ">
         <p className="fw-bold text-secondary fs-50">Sign in to Clever</p>
         <div

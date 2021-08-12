@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import Payment from "../../../pages/payment";
 import { UserContext } from "../../../pages/_app";
 import styles from "./card.module.css";
 

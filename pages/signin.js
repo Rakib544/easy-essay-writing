@@ -7,7 +7,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
@@ -85,6 +86,17 @@ const Signin = () => {
 
   return (
     <div className="overflow-hidden position-relative">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div
         className="position-absolute top-0 left-0 m-5 d-none d-md-block"
         style={{ zIndex: "999999" }}

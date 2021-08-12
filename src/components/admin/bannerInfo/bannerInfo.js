@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BannerInfo = () => {
   const [bannerData, setBannerDate] = useState({});
@@ -46,6 +47,17 @@ const BannerInfo = () => {
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <p className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold my-4 box-shadow">
         Banner Info
       </p>

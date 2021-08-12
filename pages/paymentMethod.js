@@ -45,22 +45,13 @@ const PaymentMethod = () => {
     <div className="container">
       <div className="row d-flex align-items-center vh-100">
         <div className="col-md-6">
-          {/* <form action="/api/checkout_sessions" method="POST">
-            <input
-              type="hidden"
-              value={orderInfo?.customerEmail}
-              name="email"
-            />
-            <input type="hidden" value={orderInfo?.priceKey} name="priceKey" /> */}
           <button
             role="link"
             onClick={createCheckoutSession}
             className="stripe-btn d-block mx-auto p-5 rounded-circle"
-            // type="submit"
           >
             Stripe
           </button>
-          {/* </form> */}
         </div>
         <div className="col-md-6">
           <button
