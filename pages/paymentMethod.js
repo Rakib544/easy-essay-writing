@@ -1,6 +1,6 @@
+import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(process.env.stripe_public_key);
 const axios = require("axios");
@@ -32,14 +32,13 @@ const PaymentMethod = () => {
       deliveryTime: orderInfo.deliveryTime,
       customerEmail: orderInfo.customerEmail,
     });
-    
+
     const result = await stripe.redirectToCheckout({
       sessionId: checkoutSession.data.id,
     });
 
     // if (result.error) alert(result.error.message);
   };
-
 
   return (
     <div className="container">
@@ -75,4 +74,4 @@ const PaymentMethod = () => {
   );
 };
 
-export default PaymentMethod;
+export default withAuth(PaymentMethod);
