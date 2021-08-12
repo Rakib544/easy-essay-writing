@@ -71,7 +71,7 @@ const Signin = () => {
             localStorage.removeItem("info");
             localStorage.setItem("info", JSON.stringify(token));
             if (data.userType === "user") {
-              router.push("/orderlist");
+              router.push("/profile");
             } else {
               router.push("/admin");
             }
