@@ -1,6 +1,16 @@
-import React from "react";
+import axios from "axios";
+import fileDownload from "js-file-download";
 
 const OrderDownloadCard = ({ singleOrderDetails }) => {
+  const handleDownload = (url, filename) => {
+    axios
+      .get(url, {
+        responseType: "blob",
+      })
+      .then((res) => {
+        fileDownload(res.data, filename);
+      });
+  };
   const status = singleOrderDetails.orderStatus;
   return (
     <div className="row p-5 d-flex align-items-center flex-direction-column">
@@ -31,7 +41,17 @@ const OrderDownloadCard = ({ singleOrderDetails }) => {
         </div>
       </div>
       <div className="col-12 col-md-5 h-100 mt-5">
-        <button className="btn w-100 bg-primary text-white">Download</button>
+        <button
+          className="btn w-100 bg-primary text-white"
+          onClick={() =>
+            handleDownload(
+              `http://localhost:8080/${singleOrderDetails.file}`,
+              `${singleOrderDetails.file}`
+            )
+          }
+        >
+          Download
+        </button>
       </div>
     </div>
   );
