@@ -2,6 +2,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
+
 const stripePromise = loadStripe(process.env.stripe_public_key);
 const axios = require("axios");
 
@@ -65,4 +66,4 @@ const PaymentMethod = () => {
   );
 };
 
-export default withAuth(PaymentMethod);
+export default (PaymentMethod);
