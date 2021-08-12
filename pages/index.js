@@ -5,6 +5,8 @@ import Plagiarism from "../src/components/plagiarism/plagiarism";
 import Pricing from "../src/components/pricing/pricing";
 import Process from "../src/components/process/Process";
 import Question from "../src/components/Question/Question";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home({
   bannerData,
@@ -16,6 +18,17 @@ export default function Home({
 }) {
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Head>
         <title>Easy Essay Writing | Home</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />

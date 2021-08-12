@@ -3,6 +3,8 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../../../pages/_app";
 import styles from "./card.module.css";
+import { toast } from "react-toastify";
+
 
 const Card = ({ data, index, notify }) => {
   const [signedUser] = useContext(UserContext);
@@ -89,7 +91,7 @@ const Card = ({ data, index, notify }) => {
 
       router.push("/paymentMethod");
     } else {
-      console.log("Problem");
+      toast.error("Please Login First");
     }
   };
 
