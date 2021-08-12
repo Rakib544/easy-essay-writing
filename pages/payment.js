@@ -235,7 +235,7 @@ const ELEMENTS_OPTIONS = {
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
+const stripePromise = loadStripe("pk_test_51JM8GpDBrd9LjODAHmDdcqbFTDxL6WJYRvD3JykV2qVxWmN1T47ok6B8MqhGl5CQIkjzGfdHDPQKK6vCnl43zLSF00NYICwXdY");
 
 const Payment = () => {
   return (
