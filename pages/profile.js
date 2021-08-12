@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../src/components/navbar/Navbar";
 import styles from "../src/components/profileCard/profileCard.module.css";
 import { UserContext } from "./_app";
+import withAuth from "../src/components/privateRoute";
 
 const Profile = () => {
   const [signedUser] = useContext(UserContext);
@@ -177,4 +178,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile);

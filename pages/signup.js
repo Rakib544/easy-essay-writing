@@ -36,7 +36,7 @@ const Signup = () => {
   const onSubmit = (data, e) => {
     const email = data.email;
     const config = {
-      url: "http://localhost:3000/signupComplete",
+      url: process.env.redirect_compleate_signup,
       handleCodeInApp: true,
     };
 
