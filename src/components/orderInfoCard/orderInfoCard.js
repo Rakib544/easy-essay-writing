@@ -7,19 +7,6 @@ import styles from "./orderInfoCard.module.css";
 const OrderInfoCard = ({ data, number, setNumber }) => {
   const router = useRouter();
 
-  // useEffect(() => {
-  //   console.log(path);
-  //   if (path !== null) {
-  // fetch(`http://localhost:8080/orderCard/updatePath/${id}`, {
-  //   method: "PUT",
-  //   headers: { "content-type": "application/json" },
-  //   body: JSON.stringify(path),
-  // })
-  //   .then((res) => res.json())
-  //   .then((data) => console.log(data));
-  //   }
-  // }, [path]);
-
   const handleChangeStatus = () => {
     fetch(
       `https://essay-essay-writing.herokuapp.com/orderCard/update/orderStatus/${data._id}`,

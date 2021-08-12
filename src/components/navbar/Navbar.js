@@ -57,7 +57,7 @@ const Navbar = () => {
                         href={`${
                           signedUser?.userType === "admin"
                             ? "/admin"
-                            : "/orderlist"
+                            : "/profile"
                         }`}
                       >
                         <a
@@ -100,8 +100,20 @@ const Navbar = () => {
                 )}
               </>
             )}
-            {router.pathname === "/orderlist" && (
+            {(router.pathname === "/orderlist" ||
+              router.pathname === "/profile") && (
               <>
+                <li className="nav-item">
+                  <Link href="/profile">
+                    <a
+                      className={`${
+                        currentPath === "/order-list" ? `${styles.navItem}` : ""
+                      } text-white nav-link px-2`}
+                    >
+                      Profile
+                    </a>
+                  </Link>
+                </li>
                 <li className="nav-item">
                   <Link href="/orderlist">
                     <a
