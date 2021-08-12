@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../src/components/navbar/Navbar";
 import styles from "../src/components/profileCard/profileCard.module.css";
 import { UserContext } from "./_app";
+import withAuth from "../src/components/privateRoute";
 
 const Profile = () => {
   const [signedUser] = useContext(UserContext);
@@ -91,17 +92,17 @@ const Profile = () => {
                     )}
                   </div>
                   <div className="col-9">
-                    <p className={`fs-28 fw-bold ${styles.name}`}>
+                    <p className={`text-wrap fw-bold ${styles.name}`}>
                       {signedUser.name}
                     </p>
-                    <p className={`${styles.email} fs-16`}>
+                    <p className={`${styles.email} text-wrap text-break fs-16`}>
                       {signedUser.email}
                     </p>
                   </div>
                 </div>
-                <button className="btn btn-primary w-100">
+                <p className="py-2 bg-primary rounded-3 text-center text-white">
                   Invite Your Friends
-                </button>
+                </p>
                 <div className="d-flex mt-5 mb-2 rounded-3">
                   <CopyToClipboard
                     text={`http://localhost:3000/refer/${signedUser._id}`}
@@ -177,4 +178,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile);

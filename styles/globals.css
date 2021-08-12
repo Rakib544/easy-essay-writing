@@ -142,6 +142,10 @@ a {
   font-size: 14px;
 }
 
+.fs-12 {
+  font-size: 12px;
+}
+
 @media only screen and (max-width: 600px) {
   .fs-48 {
     font-size: 21px;
@@ -193,6 +197,9 @@ a {
   }
   .fs-60 {
     font-size: 60px;
+  }
+  .fs-sm-22 {
+    font-size: 14px;
   }
 }
 
@@ -455,13 +462,10 @@ button {
   background: #556cd6;
   border-radius: 4px;
   color: white;
-  border: 0;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
   box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
-}
-
-.stripe-btn:hover {
-  opacity: 0.8;
+  width: 100%;
+  padding: 15px 0px;
+  font-size: 25px;
 }
