@@ -48,6 +48,8 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
+        <title>Easy Essay Writing | Home</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           rel="stylesheet"

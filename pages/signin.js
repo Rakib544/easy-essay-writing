@@ -64,14 +64,6 @@ const Signin = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            // const loggedUser = {
-            // //   name: data.username,
-            // //   email: data.userEmail,
-            // //   userType: data.userType,
-            // //   photoURL: data.photoURL,
-            // //   id: data._id,
-            // // };
-            // // console.log(data);
             setSignedUser(data);
             setShowSpinner(false);
             const token = jwt_encode(data, "secret");

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
@@ -20,6 +21,10 @@ const Edit = ({ priceCardData }) => {
 
   return (
     <>
+      <Head>
+        <title>Easy Essay Writing | Admin</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Navbar />
       <div className="bg-light">
         <div className="container my-5">

@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import firebase from "firebase/app";
 import "firebase/auth";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -123,134 +124,140 @@ const SignupComplete = () => {
   };
 
   return (
-    <div className="overflow-hidden position-relative">
-      <div
-        className="position-absolute top-0 left-0 m-5 d-none d-md-block"
-        style={{ zIndex: "999999" }}
-      >
-        <Link href="/">
-          <a>
-            <Image src={logo} alt="logo" height="50px" width="130px" />
-          </a>
-        </Link>
-      </div>
-
-      <div className="row d-flex align-items-center">
-        <div className="col-md-6 d-none d-md-block vh-100 position-relative">
-          <Image src={bannerImg} alt="banner-img" />
+    <>
+      <Head>
+        <title>Easy Essay Writing | Complete Signup</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div className="overflow-hidden position-relative">
+        <div
+          className="position-absolute top-0 left-0 m-5 d-none d-md-block"
+          style={{ zIndex: "999999" }}
+        >
+          <Link href="/">
+            <a>
+              <Image src={logo} alt="logo" height="50px" width="130px" />
+            </a>
+          </Link>
         </div>
 
-        <div className="col-md-6 mb-2">
-          <div className="container ">
-            <GoogleLogin />
+        <div className="row d-flex align-items-center">
+          <div className="col-md-6 d-none d-md-block vh-100 position-relative">
+            <Image src={bannerImg} alt="banner-img" />
+          </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="px-md-5">
-              <div className="row">
-                <div className="mb-1 col-12 col-md-6">
-                  <label className="form-label fs-14" htmlFor="firstName">
-                    First Name
+          <div className="col-md-6 mb-2">
+            <div className="container ">
+              <GoogleLogin />
+
+              <form onSubmit={handleSubmit(onSubmit)} className="px-md-5">
+                <div className="row">
+                  <div className="mb-1 col-12 col-md-6">
+                    <label className="form-label fs-14" htmlFor="firstName">
+                      First Name
+                    </label>
+                    <input
+                      autoComplete="off"
+                      className="form-control input-background py-2"
+                      id="firstName"
+                      type="text"
+                      defaultValue=""
+                      placeholder="First Name"
+                      {...register("firstName")}
+                    />
+                    <span role="alert" className="text-danger">
+                      {errors.firstName?.message}
+                    </span>
+                  </div>
+
+                  <div className="mb-2 col-12 col-md-6">
+                    <label className="form-label fs-14" htmlFor="lastName">
+                      Last Name
+                    </label>
+                    <input
+                      autoComplete="off"
+                      className="form-control input-background py-2"
+                      type="text"
+                      id="lastName"
+                      defaultValue=""
+                      placeholder="Last Name"
+                      {...register("lastName")}
+                    />
+                    <span role="alert" className="text-danger">
+                      {errors.lastName?.message}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mb-2">
+                  <label className="form-label fs-14" htmlFor="email">
+                    Email
                   </label>
                   <input
                     autoComplete="off"
                     className="form-control input-background py-2"
-                    id="firstName"
-                    type="text"
-                    defaultValue=""
-                    placeholder="First Name"
-                    {...register("firstName")}
+                    type="email"
+                    id="email"
+                    value={email}
+                    placeholder="email"
+                    disabled
                   />
-                  <span role="alert" className="text-danger">
-                    {errors.firstName?.message}
-                  </span>
                 </div>
 
-                <div className="mb-2 col-12 col-md-6">
-                  <label className="form-label fs-14" htmlFor="lastName">
-                    Last Name
+                <div className="mb-2">
+                  <label className="form-label fs-14" htmlFor="password">
+                    Password
                   </label>
                   <input
                     autoComplete="off"
                     className="form-control input-background py-2"
-                    type="text"
-                    id="lastName"
+                    type="password"
+                    id="password"
                     defaultValue=""
-                    placeholder="Last Name"
-                    {...register("lastName")}
+                    placeholder="Password"
+                    {...register("password")}
                   />
                   <span role="alert" className="text-danger">
-                    {errors.lastName?.message}
+                    {errors.password?.message}
                   </span>
                 </div>
-              </div>
 
-              <div className="mb-2">
-                <label className="form-label fs-14" htmlFor="email">
-                  Email
-                </label>
-                <input
-                  autoComplete="off"
-                  className="form-control input-background py-2"
-                  type="email"
-                  id="email"
-                  value={email}
-                  placeholder="email"
-                  disabled
-                />
-              </div>
+                <div className="mb-2">
+                  <label className="form-label fs-14" htmlFor="confirmPassword">
+                    Confirm Password
+                  </label>
+                  <input
+                    autoComplete="off"
+                    className="form-control input-background py-2"
+                    type="password"
+                    id="confirmPassword"
+                    defaultValue=""
+                    placeholder="Confirm Password"
+                    {...register("confirmPassword")}
+                  />
+                  <span role="alert" className="text-danger">
+                    {errors.confirmPassword?.message}
+                  </span>
+                </div>
 
-              <div className="mb-2">
-                <label className="form-label fs-14" htmlFor="password">
-                  Password
-                </label>
-                <input
-                  autoComplete="off"
-                  className="form-control input-background py-2"
-                  type="password"
-                  id="password"
-                  defaultValue=""
-                  placeholder="Password"
-                  {...register("password")}
-                />
-                <span role="alert" className="text-danger">
-                  {errors.password?.message}
-                </span>
-              </div>
+                <button className="btn btn-primary w-100 mt-2" type="submit">
+                  Sign Up
+                </button>
+              </form>
 
-              <div className="mb-2">
-                <label className="form-label fs-14" htmlFor="confirmPassword">
-                  Confirm Password
-                </label>
-                <input
-                  autoComplete="off"
-                  className="form-control input-background py-2"
-                  type="password"
-                  id="confirmPassword"
-                  defaultValue=""
-                  placeholder="Confirm Password"
-                  {...register("confirmPassword")}
-                />
-                <span role="alert" className="text-danger">
-                  {errors.confirmPassword?.message}
-                </span>
-              </div>
-
-              <button className="btn btn-primary w-100 mt-2" type="submit">
-                Sign Up
-              </button>
-            </form>
-
-            <small className="text-center d-block mt-1">
-              <strong>
-                Already have an account?{" "}
-                <Link href="/signin" className="text-primary">
-                  <a>Sign In</a>
-                </Link>{" "}
-              </strong>
-            </small>
+              <small className="text-center d-block mt-1">
+                <strong>
+                  Already have an account?{" "}
+                  <Link href="/signin" className="text-primary">
+                    <a>Sign In</a>
+                  </Link>{" "}
+                </strong>
+              </small>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

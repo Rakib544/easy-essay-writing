@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Head from "next/head";
 import React, { useContext, useEffect, useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import Card from "../src/components/Card/Card";
@@ -39,6 +39,10 @@ const OrderList = ({ cardData }) => {
   };
   return (
     <>
+      <Head>
+        <title>Easy Essay Writing | OrderList</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Navbar />
       <div className="container mt-4">
         <div className="row">
@@ -82,10 +86,12 @@ const OrderList = ({ cardData }) => {
                   className="container mt-3"
                   onClick={() => setShowDetails(false)}
                 >
-                  <BsArrowLeft size={28} className="text-primary mr-4 cursor-pointer" />
+                  <BsArrowLeft
+                    size={28}
+                    className="text-primary mr-4 cursor-pointer"
+                  />
 
-                    <span className="text-primary ms-2 cursor-pointer">Back</span>
-
+                  <span className="text-primary ms-2 cursor-pointer">Back</span>
                 </div>
                 <OrderDownloadCard singleOrderDetails={singleOrderDetails} />
               </>

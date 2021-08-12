@@ -1,6 +1,6 @@
+import Head from "next/head";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import Footer from "../src/components/footer/footer";
 import Header from "../src/components/header/Header";
 import Plagiarism from "../src/components/plagiarism/plagiarism";
@@ -17,7 +17,11 @@ export default function Home({
   processCardData,
 }) {
   return (
-    <div>
+    <>
+      <Head>
+        <title>Easy Essay Writing | Home</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -39,7 +43,7 @@ export default function Home({
       </div>
       <Question faqData={faqData} />
       <Footer />
-    </div>
+    </>
   );
 }
 

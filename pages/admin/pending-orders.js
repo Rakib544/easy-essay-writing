@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -45,6 +46,10 @@ const PendingOrders = () => {
 
   return (
     <>
+      <Head>
+        <title>Easy Essay Writing | Pending Orders</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Navbar />
       <div className="container mt-3">
         <BsArrowLeft size={28} className="text-primary mr-4" />
