@@ -2,6 +2,9 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import withAuth from "../src/components/privateRoute";
+import Image from "next/image";
+import btcImage from '../images/btc.svg'
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const stripePromise = loadStripe(process.env.stripe_public_key);
 const axios = require("axios");
@@ -11,17 +14,17 @@ const PaymentMethod = () => {
   const [orderInfo, setOrderInfo] = useState({});
 
   useEffect(() => {
-    const query = new URLSearchParams(window.location.search);
+    // const query = new URLSearchParams(window.location.search);
 
-    if (query.get("success")) {
-      console.log("Order placed! You will receive an email confirmation.");
-    }
+    // if (query.get("success")) {
+    //   console.log("Order placed! You will receive an email confirmation.");
+    // }
 
-    if (query.get("canceled")) {
-      console.log(
-        "Order canceled -- continue to shop around and checkout when you’re ready."
-      );
-    }
+    // if (query.get("canceled")) {
+    //   console.log(
+    //     "Order canceled -- continue to shop around and checkout when you’re ready."
+    //   );
+    // }
     setOrderInfo(JSON.parse(window.localStorage.getItem("orderInfos")));
     window.localStorage.removeItem("orderInfos");
   }, []);
@@ -42,24 +45,23 @@ const PaymentMethod = () => {
   };
 
   return (
-    <div className="container">
-      <div className="row d-flex align-items-center vh-100">
+    <div className="">
+      <div className="row">
         <div className="col-md-6">
           <button
             role="link"
             onClick={createCheckoutSession}
-            className="stripe-btn d-block mx-auto p-5 rounded-circle"
+            className="stripe-btn"
           >
             Stripe
           </button>
         </div>
-        <div className="col-md-6">
-          <button
-            className="stripe-btn d-block mx-auto p-5 rounded-circle"
-            onClick={() => router.push("/btc")}
-          >
-            BTC
-          </button>
+        <div className="col-md-6 vh-100 bg-primary d-flex justify-content-center align-items-center">
+          <div className="text-center">
+            <Image src={btcImage} />
+            <p className="text-white fs-44">PAY WITH BTC</p>
+            <p className="bg-white px-5 py-3 rounded fs-22">3EXDYQqE17N7NE4VRYJoqBmSQ5UFc9vzTG</p>
+          </div>
         </div>
       </div>
     </div>
