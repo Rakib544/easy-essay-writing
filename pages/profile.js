@@ -1,6 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../src/components/navbar/Navbar";
 import styles from "../src/components/profileCard/profileCard.module.css";
 import { UserContext } from "./_app";
@@ -58,6 +61,17 @@ const Profile = () => {
         <title>Easy Essay Writing | Profile</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div style={{ backgroundColor: "#F7FBFF" }}>
         <Navbar />
         <div className="container pb-5">
@@ -89,9 +103,14 @@ const Profile = () => {
                   Invite Your Friends
                 </button>
                 <div className="d-flex mt-5 mb-2 rounded-3">
-                  <button className="px-2 rounded-0 fs-15 btn-style">
-                    Copy
-                  </button>
+                  <CopyToClipboard
+                    text={`http://localhost:3000/refer/${signedUser._id}`}
+                    onCopy={() => toast.success("Copied")}
+                  >
+                    <button className="px-2 rounded-0 fs-15 btn-style">
+                      Copy
+                    </button>
+                  </CopyToClipboard>
                   <input
                     className="form-control rounded-0 affiliate-input-background"
                     value={`http://localhost:3000/refer/${signedUser._id}`}
