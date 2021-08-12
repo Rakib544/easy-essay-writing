@@ -1,10 +1,9 @@
 import { loadStripe } from "@stripe/stripe-js";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import btcImage from "../images/btc.svg";
 import withAuth from "../src/components/privateRoute";
-import Image from "next/image";
-import btcImage from '../images/btc.svg'
-import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const stripePromise = loadStripe(process.env.stripe_public_key);
 const axios = require("axios");
@@ -26,7 +25,7 @@ const PaymentMethod = () => {
     //   );
     // }
     setOrderInfo(JSON.parse(window.localStorage.getItem("orderInfos")));
-    window.localStorage.removeItem("orderInfos");
+    // window.localStorage.removeItem("orderInfos");
   }, []);
 
   const createCheckoutSession = async () => {
@@ -60,7 +59,9 @@ const PaymentMethod = () => {
           <div className="text-center">
             <Image src={btcImage} />
             <p className="text-white fs-44">PAY WITH BTC</p>
-            <p className="bg-white px-5 py-3 rounded fs-22">3EXDYQqE17N7NE4VRYJoqBmSQ5UFc9vzTG</p>
+            <p className="bg-white px-5 py-3 rounded fs-22">
+              3EXDYQqE17N7NE4VRYJoqBmSQ5UFc9vzTG
+            </p>
           </div>
         </div>
       </div>
