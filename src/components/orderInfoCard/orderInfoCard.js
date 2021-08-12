@@ -27,10 +27,13 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
 
   const notify = () => toast.success("Order Completed");
 
+  const [files, setFiles] = useState([])
+  console.log("this is file",files);
+
   const handleFileUpload = (e) => {
     const data = new FormData();
     data.append("files", e.target.files[0]);
-    console.log(data);
+    setFile(data)
   };
 
   return (
