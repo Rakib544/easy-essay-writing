@@ -6,6 +6,7 @@ import jwt_encode from "jwt-encode";
 import { firebaseConfig } from "../firebaseConfig/firebase.config";
 import { UserContext } from "../../../pages/_app";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);

@@ -93,14 +93,12 @@ const SignupComplete = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log(data);
               doAfterSignUp(e);
             });
         }
       })
       .catch((error) => {
         const errorMessage = error.message;
-        console.log(errorMessage);
         toast.error(errorMessage);
       });
   };
@@ -117,8 +115,7 @@ const SignupComplete = () => {
 
     user.updateProfile({
       displayName: name,
-      photoURL:
-        "https://images.unsplash.com/photo-1532074205216-d0e1f4b87368?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d29tYW4lMjBwcm9maWxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      photoURL: 'https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392?k=6&m=1223671392&s=612x612&w=0&h=NGxdexflb9EyQchqjQP0m6wYucJBYLfu46KCLNMHZYM=',
     });
     return;
   };
