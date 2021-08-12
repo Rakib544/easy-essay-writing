@@ -1,13 +1,24 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
 import { MdFileUpload } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./orderInfoCard.module.css";
 
 const OrderInfoCard = ({ data, number, setNumber }) => {
-  const [file, setFile] = useState(null);
   const router = useRouter();
+
+  // useEffect(() => {
+  //   console.log(path);
+  //   if (path !== null) {
+  // fetch(`http://localhost:8080/orderCard/updatePath/${id}`, {
+  //   method: "PUT",
+  //   headers: { "content-type": "application/json" },
+  //   body: JSON.stringify(path),
+  // })
+  //   .then((res) => res.json())
+  //   .then((data) => console.log(data));
+  //   }
+  // }, [path]);
 
   const handleChangeStatus = () => {
     fetch(
@@ -27,14 +38,21 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
 
   const notify = () => toast.success("Order Completed");
 
-  const handleFileUpload = (e) => {
-    const data = new FormData();
-    data.append("files", e.target.files[0]);
-    console.log(data);
+  const handleFileUpload = (e, id) => {
+    const formData = new FormData();
+    formData.append("file", e.target.files[0]);
+    fetch(`http://localhost:8080/orderCard/upload/${id}`, {
+      method: "PUT",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((path) => {
+        console.log(path);
+      });
   };
 
   return (
-    <div className="my-3">
+    <div className="my-3" key={data._id}>
       <div className="container bg-white p-5 box-shadow rounded-3 ">
         <div className="row  d-flex align-items-center border-bottom pb-4 mb-3">
           <ToastContainer
@@ -69,14 +87,17 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
               </div>
               <div className="col-md-2 d-flex flex-column align-items-center">
                 <p className="text-primary fs-22 fw-bold">File - Delivery</p>
-                <label htmlFor="file" className="btn btn-primary text-white">
+                <label
+                  htmlFor={`${data._id}`}
+                  className="btn btn-primary text-white"
+                >
                   Upload file <MdFileUpload className="ms-3" size={28} />
                   <input
                     type="file"
-                    id="file"
+                    id={`${data._id}`}
                     className="d-none"
                     name="file"
-                    onChange={handleFileUpload}
+                    onChange={(e) => handleFileUpload(e, data._id)}
                   />
                 </label>
               </div>
