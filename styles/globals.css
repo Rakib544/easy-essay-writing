@@ -142,6 +142,10 @@ a {
   font-size: 14px;
 }
 
+.fs-12 {
+  font-size: 12px;
+}
+
 @media only screen and (max-width: 600px) {
   .fs-48 {
     font-size: 21px;

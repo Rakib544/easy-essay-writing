@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
 import bannerImg from "../images/login-img.png";
@@ -94,7 +94,7 @@ const Signup = () => {
           </Link>
         </div>
 
-        <div className="row d-flex align-items-center">
+        <div className="row d-flex align-items-center vh-100">
           <div className="col-md-6 d-none d-md-block vh-100 position-relative">
             <Image src={bannerImg} alt="banner-img" />
           </div>
