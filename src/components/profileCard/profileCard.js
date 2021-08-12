@@ -10,7 +10,7 @@ const ProfileCard = () => {
     <div
       className={`${styles.profileCard} row d-flex align-items-center box-shadow`}
     >
-      <div className="col-3 p-4">
+      {signedUser.photoURL && (
         <Image
           src={signedUser?.photoURL}
           height="78"
@@ -18,8 +18,8 @@ const ProfileCard = () => {
           className="rounded-circle"
           alt="profile"
         />
-      </div>
-      <div className="col-9">
+      )}
+      <div className="col-12">
         <p className={`fs-28 fw-bold ${styles.name}`}>{signedUser.name}</p>
         <p className={`${styles.email} fs-16`}>{signedUser.email}</p>
         <button className={`${styles.btn} fs-18 mt-4`}>Admin</button>
