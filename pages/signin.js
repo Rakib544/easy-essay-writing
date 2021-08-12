@@ -7,7 +7,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
@@ -40,7 +41,7 @@ const Signin = () => {
   });
 
   const [signedUser, setSignedUser] = useContext(UserContext);
- 
+
   const onSubmit = (data) => {
     setShowSpinner(true);
     const email = data.email;
@@ -51,30 +52,23 @@ const Signin = () => {
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
         const { displayName, email, photoURL } = res.user;
-        const loggedUser = {
+        const googleLoggedUser = {
           name: displayName,
           email: email,
           photoURL: photoURL,
         };
-
+        console.log(googleLoggedUser);
         fetch("https://essay-essay-writing.herokuapp.com/admin", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify(loggedUser),
+          body: JSON.stringify(googleLoggedUser),
         })
           .then((res) => res.json())
           .then((data) => {
-            const loggedUser = {
-              name: data.username,
-              email: data.userEmail,
-              userType: data.userType,
-              photoURL: data.photoURL,
-              id: data._id,
-            };
-            setSignedUser(loggedUser);
+            setSignedUser(data);
             setShowSpinner(false);
-            const token = jwt_encode(loggedUser, "secret");
-            localStorage.clear();
+            const token = jwt_encode(data, "secret");
+            localStorage.removeItem("info");
             localStorage.setItem("info", JSON.stringify(token));
             if (data.userType === "user") {
               router.push("/orderlist");
@@ -92,6 +86,17 @@ const Signin = () => {
 
   return (
     <div className="overflow-hidden position-relative">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div
         className="position-absolute top-0 left-0 m-5 d-none d-md-block"
         style={{ zIndex: "999999" }}

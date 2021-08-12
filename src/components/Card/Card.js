@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import Payment from "../../../pages/payment";
 import { UserContext } from "../../../pages/_app";
 import styles from "./card.module.css";
 
@@ -11,19 +10,14 @@ const Card = ({ data, index, notify }) => {
   const [perPageData, setPerPageData] = useState("");
   const [wordPerPageData, setWordPerPageData] = useState("");
 
-  const { deliveryDay, perPage, wordPerPage } = data;
+  const { deliveryDay, perPage, wordPerPage, priceKey } = data;
 
   const deliveryDayValue = deliveryDay;
   const perPageValue = perPage;
   const wordPerPageValue = wordPerPage;
   const id = data._id;
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const router = useRouter();
 
@@ -79,17 +73,26 @@ const Card = ({ data, index, notify }) => {
 
   const handleOrderCard = () => {
     if (signedUser.email) {
-      fetch("https://essay-essay-writing.herokuapp.com/orderCard/post", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(orderDetails),
-      })
-        .then((res) => res.json())
-        .then((data) => {});
+      // fetch("https://essay-essay-writing.herokuapp.com/orderCard/post", {
+      //   method: "POST",
+      //   headers: { "content-type": "application/json" },
+      //   body: JSON.stringify(orderDetails),
+      // })
+      //   .then((res) => res.json())
+      //   .then((data) => {});
+      const orderInfo = {};
+      orderInfo.orderAmount = orderDetails.orderAmount;
+      orderInfo.deliveryTime = orderDetails.deliveryTime;
+      orderInfo.customerEmail = orderDetails?.customerEmail;
+
+      localStorage.setItem("orderInfos", JSON.stringify(orderInfo));
+
+      router.push("/paymentMethod");
     } else {
       console.log("Problem");
     }
   };
+
   return (
     <>
       <div
@@ -131,8 +134,6 @@ const Card = ({ data, index, notify }) => {
             <button
               className={`${styles.pricingBtn} btn`}
               onClick={handleOrderCard}
-              data-bs-target={`#AA${index + 111}`}
-              data-bs-toggle="modal"
             >
               Order Now
             </button>
@@ -199,33 +200,6 @@ const Card = ({ data, index, notify }) => {
                   data-bs-dismiss="modal"
                 />
               </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="modal fade"
-        id={`AA${index + 111}`}
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Payment Card
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <Payment />
             </div>
           </div>
         </div>
