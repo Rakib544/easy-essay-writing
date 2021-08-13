@@ -11,6 +11,7 @@ const Card = ({ data, index, notify }) => {
   const [perPageData, setPerPageData] = useState("");
   const [wordPerPageData, setWordPerPageData] = useState("");
   const [userInfo, setUserInfo] = useState({});
+  const [referredBy, setReferredBy] = useState(null);
 
   const { deliveryDay, perPage, wordPerPage } = data;
 
@@ -33,6 +34,20 @@ const Card = ({ data, index, notify }) => {
     })
       .then((res) => res.json())
       .then((data) => setUserInfo(data));
+
+    fetch(
+      "https://easy-essay-writing.herokuapp.com/affiliateUser/affiliateUserFind",
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ email }),
+      }
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        setReferredBy(result.referredBy);
+        console.log(result);
+      });
   }, []);
 
   const onSubmit = (data) => {
@@ -64,8 +79,10 @@ const Card = ({ data, index, notify }) => {
 
   //discount calculation
   let price;
+  let profit;
   if (userInfo.hasDiscountOffer) {
     price = perPage - perPage * 0.2;
+    profit = perPage * 0.2;
   } else {
     price = perPage;
   }
@@ -96,6 +113,11 @@ const Card = ({ data, index, notify }) => {
   orderDetails.orderAmount = price;
   orderDetails.deliveryTime = data.deliveryDay;
   orderDetails.quantity = "1";
+
+  if (userInfo.hasDiscountOffer) {
+    orderDetails.referredBy = referredBy;
+    orderDetails.referredUserProfit = profit;
+  }
 
   const handleOrderCard = () => {
     if (signedUser.email) {
