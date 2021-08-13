@@ -29,7 +29,7 @@ const Card = ({ data, index, notify }) => {
     fetch("https://essay-essay-writing.herokuapp.com/admin", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(email),
+      body: JSON.stringify({email}),
     })
     .then((res) => res.json())
     .then((data) => setUserInfo(data))
@@ -64,7 +64,7 @@ const Card = ({ data, index, notify }) => {
 
   //discount calculation
   let price;
-  if (signedUser.hasDiscountOffer) {
+  if (userInfo.hasDiscountOffer) {
     price = perPage - perPage * 0.2;
   } else {
     price = perPage;
