@@ -100,4 +100,4 @@ const PaymentMethod = () => {
   );
 };
 
-export default (PaymentMethod);
+export default withAuth(PaymentMethod);

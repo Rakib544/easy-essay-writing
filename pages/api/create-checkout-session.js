@@ -56,7 +56,7 @@ export default async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: `${process.env.HOST}/orderlist`,
+      success_url: `${process.env.HOST}/confirmOrder`,
       cancel_url: `${process.env.HOST}/`,
       metadata: {
         customerEmail,

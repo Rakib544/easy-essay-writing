@@ -15,6 +15,7 @@ export default function Home({
   faqData,
   priceCardData,
   processCardData,
+  footerCardData
 }) {
   return (
     <>
@@ -42,7 +43,7 @@ export default function Home({
         <Pricing priceCardData={priceCardData} />
       </div>
       <Question faqData={faqData} />
-      <Footer />
+      <Footer footerCardData={footerCardData} />
     </>
   );
 }
@@ -78,6 +79,11 @@ export async function getServerSideProps() {
   );
   const processCardData = await processCardResponse.json();
 
+  const footerCardsData = await fetch(
+    "https://essay-essay-writing.herokuapp.com/footerIcons"
+  );
+  const footerCardData = await footerCardsData.json();
+
   return {
     props: {
       bannerData: bannerData[0],
@@ -86,6 +92,7 @@ export async function getServerSideProps() {
       faqData,
       priceCardData,
       processCardData,
+      footerCardData
     },
   };
 }
