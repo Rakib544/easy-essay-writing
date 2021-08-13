@@ -36,7 +36,7 @@ const Card = ({ data, index, notify }) => {
       .then((data) => setUserInfo(data));
 
     fetch(
-      "https://easy-essay-writing.herokuapp.com/affiliateUser/affiliateUserFind",
+      "https://essay-essay-writing.herokuapp.com/affiliateUser/affiliateUserFind",
       {
         method: "POST",
         headers: { "content-type": "application/json" },
