@@ -29,10 +29,10 @@ const Card = ({ data, index, notify }) => {
     fetch("https://essay-essay-writing.herokuapp.com/admin", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({email}),
+      body: JSON.stringify({ email }),
     })
-    .then((res) => res.json())
-    .then((data) => setUserInfo(data))
+      .then((res) => res.json())
+      .then((data) => setUserInfo(data));
   }, []);
 
   const onSubmit = (data) => {
