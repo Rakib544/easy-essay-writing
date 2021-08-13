@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
 import bannerImg from "../images/login-img.png";
@@ -71,7 +71,7 @@ const Signin = () => {
             localStorage.removeItem("info");
             localStorage.setItem("info", JSON.stringify(token));
             if (data.userType === "user") {
-              router.push("/orderlist");
+              router.push("/profile");
             } else {
               router.push("/admin");
             }

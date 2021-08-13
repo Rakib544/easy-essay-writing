@@ -45,7 +45,7 @@ const OrderDownloadCard = ({ singleOrderDetails }) => {
           className="btn w-100 bg-primary text-white"
           onClick={() =>
             handleDownload(
-              `http://localhost:8080/${singleOrderDetails.file}`,
+              `https://essay-essay-writing.herokuapp.com/${singleOrderDetails.file}`,
               `${singleOrderDetails.file}`
             )
           }

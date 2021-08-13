@@ -5,6 +5,8 @@ import Plagiarism from "../src/components/plagiarism/plagiarism";
 import Pricing from "../src/components/pricing/pricing";
 import Process from "../src/components/process/Process";
 import Question from "../src/components/Question/Question";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home({
   bannerData,
@@ -13,9 +15,21 @@ export default function Home({
   faqData,
   priceCardData,
   processCardData,
+  footerCardData
 }) {
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Head>
         <title>Easy Essay Writing | Home</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -29,7 +43,7 @@ export default function Home({
         <Pricing priceCardData={priceCardData} />
       </div>
       <Question faqData={faqData} />
-      <Footer />
+      <Footer footerCardData={footerCardData} />
     </>
   );
 }
@@ -65,6 +79,11 @@ export async function getServerSideProps() {
   );
   const processCardData = await processCardResponse.json();
 
+  const footerCardsData = await fetch(
+    "https://essay-essay-writing.herokuapp.com/footerIcons"
+  );
+  const footerCardData = await footerCardsData.json();
+
   return {
     props: {
       bannerData: bannerData[0],
@@ -73,6 +92,7 @@ export async function getServerSideProps() {
       faqData,
       priceCardData,
       processCardData,
+      footerCardData
     },
   };
 }

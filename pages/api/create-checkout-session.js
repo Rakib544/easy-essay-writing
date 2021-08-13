@@ -38,7 +38,7 @@ export default async (req, res) => {
     const { orderAmount, deliveryTime, customerEmail } = req.body;
 
     const session = await stripe.checkout.sessions.create({
-      submit_type: 'pay',
+      submit_type: "pay",
       payment_method_types: ["card"],
       shipping_address_collection: {
         allowed_countries: ["US", "CN"],
@@ -56,7 +56,7 @@ export default async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: `${process.env.HOST}/orderlist`,
+      success_url: `${process.env.HOST}/confirmOrder`,
       cancel_url: `${process.env.HOST}/`,
       metadata: {
         customerEmail,

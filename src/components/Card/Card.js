@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { UserContext } from "../../../pages/_app";
 import styles from "./card.module.css";
 
@@ -9,8 +10,9 @@ const Card = ({ data, index, notify }) => {
   const [deliveriesDay, setDeliveriesDay] = useState("");
   const [perPageData, setPerPageData] = useState("");
   const [wordPerPageData, setWordPerPageData] = useState("");
+  const [userInfo, setUserInfo] = useState({});
 
-  const { deliveryDay, perPage, wordPerPage, priceKey } = data;
+  const { deliveryDay, perPage, wordPerPage } = data;
 
   const deliveryDayValue = deliveryDay;
   const perPageValue = perPage;
@@ -20,6 +22,18 @@ const Card = ({ data, index, notify }) => {
   const { register, handleSubmit } = useForm();
 
   const router = useRouter();
+
+  const email = signedUser.email;
+
+  useEffect(() => {
+    fetch("https://essay-essay-writing.herokuapp.com/admin", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then((data) => setUserInfo(data));
+  }, []);
 
   const onSubmit = (data) => {
     const deliveryDay = data.deliveryDay || deliveryDayValue;
@@ -46,7 +60,17 @@ const Card = ({ data, index, notify }) => {
       });
   };
 
-  //
+  //calculation for payment
+
+  //discount calculation
+  let price;
+  if (userInfo.hasDiscountOffer) {
+    price = perPage - perPage * 0.2;
+  } else {
+    price = perPage;
+  }
+
+  //split delivery date
   let value;
   if (data.deliveryDay.endsWith("+")) {
     value = parseInt(data.deliveryDay.split("")[0]);
@@ -56,10 +80,12 @@ const Card = ({ data, index, notify }) => {
     value = data.deliveryDay;
   }
 
+  //calculating delivery date depending on delivery date
   const deliveryDate = (value) => {
     return new Date(new Date().getTime() + value * 24 * 60 * 60 * 1000);
   };
 
+  //making objects for order
   const orderDetails = {};
   orderDetails.orderDate = new Date();
   orderDetails.orderStatus = "Work In Progress";
@@ -67,29 +93,17 @@ const Card = ({ data, index, notify }) => {
   orderDetails.file = "";
   orderDetails.customerName = signedUser?.name;
   orderDetails.customerEmail = signedUser?.email;
-  orderDetails.orderAmount = data.perPage;
+  orderDetails.orderAmount = price;
   orderDetails.deliveryTime = data.deliveryDay;
   orderDetails.quantity = "1";
 
   const handleOrderCard = () => {
     if (signedUser.email) {
-      // fetch("https://essay-essay-writing.herokuapp.com/orderCard/post", {
-      //   method: "POST",
-      //   headers: { "content-type": "application/json" },
-      //   body: JSON.stringify(orderDetails),
-      // })
-      //   .then((res) => res.json())
-      //   .then((data) => {});
-      const orderInfo = {};
-      orderInfo.orderAmount = orderDetails.orderAmount;
-      orderInfo.deliveryTime = orderDetails.deliveryTime;
-      orderInfo.customerEmail = orderDetails?.customerEmail;
-
-      localStorage.setItem("orderInfos", JSON.stringify(orderInfo));
+      window.localStorage.setItem("orderInfos", JSON.stringify(orderDetails));
 
       router.push("/paymentMethod");
     } else {
-      console.log("Problem");
+      toast.error("Please Login First");
     }
   };
 

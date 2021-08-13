@@ -1,13 +1,13 @@
-import React, { useContext, useState } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
-import { FcGoogle } from "react-icons/fc";
 import jwt_encode from "jwt-encode";
-import { firebaseConfig } from "../firebaseConfig/firebase.config";
-import { UserContext } from "../../../pages/_app";
 import { useRouter } from "next/router";
-import { ToastContainer, toast } from "react-toastify";
+import React, { useContext, useState } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { UserContext } from "../../../pages/_app";
+import { firebaseConfig } from "../firebaseConfig/firebase.config";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -27,33 +27,25 @@ const GoogleLogin = () => {
       .auth()
       .signInWithPopup(googleProvider)
       .then((res) => {
-        const { displayName, email, photoURL } = res.user;
+        const { displayName, email } = res.user;
         const loggedUser = {
           name: displayName,
           email: email,
-          photoURL: photoURL,
         };
-        fetch("https://essay-essay-writing.herokuapp.com/admin", {
+        fetch("https://essay-essay-writing.herokuapp.com/create/googleUser", {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(loggedUser),
         })
           .then((res) => res.json())
           .then((data) => {
-            const loggedUser = {
-              name: data.username,
-              email: data.userEmail,
-              userType: data.userType,
-              photoURL: data.photoURL,
-              id: data._id,
-            };
-            setSignedUser(loggedUser);
+            setSignedUser(data);
             setShowSpinner(false);
             const token = jwt_encode(data, "secret");
             localStorage.clear();
             localStorage.setItem("info", JSON.stringify(token));
             if (data.userType === "user") {
-              router.push("/orderlist");
+              router.push("/profile");
             } else {
               router.push("/admin");
             }
@@ -79,7 +71,7 @@ const GoogleLogin = () => {
         pauseOnHover
       />
       <div className="text-center ">
-        <p className="fw-bold text-secondary fs-50">Sign in to Clever</p>
+        <p className="fw-bold fs-50" style={{ color : '#313151'}}>Sign in to Clever</p>
         <div
           className="p-3 d-inline icon-bg cursor-pointer"
           onClick={googleSignin}
@@ -87,7 +79,7 @@ const GoogleLogin = () => {
           <FcGoogle size={24} />
         </div>
       </div>
-      <p className="beforeAfter mt-4 fs-15">or do it via email</p>
+      <p className="beforeAfter mt-4 fs-15" style={{ color : '#315A9E'}}>or do it via email</p>
     </>
   );
 };

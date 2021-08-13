@@ -17,14 +17,14 @@
 }
 
 .name {
-  font-size: 28px;
+  font-size: 20px;
   line-height: 10px;
   font-weight: bold;
 }
 
 .email {
-  color: #c9c9c9;
-  line-height: 10px;
+  color: #b3afaf;
+  line-height: 14px;
 }
 
 @media only screen and (max-width: 600px) {

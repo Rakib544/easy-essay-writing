@@ -28,7 +28,7 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
   const handleFileUpload = (e, id) => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
-    fetch(`http://localhost:8080/orderCard/upload/${id}`, {
+    fetch(`https://essay-essay-writing.herokuapp.com/orderCard/upload/${id}`, {
       method: "PUT",
       body: formData,
     })
