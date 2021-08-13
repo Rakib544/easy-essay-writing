@@ -28,7 +28,7 @@ const TotalOrderCard = ({ userOrders }) => {
           {userOrders.length} - Items
         </p>
         <p className={`${styles.lastOrderDateText} fs-19`}>
-          Last Order - 23 Oct, 2021
+          {userOrders.length === 0 ? "You don't order anything yet" : `Last Order - ${userOrders[0].orderDate.slice(0, 10)}`}
         </p>
       </div>
       <button className={`btn ${styles.pricingBtn}`}>New Order</button>
