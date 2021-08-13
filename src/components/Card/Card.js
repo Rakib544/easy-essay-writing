@@ -86,14 +86,6 @@ const Card = ({ data, index, notify }) => {
 
   const handleOrderCard = () => {
     if (signedUser.email) {
-      // fetch("https://essay-essay-writing.herokuapp.com/orderCard/post", {
-      //   method: "POST",
-      //   headers: { "content-type": "application/json" },
-      //   body: JSON.stringify(orderDetails),
-      // })
-      //   .then((res) => res.json())
-      //   .then((data) => {});
-
       window.localStorage.setItem("orderInfos", JSON.stringify(orderDetails));
 
       router.push("/paymentMethod");
