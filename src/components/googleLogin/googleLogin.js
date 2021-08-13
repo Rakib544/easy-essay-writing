@@ -71,7 +71,7 @@ const GoogleLogin = () => {
         pauseOnHover
       />
       <div className="text-center ">
-        <p className="fw-bold text-secondary fs-50">Sign in to Clever</p>
+        <p className="fw-bold fs-50" style={{ color : '#313151'}}>Sign in to Clever</p>
         <div
           className="p-3 d-inline icon-bg cursor-pointer"
           onClick={googleSignin}
@@ -79,7 +79,7 @@ const GoogleLogin = () => {
           <FcGoogle size={24} />
         </div>
       </div>
-      <p className="beforeAfter mt-4 fs-15">or do it via email</p>
+      <p className="beforeAfter mt-4 fs-15" style={{ color : '#315A9E'}}>or do it via email</p>
     </>
   );
 };

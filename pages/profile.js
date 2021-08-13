@@ -8,6 +8,7 @@ import Navbar from "../src/components/navbar/Navbar";
 import styles from "../src/components/profileCard/profileCard.module.css";
 import { UserContext } from "./_app";
 import withAuth from "../src/components/privateRoute";
+import profileImage from '../images/profile_image.jpg';
 
 const Profile = () => {
   const [signedUser] = useContext(UserContext);
@@ -81,15 +82,15 @@ const Profile = () => {
               <div className="box-shadow p-4 bg-white rounded-3">
                 <div className="row d-flex align-items-center mb-3">
                   <div className="col-3">
-                    {signedUser.photoURL && (
+
                       <Image
-                        src={signedUser.photoURL}
+                        src={signedUser.photoURL || profileImage}
                         alt="profile"
                         height="78"
                         width="78"
                         className="rounded-circle"
                       />
-                    )}
+
                   </div>
                   <div className="col-9">
                     <p className={`text-wrap fw-bold ${styles.name}`}>

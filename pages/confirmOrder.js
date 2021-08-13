@@ -33,7 +33,7 @@ const confirmOrder = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        fetch(`http://localhost:8080/create/update/${singedUser._id}`, {
+        fetch(`https://essay-essay-writing.herokuapp.com/create/update/${singedUser._id}`, {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(),

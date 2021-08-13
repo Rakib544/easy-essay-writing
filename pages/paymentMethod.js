@@ -17,19 +17,7 @@ const PaymentMethod = () => {
   const [orderInfo, setOrderInfo] = useState({});
 
   useEffect(() => {
-    // const query = new URLSearchParams(window.location.search);
-
-    // if (query.get("success")) {
-    //   console.log("Order placed! You will receive an email confirmation.");
-    // }
-
-    // if (query.get("canceled")) {
-    //   console.log(
-    //     "Order canceled -- continue to shop around and checkout when you’re ready."
-    //   );
-    // }
     setOrderInfo(JSON.parse(window.localStorage.getItem("orderInfos")));
-    // window.localStorage.removeItem("orderInfos");
   }, []);
 
   const createCheckoutSession = async () => {
@@ -43,8 +31,6 @@ const PaymentMethod = () => {
     const result = await stripe.redirectToCheckout({
       sessionId: checkoutSession.data.id,
     });
-
-    // if (result.error) alert(result.error.message);
   };
 
   return (

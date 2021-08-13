@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { UserContext } from "../../../pages/_app";
@@ -10,6 +10,7 @@ const Card = ({ data, index, notify }) => {
   const [deliveriesDay, setDeliveriesDay] = useState("");
   const [perPageData, setPerPageData] = useState("");
   const [wordPerPageData, setWordPerPageData] = useState("");
+  const [userInfo, setUserInfo] = useState({});
 
   const { deliveryDay, perPage, wordPerPage } = data;
 
@@ -21,6 +22,18 @@ const Card = ({ data, index, notify }) => {
   const { register, handleSubmit } = useForm();
 
   const router = useRouter();
+
+  const email = signedUser.email;
+
+  useEffect(() => {
+    fetch("https://essay-essay-writing.herokuapp.com/admin", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(email),
+    })
+    .then((res) => res.json())
+    .then((data) => setUserInfo(data))
+  }, []);
 
   const onSubmit = (data) => {
     const deliveryDay = data.deliveryDay || deliveryDayValue;
