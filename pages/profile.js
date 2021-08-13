@@ -134,7 +134,7 @@ const Profile = () => {
                 </p>
                 <div className="d-flex mt-5 mb-2 rounded-3">
                   <CopyToClipboard
-                    text={`http://localhost:3000/refer/${signedUser._id}`}
+                    text={`https://easy-essay-writing.vercel.app/refer/${signedUser._id}`}
                     onCopy={() => toast.success("Copied")}
                   >
                     <button className="px-2 rounded-0 fs-15 btn-style">
@@ -143,7 +143,7 @@ const Profile = () => {
                   </CopyToClipboard>
                   <input
                     className="form-control rounded-0 affiliate-input-background"
-                    value={`http://localhost:3000/refer/${signedUser._id}`}
+                    value={`https://easy-essay-writing.vercel.app/refer/${signedUser._id}`}
                   />
                 </div>
               </div>
