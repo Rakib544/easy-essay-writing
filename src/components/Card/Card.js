@@ -23,6 +23,7 @@ const Card = ({ data, index, notify }) => {
   const { register, handleSubmit } = useForm();
 
   const router = useRouter();
+  // console.log(signedUser.email);
 
   const email = signedUser.email;
 
@@ -34,7 +35,7 @@ const Card = ({ data, index, notify }) => {
     })
       .then((res) => res.json())
       .then((data) => setUserInfo(data));
-  }, []);
+  }, [email]);
 
   useEffect(() => {
     fetch(
