@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import OurProcessCard from "../ourProcessCard/ourProcessCard";
 
@@ -120,7 +120,7 @@ const OurProcess = () => {
       <div
         class="modal fade"
         id="processModal1"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -163,7 +163,7 @@ const OurProcess = () => {
       <div
         class="modal fade"
         id="processModal2"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >

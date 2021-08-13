@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const BannerInfo = () => {
@@ -95,7 +95,7 @@ const BannerInfo = () => {
       <div
         class="modal fade"
         id="bannerModal1"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -138,7 +138,7 @@ const BannerInfo = () => {
       <div
         class="modal fade"
         id="bannerModal2"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >

@@ -33,9 +33,7 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
       body: formData,
     })
       .then((res) => res.json())
-      .then((path) => {
-        console.log(path);
-      });
+      .then((filepath) => {});
   };
 
   return (

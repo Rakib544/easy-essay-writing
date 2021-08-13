@@ -9,7 +9,7 @@ const QuestionCard = ({ data }) => {
   return (
     <>
       <div className={`${styles.acc} my-3 `}>
-        <p className="fs-24">{data.question}</p>
+        <p className="fs-18">{data.question}</p>
         <span
           onClick={() => setIsOpen(!isOpen)}
           type="button"
@@ -19,7 +19,7 @@ const QuestionCard = ({ data }) => {
           aria-controls="collapseExample"
           className={styles.questionIcon}
         >
-          {isOpen ? <VscRemove /> : <GrAdd />}
+          {isOpen ? <VscRemove size={14} /> : <GrAdd size={14} />}
         </span>
       </div>
       <div className="collapse" id={data.id}>

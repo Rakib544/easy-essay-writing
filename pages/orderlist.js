@@ -37,8 +37,9 @@ const OrderList = ({ cardData }) => {
     const singleOrderDetails = userOrders.find((order) => order._id === id);
     setSingleOrderDetails(singleOrderDetails);
     setShowDetails(true);
-    
-    const previousOrderDetails = userOrders.findIndex((order) => order._id === id) -1 ;
+
+    const previousOrderDetails =
+      userOrders.findIndex((order) => order._id === id) - 1;
     setPreviousOrderDetails(userOrders[previousOrderDetails]);
   };
   return (
@@ -60,13 +61,11 @@ const OrderList = ({ cardData }) => {
                   <div className="d-flex flex-column p-4 scroll height">
                     {userOrders.map((order) => (
                       <div
+                        key={order._id}
                         className="my-2"
                         onClick={() => handleShowOrderDetails(order._id)}
                       >
-                        <div
-                          key={order._id}
-                          className="row shadow-sm py-2 cursor-pointer"
-                        >
+                        <div className="row shadow-sm py-2 cursor-pointer">
                           <p className="col-12 col-md-4 pt-3 text-primary fw-bold">
                             Order - {order._id}
                           </p>
@@ -102,7 +101,8 @@ const OrderList = ({ cardData }) => {
                       </span>
                     </div>
                     <OrderDownloadCard
-                      singleOrderDetails={singleOrderDetails} previousOrderDetails={previousOrderDetails}
+                      singleOrderDetails={singleOrderDetails}
+                      previousOrderDetails={previousOrderDetails}
                     />
                   </>
                 )}

@@ -7,7 +7,7 @@ const Pricing = ({ priceCardData }) => {
       <p className="text-center fs-48 fw-bold mb-3 mt-5">Pricing</p>
       <div className="row d-md-flex justify-content-center align-items-center">
         {priceCardData.map((data, index) => (
-          <Card data={data} key={data.id} index={index} />
+          <Card data={data} key={data._id} index={index} />
         ))}
       </div>
     </div>

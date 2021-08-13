@@ -60,7 +60,7 @@ const FooterCard = ({ footerCardData, index, setNumber, number, notify }) => {
       <div
         class="modal fade"
         id={`footerModalCard${index + 1}`}
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >

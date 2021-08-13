@@ -78,7 +78,7 @@ const OurProcessCard = ({
       <div
         className="modal fade"
         id={`processCardModal${index + 1}`}
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -121,7 +121,7 @@ const OurProcessCard = ({
       <div
         className="modal fade"
         id={`processModalCard${index + 1}`}
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >

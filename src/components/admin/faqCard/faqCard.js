@@ -50,7 +50,7 @@ const FaqCard = ({ faqCardData, index, setNumber, number, notify }) => {
       <div
         class="modal fade"
         id={`faqModalCard${index + 1}`}
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >

@@ -23,7 +23,6 @@ const Card = ({ data, index, notify }) => {
   const { register, handleSubmit } = useForm();
 
   const router = useRouter();
-  // console.log(signedUser.email);
 
   const email = signedUser.email;
 
@@ -49,7 +48,6 @@ const Card = ({ data, index, notify }) => {
       .then((res) => res.json())
       .then((result) => {
         setReferredBy(result.referredBy);
-        console.log(result);
       });
   }, [email]);
 
@@ -89,7 +87,7 @@ const Card = ({ data, index, notify }) => {
   } else {
     price = perPage;
   }
-  console.log("price", userInfo, signedUser);
+
   //split delivery date
   let value;
   if (data.deliveryDay.endsWith("+")) {

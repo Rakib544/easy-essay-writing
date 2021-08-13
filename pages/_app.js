@@ -40,9 +40,7 @@ function MyApp({ Component, pageProps }) {
     try {
       const decoded = jwt_decode(info);
       setSignedUser(decoded);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }, []);
 
   return (

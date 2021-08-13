@@ -2,12 +2,10 @@ import Image from "next/image";
 import React from "react";
 import flower from "../../../images/Grupo 466.svg";
 import lama from "../../../images/svg17.svg";
-import { faqData } from "../../data/faqData";
 import styles from "./Question.module.css";
 import QuestionCard from "./QuestionCard";
 
-const Question = ({faqData}) => {
-  
+const Question = ({ faqData }) => {
   return (
     <div className={styles.question}>
       <div className="pe-md-5 me-md-5 pb-md-5">
@@ -26,7 +24,7 @@ const Question = ({faqData}) => {
         </div>
 
         {faqData.map((data) => (
-          <QuestionCard key={data.id} data={data} />
+          <QuestionCard key={data._id} data={data} />
         ))}
       </div>
     </div>
