@@ -1,15 +1,15 @@
-import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { UserContext } from "../../../pages/_app";
-import styles from "./card.module.css";
+import { useRouter } from 'next/router';
+import { useContext, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { UserContext } from '../../../pages/_app';
+import styles from './card.module.css';
 
 const Card = ({ data, index, notify }) => {
   const [signedUser] = useContext(UserContext);
-  const [deliveriesDay, setDeliveriesDay] = useState("");
-  const [perPageData, setPerPageData] = useState("");
-  const [wordPerPageData, setWordPerPageData] = useState("");
+  const [deliveriesDay, setDeliveriesDay] = useState('');
+  const [perPageData, setPerPageData] = useState('');
+  const [wordPerPageData, setWordPerPageData] = useState('');
   const [userInfo, setUserInfo] = useState({});
   const [referredBy, setReferredBy] = useState(null);
 
@@ -27,19 +27,21 @@ const Card = ({ data, index, notify }) => {
   const email = signedUser.email;
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/admin", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
+    fetch('https://essay-essay-writing.herokuapp.com/admin', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ email }),
     })
       .then((res) => res.json())
       .then((data) => setUserInfo(data));
+  }, []);
 
+  useEffect(() => {
     fetch(
-      "https://easy-essay-writing.herokuapp.com/affiliateUser/affiliateUserFind",
+      'https://essay-essay-writing.herokuapp.com/affiliateUser/affiliateUserFind',
       {
-        method: "POST",
-        headers: { "content-type": "application/json" },
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ email }),
       }
     )
@@ -48,7 +50,7 @@ const Card = ({ data, index, notify }) => {
         setReferredBy(result.referredBy);
         console.log(result);
       });
-  }, []);
+  }, [email]);
 
   const onSubmit = (data) => {
     const deliveryDay = data.deliveryDay || deliveryDayValue;
@@ -56,8 +58,8 @@ const Card = ({ data, index, notify }) => {
     const wordPerPage = data.wordPerPage || wordPerPageValue;
 
     fetch(`https://essay-essay-writing.herokuapp.com/priceCard/update/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         deliveryDay,
         perPage,
@@ -86,13 +88,13 @@ const Card = ({ data, index, notify }) => {
   } else {
     price = perPage;
   }
-
+  console.log('price', userInfo, signedUser);
   //split delivery date
   let value;
-  if (data.deliveryDay.endsWith("+")) {
-    value = parseInt(data.deliveryDay.split("")[0]);
-  } else if (data.deliveryDay.includes("-")) {
-    value = data.deliveryDay.split("-")[1];
+  if (data.deliveryDay.endsWith('+')) {
+    value = parseInt(data.deliveryDay.split('')[0]);
+  } else if (data.deliveryDay.includes('-')) {
+    value = data.deliveryDay.split('-')[1];
   } else {
     value = data.deliveryDay;
   }
@@ -105,14 +107,14 @@ const Card = ({ data, index, notify }) => {
   //making objects for order
   const orderDetails = {};
   orderDetails.orderDate = new Date();
-  orderDetails.orderStatus = "Work In Progress";
+  orderDetails.orderStatus = 'Work In Progress';
   orderDetails.deliveryDate = deliveryDate(value);
-  orderDetails.file = "";
+  orderDetails.file = '';
   orderDetails.customerName = signedUser?.name;
   orderDetails.customerEmail = signedUser?.email;
   orderDetails.orderAmount = price;
   orderDetails.deliveryTime = data.deliveryDay;
-  orderDetails.quantity = "1";
+  orderDetails.quantity = '1';
 
   if (userInfo.hasDiscountOffer) {
     orderDetails.referredBy = referredBy;
@@ -121,11 +123,11 @@ const Card = ({ data, index, notify }) => {
 
   const handleOrderCard = () => {
     if (signedUser.email) {
-      window.localStorage.setItem("orderInfos", JSON.stringify(orderDetails));
+      window.localStorage.setItem('orderInfos', JSON.stringify(orderDetails));
 
-      router.push("/paymentMethod");
+      router.push('/paymentMethod');
     } else {
-      toast.error("Please Login First");
+      toast.error('Please Login First');
     }
   };
 
@@ -133,18 +135,18 @@ const Card = ({ data, index, notify }) => {
     <>
       <div
         className={`col-12 col-sm-6 col-md-6 ${
-          router.pathname === "/" ? "col-lg-3" : "col-lg-4"
+          router.pathname === '/' ? 'col-lg-3' : 'col-lg-4'
         }`}
       >
         <div
           className={`${
             styles.styleCard
           } mx-auto d-flex justify-content-center align-items-center mx-3 mb-3 px-3 py-md-4 py-3 box-shadow ${
-            index === 1 ? `${styles.active}` : ""
+            index === 1 ? `${styles.active}` : ''
           }`}
         >
           <div className="card-body text-center">
-            {router.pathname === "/admin" && (
+            {router.pathname === '/admin' && (
               <button
                 className={`${styles.editBtn} d-block ms-auto mb-2`}
                 data-bs-target={`#AA${index + 1}`}
@@ -204,7 +206,7 @@ const Card = ({ data, index, notify }) => {
                   rows="3"
                   cols="5"
                   defaultValue={data.deliveryDay}
-                  {...register("deliveryDay")}
+                  {...register('deliveryDay')}
                   name="deliveryDay"
                   id="deliveryDay"
                   className="form-control mb-2"
@@ -214,7 +216,7 @@ const Card = ({ data, index, notify }) => {
                   rows="3"
                   cols="5"
                   defaultValue={data.perPage}
-                  {...register("perPage")}
+                  {...register('perPage')}
                   name="perPage"
                   id="perPage"
                   className="form-control mb-2"
@@ -224,7 +226,7 @@ const Card = ({ data, index, notify }) => {
                   rows="3"
                   cols="5"
                   defaultValue={data.wordPerPage}
-                  {...register("wordPerPage")}
+                  {...register('wordPerPage')}
                   name="wordPerPage"
                   id="wordPerPage"
                   className="form-control mb-2"
