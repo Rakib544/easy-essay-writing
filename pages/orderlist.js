@@ -12,6 +12,7 @@ const OrderList = ({ cardData }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [userOrders, setUserOrders] = useState([]);
   const [singleOrderDetails, setSingleOrderDetails] = useState({});
+  const [previousOrderDetails, setPreviousOrderDetails] = useState({});
 
   const [signedUser] = useContext(UserContext);
   const email = signedUser.email;
@@ -36,6 +37,9 @@ const OrderList = ({ cardData }) => {
     const singleOrderDetails = userOrders.find((order) => order._id === id);
     setSingleOrderDetails(singleOrderDetails);
     setShowDetails(true);
+    
+    const previousOrderDetails = userOrders.findIndex((order) => order._id === id) -1 ;
+    setPreviousOrderDetails(userOrders[previousOrderDetails]);
   };
   return (
     <>
@@ -98,7 +102,7 @@ const OrderList = ({ cardData }) => {
                       </span>
                     </div>
                     <OrderDownloadCard
-                      singleOrderDetails={singleOrderDetails}
+                      singleOrderDetails={singleOrderDetails} previousOrderDetails={previousOrderDetails}
                     />
                   </>
                 )}

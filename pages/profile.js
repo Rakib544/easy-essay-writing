@@ -4,17 +4,20 @@ import { useContext, useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import profileImage from "../images/profile_image.jpg";
 import Navbar from "../src/components/navbar/Navbar";
+import withAuth from "../src/components/privateRoute";
 import styles from "../src/components/profileCard/profileCard.module.css";
 import { UserContext } from "./_app";
-import withAuth from "../src/components/privateRoute";
-import profileImage from '../images/profile_image.jpg';
 
 const Profile = () => {
   const [signedUser] = useContext(UserContext);
   const [totalUsers, setTotalUsers] = useState(0);
   const [lastSevenDaysUsers, setLastSevenDaysUsers] = useState(0);
   const [lastOneDaysUsers, setLastOneDaysUsers] = useState(0);
+  const [totalEarns, setTotalEarns] = useState(0);
+  const [lastSevenDaysEarning, setLastSevenDaysEarning] = useState(0);
+  const [lastOneDayEarning, setLastOneDayEarning] = useState(0);
   const email = signedUser.email;
 
   useEffect(() => {
@@ -38,7 +41,6 @@ const Profile = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setLastSevenDaysUsers(data.lastSevenDaysUser);
       });
 
@@ -52,8 +54,36 @@ const Profile = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setLastOneDaysUsers(data.lastOneDayUser);
+      });
+    fetch("https://essay-essay-writing.herokuapp.com/earnInfo/all", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setTotalEarns(data.totalEarning);
+      });
+
+    fetch("https://essay-essay-writing.herokuapp.com/earnInfo/lastSevenDays", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setLastSevenDaysEarning(data.lastSevenDaysEarning);
+      });
+
+    fetch("https://essay-essay-writing.herokuapp.com/earnInfo/lastOneDay", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setLastOneDayEarning(data.lastOneDayEarning);
       });
   }, [email]);
 
@@ -82,15 +112,13 @@ const Profile = () => {
               <div className="box-shadow p-4 bg-white rounded-3">
                 <div className="row d-flex align-items-center mb-3">
                   <div className="col-3">
-
-                      <Image
-                        src={signedUser.photoURL || profileImage}
-                        alt="profile"
-                        height="78"
-                        width="78"
-                        className="rounded-circle"
-                      />
-
+                    <Image
+                      src={signedUser.photoURL || profileImage}
+                      alt="profile"
+                      height="78"
+                      width="78"
+                      className="rounded-circle"
+                    />
                   </div>
                   <div className="col-9">
                     <p className={`text-wrap fw-bold ${styles.name}`}>
@@ -155,19 +183,19 @@ const Profile = () => {
                 <div className="col-12 col-md-4">
                   <div className="m-2 p-2 box-shadow bg-white">
                     <p className="fs-24 fw-bold">Life time </p>
-                    <p className="fs-50 fw-bold">$2000</p>
+                    <p className="fs-50 fw-bold">${totalEarns}</p>
                   </div>
                 </div>
                 <div className="col-12 col-md-4">
                   <div className="m-2 p-2 box-shadow bg-white">
                     <p className="fs-24 fw-bold">Last 7 Days</p>
-                    <p className="fs-50 fw-bold">$200</p>
+                    <p className="fs-50 fw-bold">${lastSevenDaysEarning}</p>
                   </div>
                 </div>
                 <div className="col-12 col-md-4">
                   <div className="m-2 p-2 box-shadow bg-white">
                     <p className="fs-24 fw-bold">Today</p>
-                    <p className="fs-50 fw-bold">$20</p>
+                    <p className="fs-50 fw-bold">${lastOneDayEarning}</p>
                   </div>
                 </div>
               </div>

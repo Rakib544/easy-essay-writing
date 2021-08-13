@@ -1,7 +1,7 @@
 import axios from "axios";
 import fileDownload from "js-file-download";
 
-const OrderDownloadCard = ({ singleOrderDetails }) => {
+const OrderDownloadCard = ({ singleOrderDetails, previousOrderDetails }) => {
   const handleDownload = (url, filename) => {
     axios
       .get(url, {
@@ -25,18 +25,24 @@ const OrderDownloadCard = ({ singleOrderDetails }) => {
           </button>
           <p className="mt-3  fw-bold d-flex align-items-center flex-column flex-md-row">
             <span className="fs-18 text-primary me-1">Next Delivery:</span>{" "}
-            <span className="fs-27 text-danger">
+            <span className="fs-22 text-danger">
               {singleOrderDetails.deliveryDate.slice(0, 10)}
             </span>
           </p>
         </div>
         <div className="p-5 bg-primary">
           <button className="btn bg-white text-primary fw-bold">
-            Work Complete
+            {previousOrderDetails
+              ? `${previousOrderDetails.orderStatus}`
+              : `${singleOrderDetails.orderStatus}`}
           </button>
           <p className="mt-3 text-white fs-18">
             Previous Delivery{" "}
-            <span className="fw-bold fs-27 pt-2">Complete</span>
+            <span className="fw-bold fs-22 pt-2">
+              {previousOrderDetails
+                ? `${previousOrderDetails.deliveryDate.slice(0, 10)}`
+                : `${singleOrderDetails.deliveryDate.slice(0, 10)}`}
+            </span>
           </p>
         </div>
       </div>

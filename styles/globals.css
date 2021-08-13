@@ -474,6 +474,7 @@ button {
 .navBar {
   padding: 11px 34px !important;
   background-color: #0254f9 !important;
+  color: #fff !important;
 }
 
 .navBar:hover {
