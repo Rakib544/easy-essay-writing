@@ -1,9 +1,8 @@
 import jwt_encode from "jwt-encode";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FiCheckCircle } from "react-icons/fi";
-import { useEffect, useState } from "react/cjs/react.development";
 import withAuth from "../src/components/privateRoute";
 import { UserContext } from "./_app";
 
