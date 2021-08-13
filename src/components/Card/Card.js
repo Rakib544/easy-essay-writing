@@ -34,7 +34,9 @@ const Card = ({ data, index, notify }) => {
     })
       .then((res) => res.json())
       .then((data) => setUserInfo(data));
+  }, []);
 
+  useEffect(() => {
     fetch(
       "https://essay-essay-writing.herokuapp.com/affiliateUser/affiliateUserFind",
       {
@@ -48,7 +50,7 @@ const Card = ({ data, index, notify }) => {
         setReferredBy(result.referredBy);
         console.log(result);
       });
-  }, []);
+  }, [email]);
 
   const onSubmit = (data) => {
     const deliveryDay = data.deliveryDay || deliveryDayValue;
@@ -86,7 +88,7 @@ const Card = ({ data, index, notify }) => {
   } else {
     price = perPage;
   }
-
+  console.log("price", userInfo, signedUser);
   //split delivery date
   let value;
   if (data.deliveryDay.endsWith("+")) {
