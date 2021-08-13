@@ -25,7 +25,7 @@ const OrderDownloadCard = ({ singleOrderDetails, previousOrderDetails }) => {
           </button>
           <p className="mt-3  fw-bold d-flex align-items-center flex-column flex-md-row">
             <span className="fs-18 text-primary me-1">Next Delivery:</span>{" "}
-            <span className="fs-27 text-danger">
+            <span className="fs-22 text-danger">
               {singleOrderDetails.deliveryDate.slice(0, 10)}
             </span>
           </p>
@@ -38,7 +38,7 @@ const OrderDownloadCard = ({ singleOrderDetails, previousOrderDetails }) => {
           </button>
           <p className="mt-3 text-white fs-18">
             Previous Delivery{" "}
-            <span className="fw-bold fs-27 pt-2">
+            <span className="fw-bold fs-22 pt-2">
               {previousOrderDetails
                 ? `${previousOrderDetails.deliveryDate.slice(0, 10)}`
                 : `${singleOrderDetails.deliveryDate.slice(0, 10)}`}

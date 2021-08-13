@@ -2,11 +2,10 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import jwt_encode from "jwt-encode";
 import { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react/cjs/react.development";
 import { UserContext } from "../../../pages/_app";
 import { firebaseConfig } from "../firebaseConfig/firebase.config";
 
