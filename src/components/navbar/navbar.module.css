@@ -1,5 +1,5 @@
 .navItem {
-  padding: 10px 20px;
-  background: #226cff 0% 0% no-repeat padding-box;
+  padding: 11px 34px !important;
+  background: #226cff 0% 0% no-repeat padding-box !important;
   border-radius: 4px;
 }

@@ -142,6 +142,10 @@ a {
   font-size: 14px;
 }
 
+.fs-12 {
+  font-size: 12px;
+}
+
 @media only screen and (max-width: 600px) {
   .fs-48 {
     font-size: 21px;
@@ -194,6 +198,9 @@ a {
   .fs-60 {
     font-size: 60px;
   }
+  .fs-sm-22 {
+    font-size: 14px;
+  }
 }
 
 .cursor-pointer {
@@ -207,6 +214,11 @@ a {
   background-color: #cbdcff;
   padding: 10px 30px;
   border-radius: 5px;
+}
+
+.affiliate-input-background {
+  background-color: #cbdcff;
+  border: none;
 }
 
 .scroll {
@@ -443,4 +455,29 @@ button {
 .Toastify__toast--success {
   background-color: #07bc0c;
   color: #fff;
+}
+
+/* stripe design */
+.stripe-btn {
+  background: #556cd6;
+  border-radius: 4px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+  width: 100%;
+  padding: 15px 0px;
+  font-size: 25px;
+}
+
+/*styling navbar */
+.navBar {
+  padding: 11px 34px !important;
+  background-color: #0254f9 !important;
+}
+
+.navBar:hover {
+  background-color: #226cff !important;
+  border-radius: 4px;
+  color: #fff !important;
 }

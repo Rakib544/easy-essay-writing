@@ -57,11 +57,11 @@ const Navbar = () => {
                         href={`${
                           signedUser?.userType === "admin"
                             ? "/admin"
-                            : "/orderlist"
+                            : "/profile"
                         }`}
                       >
                         <a
-                          className={`${styles.navItem} mx-3 mx-md-0 text-white nav-link px-3`}
+                          className={`navBar mx-3 mx-md-0 text-white nav-link px-3`}
                         >
                           Dashboard
                         </a>
@@ -73,7 +73,7 @@ const Navbar = () => {
                           onClick={logout}
                           className={`${styles.navItem} mx-3 mx-md-0 text-white nav-link px-3`}
                         >
-                          Sign Out
+                          Logout
                         </a>
                       </Link>
                     </li>
@@ -82,7 +82,7 @@ const Navbar = () => {
                   <>
                     <li className="nav-item">
                       <Link href="/signup">
-                        <a className="mx-3 mx-md-0 text-white nav-link px-2">
+                        <a className="navBar mx-3 mx-md-0 text-white nav-link px-2">
                           Sign Up
                         </a>
                       </Link>
@@ -100,21 +100,33 @@ const Navbar = () => {
                 )}
               </>
             )}
-            {router.pathname === "/orderlist" && (
+            {(router.pathname === "/orderlist" ||
+              router.pathname === "/profile") && (
               <>
+                <li className="nav-item">
+                  <Link href="/profile">
+                    <a
+                      className={`${
+                        currentPath === "/profile" ? `${styles.navItem}` : ""
+                      } text-white nav-link px-2 navBar`}
+                    >
+                      Profile
+                    </a>
+                  </Link>
+                </li>
                 <li className="nav-item">
                   <Link href="/orderlist">
                     <a
                       className={`${
-                        currentPath === "/order-list" ? `${styles.navItem}` : ""
-                      } text-white nav-link px-2`}
+                        currentPath === "/orderlist" ? `${styles.navItem}` : ""
+                      } navBar text-white nav-link px-2 ms-md-2 my-2 my-md-0`}
                     >
                       Order List
                     </a>
                   </Link>
                 </li>
                 <li
-                  className={`nav-item ${styles.navItem} mx-md-2 my-2 my-md-0 cursor-pointer`}
+                  className={`nav-item navBar mx-md-2 my-2 my-md-0 cursor-pointer`}
                   onClick={logout}
                 >
                   Logout
@@ -130,7 +142,7 @@ const Navbar = () => {
                     <a
                       className={`${
                         currentPath === "/admin" ? `${styles.navItem}` : ""
-                      } text-white nav-link px-2`}
+                      } text-white nav-link px-2 navBar mx-md-2`}
                     >
                       Home Page
                     </a>
@@ -143,7 +155,7 @@ const Navbar = () => {
                         currentPath === "/admin/pending-orders"
                           ? `${styles.navItem}`
                           : ""
-                      } text-white nav-link px-2`}
+                      } text-white nav-link px-2 navBar mx-md-2`}
                     >
                       Pending Orders
                     </a>
@@ -156,14 +168,14 @@ const Navbar = () => {
                         currentPath === "/admin/complete-orders"
                           ? `${styles.navItem}`
                           : ""
-                      } text-white nav-link px-2`}
+                      } navBar text-white nav-link px-2`}
                     >
                       Complete Orders
                     </a>
                   </Link>
                 </li>
                 <li
-                  className={`nav-item ${styles.navItem} mx-md-2 my-2 my-md-0 cursor-pointer`}
+                  className={`nav-item navBar mx-md-2 my-2 my-md-0 cursor-pointer`}
                   onClick={logout}
                 >
                   <Link href="/">

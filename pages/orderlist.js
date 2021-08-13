@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Head from "next/head";
 import React, { useContext, useEffect, useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import Card from "../src/components/Card/Card";
@@ -39,56 +39,74 @@ const OrderList = ({ cardData }) => {
   };
   return (
     <>
+      <Head>
+        <title>Easy Essay Writing | OrderList</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Navbar />
       <div className="container mt-4">
         <div className="row">
           <div className="col-12 col-md-4 col-lg-4">
-            <TotalOrderCard />
+            <TotalOrderCard userOrders={userOrders} />
           </div>
           <div className="col-12 col-md-8 bg-white">
-            {!showDetails ? (
-              <div className="d-flex flex-column p-4 scroll height">
-                {userOrders.map((order) => (
-                  <div
-                    className="my-2"
-                    onClick={() => handleShowOrderDetails(order._id)}
-                  >
-                    <div
-                      key={order._id}
-                      className="row shadow-sm py-2 cursor-pointer"
-                    >
-                      <p className="col-12 col-md-4 pt-3 text-primary fw-bold">
-                        Order - {order._id}
-                      </p>
-                      <p className="col-12 col-md-4 pt-3">
-                        Order-Date: {order.orderDate.slice(0, 10)}
-                      </p>
-                      <button
-                        className={`col-12 col-md-4 my-2 btn ${
-                          order.orderStatus === "Completed"
-                            ? "btn-primary"
-                            : "work-in-progress"
-                        }`}
-                      >
-                        {order.orderStatus}
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
+            {userOrders.length > 0 ? (
               <>
-                <div
-                  className="container mt-3"
-                  onClick={() => setShowDetails(false)}
-                >
-                  <BsArrowLeft size={28} className="text-primary mr-4 cursor-pointer" />
+                {!showDetails ? (
+                  <div className="d-flex flex-column p-4 scroll height">
+                    {userOrders.map((order) => (
+                      <div
+                        className="my-2"
+                        onClick={() => handleShowOrderDetails(order._id)}
+                      >
+                        <div
+                          key={order._id}
+                          className="row shadow-sm py-2 cursor-pointer"
+                        >
+                          <p className="col-12 col-md-4 pt-3 text-primary fw-bold">
+                            Order - {order._id}
+                          </p>
+                          <p className="col-12 col-md-4 pt-3">
+                            Order-Date: {order.orderDate.slice(0, 10)}
+                          </p>
+                          <button
+                            className={`col-12 col-md-4 my-2 btn ${
+                              order.orderStatus === "Completed"
+                                ? "btn-primary"
+                                : "work-in-progress"
+                            }`}
+                          >
+                            {order.orderStatus}
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <>
+                    <div
+                      className="container mt-3"
+                      onClick={() => setShowDetails(false)}
+                    >
+                      <BsArrowLeft
+                        size={28}
+                        className="text-primary mr-4 cursor-pointer"
+                      />
 
-                    <span className="text-primary ms-2 cursor-pointer">Back</span>
-
-                </div>
-                <OrderDownloadCard singleOrderDetails={singleOrderDetails} />
+                      <span className="text-primary ms-2 cursor-pointer">
+                        Back
+                      </span>
+                    </div>
+                    <OrderDownloadCard
+                      singleOrderDetails={singleOrderDetails}
+                    />
+                  </>
+                )}
               </>
+            ) : (
+              <p className="text-center fw-bold mt-3">
+                You don't order anything yet
+              </p>
             )}
           </div>
         </div>

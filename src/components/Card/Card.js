@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import Payment from "../../../pages/payment";
+import { toast } from "react-toastify";
 import { UserContext } from "../../../pages/_app";
 import styles from "./card.module.css";
 
@@ -10,6 +10,7 @@ const Card = ({ data, index, notify }) => {
   const [deliveriesDay, setDeliveriesDay] = useState("");
   const [perPageData, setPerPageData] = useState("");
   const [wordPerPageData, setWordPerPageData] = useState("");
+  const [userInfo, setUserInfo] = useState({});
 
   const { deliveryDay, perPage, wordPerPage } = data;
 
@@ -18,14 +19,21 @@ const Card = ({ data, index, notify }) => {
   const wordPerPageValue = wordPerPage;
   const id = data._id;
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const router = useRouter();
+
+  const email = signedUser.email;
+
+  useEffect(() => {
+    fetch("https://essay-essay-writing.herokuapp.com/admin", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then((data) => setUserInfo(data));
+  }, []);
 
   const onSubmit = (data) => {
     const deliveryDay = data.deliveryDay || deliveryDayValue;
@@ -52,7 +60,17 @@ const Card = ({ data, index, notify }) => {
       });
   };
 
-  //
+  //calculation for payment
+
+  //discount calculation
+  let price;
+  if (userInfo.hasDiscountOffer) {
+    price = perPage - perPage * 0.2;
+  } else {
+    price = perPage;
+  }
+
+  //split delivery date
   let value;
   if (data.deliveryDay.endsWith("+")) {
     value = parseInt(data.deliveryDay.split("")[0]);
@@ -62,10 +80,12 @@ const Card = ({ data, index, notify }) => {
     value = data.deliveryDay;
   }
 
+  //calculating delivery date depending on delivery date
   const deliveryDate = (value) => {
     return new Date(new Date().getTime() + value * 24 * 60 * 60 * 1000);
   };
 
+  //making objects for order
   const orderDetails = {};
   orderDetails.orderDate = new Date();
   orderDetails.orderStatus = "Work In Progress";
@@ -73,23 +93,20 @@ const Card = ({ data, index, notify }) => {
   orderDetails.file = "";
   orderDetails.customerName = signedUser?.name;
   orderDetails.customerEmail = signedUser?.email;
-  orderDetails.orderAmount = data.perPage;
+  orderDetails.orderAmount = price;
   orderDetails.deliveryTime = data.deliveryDay;
   orderDetails.quantity = "1";
 
   const handleOrderCard = () => {
     if (signedUser.email) {
-      fetch("https://essay-essay-writing.herokuapp.com/orderCard/post", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(orderDetails),
-      })
-        .then((res) => res.json())
-        .then((data) => {});
+      window.localStorage.setItem("orderInfos", JSON.stringify(orderDetails));
+
+      router.push("/paymentMethod");
     } else {
-      console.log("Problem");
+      toast.error("Please Login First");
     }
   };
+
   return (
     <>
       <div
@@ -131,8 +148,6 @@ const Card = ({ data, index, notify }) => {
             <button
               className={`${styles.pricingBtn} btn`}
               onClick={handleOrderCard}
-              data-bs-target={`#AA${index + 111}`}
-              data-bs-toggle="modal"
             >
               Order Now
             </button>
@@ -199,33 +214,6 @@ const Card = ({ data, index, notify }) => {
                   data-bs-dismiss="modal"
                 />
               </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="modal fade"
-        id={`AA${index + 111}`}
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Payment Card
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <Payment />
             </div>
           </div>
         </div>

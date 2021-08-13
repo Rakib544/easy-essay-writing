@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FaqCard from "../faqCard/faqCard";
 import FooterCard from "../footerCard/footerCard";
@@ -29,10 +29,6 @@ const Faq = () => {
 
   return (
     <>
-      <p className="bg-white fs-26 fw-bold py-2 px-5 d-inline-block my-4 box-shadow">
-        FAQ
-      </p>
-
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -44,6 +40,9 @@ const Faq = () => {
         draggable
         pauseOnHover
       />
+      <p className="bg-white fs-26 fw-bold py-2 px-5 d-inline-block my-4 box-shadow">
+        FAQ
+      </p>
 
       <div className="bg-white py-4 px-5 my-4 box-shadow">
         <div className="row">

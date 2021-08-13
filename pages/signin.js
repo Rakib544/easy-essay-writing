@@ -7,14 +7,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
 import bannerImg from "../images/login-img.png";
 import logo from "../images/logo.png";
 import { firebaseConfig } from "../src/components/firebaseConfig/firebase.config";
+import GoogleLogin from "../src/components/googleLogin/googleLogin";
 import { UserContext } from "./_app";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -41,44 +41,7 @@ const Signin = () => {
   });
 
   const [signedUser, setSignedUser] = useContext(UserContext);
-  const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-  const googleSignin = () => {
-    setShowSpinner(true);
-    firebase
-      .auth()
-      .signInWithPopup(googleProvider)
-      .then((res) => {
-        const { displayName, email, photoURL } = res.user;
-        const loggedUser = {
-          name: displayName,
-          email: email,
-          photoURL: photoURL,
-        };
-        fetch("https://essay-essay-writing.herokuapp.com/admin", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(loggedUser),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            setSignedUser(data);
-            setShowSpinner(false);
-            const token = jwt_encode(data, "secret");
-            localStorage.clear();
-            localStorage.setItem("info", token);
-            if (data.userType === "user") {
-              router.push("/orderlist");
-            } else {
-              router.push("/admin");
-            }
-          });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        toast.error(errorMessage);
-      });
-  };
   const onSubmit = (data) => {
     setShowSpinner(true);
     const email = data.email;
@@ -89,26 +52,26 @@ const Signin = () => {
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
         const { displayName, email, photoURL } = res.user;
-        const loggedUser = {
+        const googleLoggedUser = {
           name: displayName,
           email: email,
           photoURL: photoURL,
         };
-
+        console.log(googleLoggedUser);
         fetch("https://essay-essay-writing.herokuapp.com/admin", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify(loggedUser),
+          body: JSON.stringify(googleLoggedUser),
         })
           .then((res) => res.json())
           .then((data) => {
             setSignedUser(data);
             setShowSpinner(false);
-            localStorage.clear();
             const token = jwt_encode(data, "secret");
+            localStorage.removeItem("info");
             localStorage.setItem("info", JSON.stringify(token));
             if (data.userType === "user") {
-              router.push("/orderlist");
+              router.push("/profile");
             } else {
               router.push("/admin");
             }
@@ -161,16 +124,7 @@ const Signin = () => {
             ) : (
               ""
             )}
-            <div className="text-center ">
-              <p className="fw-bold text-secondary fs-50">Sign in to Clever</p>
-              <div
-                className="p-3 d-inline icon-bg cursor-pointer"
-                onClick={googleSignin}
-              >
-                <FcGoogle size={24} />
-              </div>
-            </div>
-            <p className="beforeAfter mt-4 fs-15">or do it via email</p>
+            <GoogleLogin />
 
             <form
               onSubmit={handleSubmit(onSubmit)}
@@ -213,14 +167,13 @@ const Signin = () => {
               </div>
 
               <small
-              style={{ cursor: "pointer" }}
-              className="text-primary fs-6 d-block text-end"
-            >
-              <Link href="/resetPassword" className="text-primary">
-                <a>Forget password</a>
-              </Link>{" "}
-            </small>
-
+                style={{ cursor: "pointer" }}
+                className="text-primary fs-6 d-block text-end"
+              >
+                <Link href="/resetPassword" className="text-primary">
+                  <a>Forget password</a>
+                </Link>{" "}
+              </small>
 
               <button className="btn btn-primary w-100 mt-3" type="submit">
                 Sign In

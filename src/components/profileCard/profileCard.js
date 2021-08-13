@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useContext } from "react";
+import profileImg from "../../../images/profile_image.jpg";
 import { UserContext } from "../../../pages/_app";
 import styles from "./profileCard.module.css";
 
@@ -10,9 +11,9 @@ const ProfileCard = () => {
     <div
       className={`${styles.profileCard} row d-flex align-items-center box-shadow`}
     >
-      <div className="col-3 p-4">
+      <div className="col-3">
         <Image
-          src={signedUser?.photoURL}
+          src={signedUser.photoURL || profileImg}
           height="78"
           width="78"
           className="rounded-circle"
