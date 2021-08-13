@@ -1,5 +1,5 @@
 import React from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Card from "../../Card/Card";
 
@@ -18,9 +18,9 @@ const Pricing = ({ priceCardData }) => {
         draggable
         pauseOnHover
       />
-      <p className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold my-4 box-shadow">
+      <h1 className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold my-4 box-shadow">
         Pricing
-      </p>
+      </h1>
 
       <div className="py-4 px-5 my-4">
         <div className="row px-md-5 mx-md-5">

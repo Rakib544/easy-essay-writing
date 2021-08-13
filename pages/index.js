@@ -1,12 +1,12 @@
 import Head from "next/head";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Footer from "../src/components/footer/footer";
 import Header from "../src/components/header/Header";
 import Plagiarism from "../src/components/plagiarism/plagiarism";
 import Pricing from "../src/components/pricing/pricing";
 import Process from "../src/components/process/Process";
 import Question from "../src/components/Question/Question";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function Home({
   bannerData,
@@ -15,7 +15,7 @@ export default function Home({
   faqData,
   priceCardData,
   processCardData,
-  footerCardData
+  footerCardData,
 }) {
   return (
     <>
@@ -39,7 +39,7 @@ export default function Home({
       </div>
       <Plagiarism aboutData={aboutData} />
       <Process processData={processData} processCardData={processCardData} />
-      <div className="mx-4 mx-md-0">
+      <div className="mx-5 mx-md-0">
         <Pricing priceCardData={priceCardData} />
       </div>
       <Question faqData={faqData} />
@@ -92,7 +92,7 @@ export async function getServerSideProps() {
       faqData,
       priceCardData,
       processCardData,
-      footerCardData
+      footerCardData,
     },
   };
 }

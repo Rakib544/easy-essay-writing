@@ -114,11 +114,11 @@ const OrderList = ({ cardData }) => {
             )}
           </div>
         </div>
-        <div className="col-12 col-md-10 col-lg-8 mt-5">
+        <div className="col-12 col-md-11 mx-auto mt-5">
           <p className="bg-white text-center fs-4 fw-bold text-primary px-2 py-3">
             New Order
           </p>
-          <div className="row">
+          <div className="row mx-4 mx-md-5">
             {cardData.map((data, index) => (
               <Card key={data._id} data={data} index={index} />
             ))}
