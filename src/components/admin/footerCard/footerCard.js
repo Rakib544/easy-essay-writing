@@ -58,26 +58,26 @@ const FooterCard = ({ footerCardData, index, setNumber, number, notify }) => {
       </div>
 
       <div
-        class="modal fade"
+        className="modal fade"
         id={`footerModalCard${index + 1}`}
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
+        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
                 FAQ
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <label className="form-label fs-14" htmlFor="answer">
                   {titleValue}
@@ -88,7 +88,7 @@ const FooterCard = ({ footerCardData, index, setNumber, number, notify }) => {
                   {...register("link")}
                   name="link"
                   id="link"
-                  class="form-control mb-2"
+                  className="form-control mb-2"
                 />
                 <input
                   type="submit"
