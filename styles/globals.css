@@ -469,3 +469,15 @@ button {
   padding: 15px 0px;
   font-size: 25px;
 }
+
+/*styling navbar */
+.navBar {
+  padding: 11px 34px !important;
+  background-color: #0254f9 !important;
+}
+
+.navBar:hover {
+  background-color: #226cff !important;
+  border-radius: 4px;
+  color: #fff !important;
+}
