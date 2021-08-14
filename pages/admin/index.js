@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import About from "../../src/components/admin/about/about";
 import BannerInfo from "../../src/components/admin/bannerInfo/bannerInfo";
+import DiscountPrice from "../../src/components/admin/discountPrice/discountPrice";
 import Faq from "../../src/components/admin/faq/faq";
 import OurProcess from "../../src/components/admin/ourProcess/ourProcess";
 import Pricing from "../../src/components/admin/pricing/pricing";
@@ -39,6 +40,7 @@ const Edit = ({ priceCardData }) => {
           <About aboutData={aboutData} />
           <OurProcess />
           <Pricing priceCardData={priceCardData} />
+          <DiscountPrice />
           <Faq />
         </div>
       </div>
