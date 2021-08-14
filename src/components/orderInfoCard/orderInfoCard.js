@@ -34,7 +34,8 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
     })
       .then((res) => res.json())
       .then((filepath) => {
-        console.log(filepath);
+        setNumber(number + 1);
+        toast.success("File Uploaded");
       });
   };
 
@@ -98,6 +99,7 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
               <button
                 onClick={handleChangeStatus}
                 type="button"
+                disabled={data.file ? false : true}
                 class="btn btn-success text-white px-5 py-2"
               >
                 Complete
