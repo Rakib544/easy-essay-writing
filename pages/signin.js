@@ -182,8 +182,8 @@ const Signin = () => {
             <small className="text-center d-block mt-1">
               <strong>
                 Don't have any account?{" "}
-                <Link href="/signup" className="text-primary">
-                  <a>Sign Up</a>
+                <Link href="/signup">
+                  <a className="text-primary">Sign Up</a>
                 </Link>{" "}
               </strong>
             </small>

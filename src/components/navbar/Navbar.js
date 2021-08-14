@@ -92,7 +92,7 @@ const Navbar = () => {
                         <a
                           className={`${styles.navItem} mx-3 mx-md-1 text-white nav-link px-2`}
                         >
-                          Sing In
+                          Sign In
                         </a>
                       </Link>
                     </li>

@@ -255,8 +255,8 @@ const SignupComplete = () => {
               <small className="text-center d-block mt-1">
                 <strong>
                   Already have an account?{" "}
-                  <Link href="/signin" className="text-primary">
-                    <a>Sign In</a>
+                  <Link href="/signin">
+                    <a className="text-primary">Sign In</a>
                   </Link>{" "}
                 </strong>
               </small>
