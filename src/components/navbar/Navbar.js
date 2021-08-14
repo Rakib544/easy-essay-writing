@@ -135,7 +135,8 @@ const Navbar = () => {
             )}
             {(router.pathname === "/admin" ||
               router.pathname === "/admin/pending-orders" ||
-              router.pathname === "/admin/complete-orders") && (
+              router.pathname === "/admin/complete-orders" ||
+              router.pathname === "/admin/affiliate-users") && (
               <>
                 <li className="nav-item">
                   <Link href="/admin/">
@@ -171,6 +172,19 @@ const Navbar = () => {
                       } navBar text-white nav-link px-2`}
                     >
                       Complete Orders
+                    </a>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link href="/admin/affiliate-users">
+                    <a
+                      className={`${
+                        currentPath === "/admin/affiliate-users"
+                          ? `${styles.navItem}`
+                          : ""
+                      } navBar text-white nav-link px-2`}
+                    >
+                      Affiliate Users
                     </a>
                   </Link>
                 </li>
