@@ -28,12 +28,15 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
   const handleFileUpload = (e, id) => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
-    fetch(`https://essay-essay-writing.herokuapp.com/orderCard/upload/${id}`, {
+    fetch(`http://localhost:8080/orderCard/upload/${id}`, {
       method: "PUT",
       body: formData,
     })
       .then((res) => res.json())
-      .then((filepath) => {});
+      .then((filepath) => {
+        setNumber(number + 1);
+        toast.success("File Uploaded")
+      });
   };
 
   return (
@@ -96,6 +99,7 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
               <button
                 onClick={handleChangeStatus}
                 type="button"
+                disabled={data.file ? false : true}
                 class="btn btn-success text-white px-5 py-2"
               >
                 Complete
