@@ -129,9 +129,14 @@ const Profile = () => {
                     </p>
                   </div>
                 </div>
-                <p className="py-2 bg-primary rounded-3 text-center text-white">
-                  Invite Your Friends
-                </p>
+                <CopyToClipboard
+                  text={`https://easy-essay-writing.vercel.app/refer/${signedUser._id}`}
+                  onCopy={() => toast.success("Copied")}
+                >
+                  <p className="py-2 bg-primary rounded-3 text-center text-white cursor-pointer">
+                    Invite Your Friends
+                  </p>
+                </CopyToClipboard>
                 <div className="d-flex mt-5 mb-2 rounded-3">
                   <CopyToClipboard
                     text={`https://easy-essay-writing.vercel.app/refer/${signedUser._id}`}

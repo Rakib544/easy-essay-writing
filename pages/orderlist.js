@@ -65,15 +65,15 @@ const OrderList = ({ cardData }) => {
                         className="my-2"
                         onClick={() => handleShowOrderDetails(order._id)}
                       >
-                        <div className="row shadow-sm py-2 cursor-pointer">
-                          <p className="col-12 col-md-4 pt-3 text-primary fw-bold">
+                        <div className="row shadow-sm py-2 cursor-pointer pe-2">
+                          <p className="col-12 col-md-5 pt-3 fs-15 text-primary ">
                             Order - {order._id}
                           </p>
-                          <p className="col-12 col-md-4 pt-3">
+                          <p className="col-12 col-md-4 fs-15 pt-3">
                             Order-Date: {order.orderDate.slice(0, 10)}
                           </p>
                           <button
-                            className={`col-12 col-md-4 my-2 btn ${
+                            className={`col-12 col-md-3 my-2 btn ${
                               order.orderStatus === "Completed"
                                 ? "btn-primary"
                                 : "work-in-progress"
@@ -118,7 +118,7 @@ const OrderList = ({ cardData }) => {
           <p className="bg-white text-center fs-4 fw-bold text-primary px-2 py-3">
             New Order
           </p>
-          <div className="row mx-4 mx-md-5">
+          <div className="row mx-4 mx-md-5 mt-md-5">
             {cardData.map((data, index) => (
               <Card key={data._id} data={data} index={index} />
             ))}

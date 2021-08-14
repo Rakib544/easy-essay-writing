@@ -15,7 +15,7 @@ const OrderDownloadCard = ({ singleOrderDetails, previousOrderDetails }) => {
   return (
     <div className="row p-5 d-flex align-items-center flex-direction-column">
       <div className="col-12 col-md-7">
-        <div className="bg-light p-5 mb-4">
+        <div className="bg-light p-5 mb-4 rounded-3">
           <button
             className={`btn ${
               status === "Completed" ? "btn-style" : "work-in-progress"
@@ -30,7 +30,7 @@ const OrderDownloadCard = ({ singleOrderDetails, previousOrderDetails }) => {
             </span>
           </p>
         </div>
-        <div className="p-5 bg-primary">
+        <div className="p-5 bg-primary rounded-3">
           <button className="btn bg-white text-primary fw-bold">
             {previousOrderDetails
               ? `${previousOrderDetails.orderStatus}`

@@ -12,6 +12,7 @@ const Card = ({ data, index, notify }) => {
   const [wordPerPageData, setWordPerPageData] = useState("");
   const [userInfo, setUserInfo] = useState({});
   const [referredBy, setReferredBy] = useState(null);
+  const [discountPercentage, setDiscountPercentage] = useState(null);
 
   const { deliveryDay, perPage, wordPerPage } = data;
 
@@ -34,6 +35,11 @@ const Card = ({ data, index, notify }) => {
     })
       .then((res) => res.json())
       .then((data) => setUserInfo(data));
+    fetch(
+      "https://essay-essay-writing.herokuapp.com/discount/discountPercentage"
+    )
+      .then((res) => res.json())
+      .then((data) => setDiscountPercentage(data.discountPercentage));
   }, [email]);
 
   useEffect(() => {
@@ -79,11 +85,12 @@ const Card = ({ data, index, notify }) => {
   //calculation for payment
 
   //discount calculation
+  const discount = parseInt(discountPercentage) / 100;
   let price;
   let profit;
   if (userInfo.hasDiscountOffer) {
-    price = perPage - perPage * 0.2;
-    profit = perPage * 0.2;
+    price = perPage - perPage * discount;
+    profit = perPage * discount;
   } else {
     price = perPage;
   }
@@ -159,9 +166,7 @@ const Card = ({ data, index, notify }) => {
               {deliveriesDay || data.deliveryDay} Days
             </p>
             <span className="fw-bold">
-              <p className={`${styles.priceStyle} fs-60 d-inline`}>
-                ${perPageData || data.perPage}
-              </p>
+              <p className={`${styles.priceStyle} fs-60 d-inline`}>${price}</p>
               /page
             </span>
             <p className="fw-bold fs-4">or</p>
