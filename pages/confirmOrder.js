@@ -28,7 +28,7 @@ const ConfirmOrder = () => {
 
   const handleOrder = () => {
     fetch("https://essay-essay-writing.herokuapp.com/orderCard/post", {
-      method: "POST",
+      method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(orderInfos),
     })
