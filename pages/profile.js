@@ -148,7 +148,7 @@ const Profile = () => {
                   </CopyToClipboard>
                   <input
                     className="form-control rounded-0 affiliate-input-background"
-                    value={`https://easy-essay-writing.vercel.app/refer/${signedUser._id}`}
+                    value={`https://www.easyessaywriting.com/refer/${signedUser._id}`}
                   />
                 </div>
               </div>
