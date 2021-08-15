@@ -36,7 +36,7 @@ const Signup = () => {
   const onSubmit = (data, e) => {
     const email = data.email;
     const config = {
-      url: process.env.redirect_compleate_signup,
+      url: 'https://www.easyessaywriting.com/signupComplete',
       handleCodeInApp: true,
     };
 

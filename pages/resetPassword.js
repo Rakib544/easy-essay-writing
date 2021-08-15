@@ -37,7 +37,7 @@ const Signin = () => {
   const onSubmit = (data, e) => {
     const email = data.email;
     const config = {
-      url: process.env.redirect_signin,
+      url: 'https://www.easyessaywriting.com/signin',
       handleCodeInApp: true,
     };
 

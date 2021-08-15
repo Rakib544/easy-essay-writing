@@ -56,8 +56,8 @@ export default async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: `${process.env.HOST}/confirmOrder`,
-      cancel_url: `${process.env.HOST}/`,
+      success_url: `https://www.easyessaywriting.com/confirmOrder`,
+      cancel_url: `https://www.easyessaywriting.com/`,
       metadata: {
         customerEmail,
       },
