@@ -130,7 +130,7 @@ const Profile = () => {
                   </div>
                 </div>
                 <CopyToClipboard
-                  text={`https://easy-essay-writing.vercel.app/refer/${signedUser._id}`}
+                  text={`https://www.easyessaywriting.com/refer/${signedUser._id}`}
                   onCopy={() => toast.success("Copied")}
                 >
                   <p className="py-2 bg-primary rounded-3 text-center text-white cursor-pointer">
@@ -139,7 +139,7 @@ const Profile = () => {
                 </CopyToClipboard>
                 <div className="d-flex mt-5 mb-2 rounded-3">
                   <CopyToClipboard
-                    text={`https://easy-essay-writing.vercel.app/refer/${signedUser._id}`}
+                    text={`https://www.easyessaywriting.com/refer/${signedUser._id}`}
                     onCopy={() => toast.success("Copied")}
                   >
                     <button className="px-2 rounded-0 fs-15 btn-style">
