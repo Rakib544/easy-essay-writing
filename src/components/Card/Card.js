@@ -85,14 +85,27 @@ const Card = ({ data, index, notify }) => {
   //calculation for payment
 
   //discount calculation
-  const discount = parseInt(discountPercentage) / 100;
+  const halfPrice = perPage / 2;
+
+  const discount = parseFloat(discountPercentage) / 100;
   let price;
   let profit;
   if (userInfo.hasDiscountOffer) {
-    price = perPage - perPage * discount;
-    profit = perPage * discount;
+    if (parseFloat(userInfo.balance) > halfPrice) {
+      const discountPrice = perPage - perPage * discount;
+      price = discountPrice / 2;
+      profit = perPage * discount;
+    } else {
+      price = perPage - perPage * discount;
+      profit = perPage * discount;
+    }
   } else {
-    price = perPage;
+    if (parseFloat(userInfo.balance) > halfPrice) {
+      const discountPrice = perPage;
+      price = discountPrice / 2;
+    } else {
+      price = perPage;
+    }
   }
 
   //split delivery date
@@ -125,6 +138,10 @@ const Card = ({ data, index, notify }) => {
   if (userInfo.hasDiscountOffer) {
     orderDetails.referredBy = referredBy;
     orderDetails.referredUserProfit = profit;
+  }
+
+  if (userInfo.balance > halfPrice) {
+    orderDetails.userBalance = price;
   }
 
   const handleOrderCard = () => {
