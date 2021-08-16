@@ -18,6 +18,7 @@ const Profile = () => {
   const [totalEarns, setTotalEarns] = useState(0);
   const [lastSevenDaysEarning, setLastSevenDaysEarning] = useState(0);
   const [lastOneDayEarning, setLastOneDayEarning] = useState(0);
+  const [userInfo, setUserInfo] = useState({});
   const email = signedUser.email;
 
   useEffect(() => {
@@ -85,6 +86,14 @@ const Profile = () => {
       .then((data) => {
         setLastOneDayEarning(data.lastOneDayEarning);
       });
+
+    fetch("https://essay-essay-writing.herokuapp.com/admin", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then((data) => setUserInfo(data));
   }, [email]);
 
   return (
@@ -180,6 +189,7 @@ const Profile = () => {
                 </div>
               </div>
             </div>
+
             <div className="px-3 box-shadow my-5 bg-white rounded-3 py-5">
               <p className="fs-24 fw-bold text-center text-md-start">
                 Total Earnings
@@ -201,6 +211,18 @@ const Profile = () => {
                   <div className="m-2 p-2 box-shadow bg-white">
                     <p className="fs-24 fw-bold">Today</p>
                     <p className="fs-50 fw-bold">${lastOneDayEarning}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="px-3 box-shadow bg-white rounded-3 py-5">
+              <p className="fs-24 fw-bold text-center text-md-start">Balance</p>
+              <div className="row text-primary text-center text-md-start">
+                <div className="col-12">
+                  <div className="m-2 p-2 box-shadow bg-white">
+                    <p className="fs-24 fw-bold">Current Balance</p>
+                    <p className="fs-50 fw-bold">${userInfo.balance}</p>
                   </div>
                 </div>
               </div>

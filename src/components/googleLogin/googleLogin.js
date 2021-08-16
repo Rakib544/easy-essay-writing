@@ -32,7 +32,7 @@ const GoogleLogin = () => {
       .auth()
       .signInWithPopup(googleProvider)
       .then((res) => {
-        const { displayName, email } = res.user;
+        const { displayName, email, photoURL } = res.user;
 
         const loggedUser = {
           name: displayName,
@@ -47,6 +47,7 @@ const GoogleLogin = () => {
         })
           .then((res) => res.json())
           .then((data) => {
+            data.photoURL = photoURL;
             setSignedUser(data);
             setShowSpinner(false);
             const token = jwt_encode(data, "secret");

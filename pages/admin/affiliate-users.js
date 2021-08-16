@@ -10,6 +10,8 @@ import ProfileCard from "../../src/components/profileCard/profileCard";
 
 const AffiliateUser = ({ affiliateUserData, totalData }) => {
   const router = useRouter();
+  const pageNumber = router.query.page || 1;
+  const serial = 10 * pageNumber - 10;
 
   const totalPage = Math.ceil(totalData / 10);
 
@@ -54,7 +56,7 @@ const AffiliateUser = ({ affiliateUserData, totalData }) => {
             <tbody>
               {affiliateUserData.map((affiliateUser, index) => (
                 <tr key={affiliateUser._id}>
-                  <th scope="row">{index + 1}</th> 
+                  <th scope="row">{serial + index + 1}</th>
                   <td>{affiliateUser.name}</td>
                   <td>{affiliateUser.email}</td>
                   <td>{affiliateUser.referredBy}</td>
