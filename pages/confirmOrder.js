@@ -27,7 +27,7 @@ const ConfirmOrder = () => {
   const router = useRouter();
 
   const handleOrder = () => {
-    fetch("http://localhost:8080/orderCard/post", {
+    fetch("https://essay-essay-writing.herokuapp.com/orderCard/post", {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(orderInfos),
