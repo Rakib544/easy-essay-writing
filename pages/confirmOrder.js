@@ -9,7 +9,7 @@ import { UserContext } from "./_app";
 const ConfirmOrder = () => {
   const [singedUser] = useContext(UserContext);
 
-  //updating user info in localStorage
+  //updating user info in localStorages
   const userInfo = {
     email: singedUser.email,
     hasDiscountOffer: false,
