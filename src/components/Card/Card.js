@@ -6,6 +6,8 @@ import { UserContext } from "../../../pages/_app";
 import styles from "./card.module.css";
 
 const Card = ({ data, index, notify }) => {
+  const [showError, setShowError] = useState(false);
+  const [error, setError] = useState("");
   const [signedUser] = useContext(UserContext);
   const [deliveriesDay, setDeliveriesDay] = useState("");
   const [perPageData, setPerPageData] = useState("");
@@ -144,13 +146,45 @@ const Card = ({ data, index, notify }) => {
     orderDetails.userBalance = price;
   }
 
-  const handleOrderCard = () => {
-    if (signedUser.email) {
-      window.localStorage.setItem("orderInfos", JSON.stringify(orderDetails));
-
-      router.push("/paymentMethod");
+  const handleOrderCard = (data) => {
+    const promoCode = data.promoCode;
+    if (data.promoCode) {
+      fetch("https://essay-essay-writing.herokuapp.com/create/checkPromoCode", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ promoCode, email }),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          if (Array.isArray(result)) {
+            setShowError(true);
+            if (signedUser.email) {
+              orderDetails.referredBy = result[0].email;
+              orderDetails.orderAmount = price - price * 0.2;
+              orderDetails.referredUserProfit = price * 0.2;
+              orderDetails.promoCode = promoCode;
+              window.localStorage.setItem(
+                "orderInfos",
+                JSON.stringify(orderDetails)
+              );
+              router.push("/paymentMethod");
+            } else {
+              toast.error("Please Login First");
+            }
+          } else {
+            setError(result);
+            setShowError(true);
+          }
+        });
     } else {
-      toast.error("Please Login First");
+      if (signedUser.email) {
+        orderDetails.promoCode = "";
+        window.localStorage.setItem("orderInfos", JSON.stringify(orderDetails));
+
+        router.push("/paymentMethod");
+      } else {
+        toast.error("Please Login First");
+      }
     }
   };
 
@@ -192,7 +226,8 @@ const Card = ({ data, index, notify }) => {
             </p>
             <button
               className={`${styles.pricingBtn} btn`}
-              onClick={handleOrderCard}
+              data-bs-target={`#AB${index + 10}`}
+              data-bs-toggle="modal"
             >
               Order Now
             </button>
@@ -258,6 +293,58 @@ const Card = ({ data, index, notify }) => {
                   value="Save Changes"
                   data-bs-dismiss="modal"
                 />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* promo code modal */}
+
+      <div
+        className="modal fade"
+        id={`AB${index + 10}`}
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div className="modal-content">
+            <div className="modal-header">
+              <p className="text-danger">{error}</p>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <form onSubmit={handleSubmit(handleOrderCard)}>
+                <p>Enter Promo Code</p>
+                <input
+                  rows="3"
+                  cols="5"
+                  placeholder="Enter promo code"
+                  {...register("promoCode")}
+                  name="promoCode"
+                  id="promoCode"
+                  className="form-control mb-2"
+                />
+                <div className="text-end">
+                  <input
+                    type="submit"
+                    className="btn btn-primary mx-2"
+                    value="Skip"
+                    data-bs-dismiss={showError ? "codal" : "modal"}
+                  />
+                  <input
+                    type="submit"
+                    className="btn btn-primary"
+                    value="Add"
+                    data-bs-dismiss={showError ? "codal" : "modal"}
+                  />
+                </div>
               </form>
             </div>
           </div>

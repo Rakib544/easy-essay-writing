@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { AiOutlineCopy } from "react-icons/ai";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import profileImage from "../images/profile_image.jpg";
@@ -138,6 +139,17 @@ const Profile = () => {
                     </p>
                   </div>
                 </div>
+                <CopyToClipboard
+                  text={signedUser.promoCode}
+                  onCopy={() => toast.success("Copied")}
+                >
+                  <div className="d-flex justify-content-between align-items-center cursor-pointer">
+                    <h6 className="px-1 my-4 fw-bold">
+                      Promo Code - {signedUser?.promoCode}
+                    </h6>
+                    <AiOutlineCopy size={24} />
+                  </div>
+                </CopyToClipboard>
                 <CopyToClipboard
                   text={`https://www.easyessaywriting.com/refer/${signedUser._id}`}
                   onCopy={() => toast.success("Copied")}

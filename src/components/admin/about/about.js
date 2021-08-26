@@ -11,12 +11,7 @@ const About = () => {
   const headerDetailsValue = headerDetails;
   const buttonTextValue = buttonText;
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   useEffect(() => {
     fetch("https://essay-essay-writing.herokuapp.com/about")

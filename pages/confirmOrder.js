@@ -24,6 +24,8 @@ const ConfirmOrder = () => {
     setOrderInfos(JSON.parse(window.localStorage.getItem("orderInfos")));
   }, []);
 
+  const promoCode = orderInfos.promoCode;
+
   const router = useRouter();
 
   const handleOrder = () => {
@@ -39,7 +41,7 @@ const ConfirmOrder = () => {
           {
             method: "POST",
             headers: { "content-type": "application/json" },
-            body: JSON.stringify(),
+            body: JSON.stringify({ promoCode }),
           }
         )
           .then((res) => res.json())
