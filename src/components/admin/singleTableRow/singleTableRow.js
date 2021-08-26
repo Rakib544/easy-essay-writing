@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdDelete } from "react-icons/md";
-import { useState } from "react/cjs/react.development";
 
 const SingleTableRow = ({ user, index, serial }) => {
   const { register, handleSubmit } = useForm();
