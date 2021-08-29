@@ -92,6 +92,7 @@ const Card = ({ data, index, notify }) => {
   const discount = parseFloat(discountPercentage) / 100;
   let price;
   let profit;
+
   if (userInfo.hasDiscountOffer) {
     if (parseFloat(userInfo.balance) > halfPrice) {
       const discountPrice = perPage - perPage * discount;
@@ -112,6 +113,7 @@ const Card = ({ data, index, notify }) => {
 
   //split delivery date
   let value;
+
   if (data.deliveryDay.endsWith("+")) {
     value = parseInt(data.deliveryDay.split("")[0]);
   } else if (data.deliveryDay.includes("-")) {
@@ -160,8 +162,8 @@ const Card = ({ data, index, notify }) => {
             setShowError(true);
             if (signedUser.email) {
               orderDetails.referredBy = result[0].email;
-              orderDetails.orderAmount = price - price * 0.2;
-              orderDetails.referredUserProfit = price * 0.2;
+              orderDetails.orderAmount = price - price * discount;
+              orderDetails.referredUserProfit = price * discount;
               orderDetails.promoCode = promoCode;
               window.localStorage.setItem(
                 "orderInfos",

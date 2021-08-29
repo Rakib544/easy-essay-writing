@@ -81,7 +81,7 @@ const GoogleLogin = () => {
       />
       <div className="text-center ">
         <p className="fw-bold fs-50" style={{ color: "#313151" }}>
-          Sign in to Clever
+          Sign in to Easy Essay Writting
         </p>
         <div
           className="p-3 d-inline icon-bg cursor-pointer"
