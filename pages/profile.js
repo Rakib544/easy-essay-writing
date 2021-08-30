@@ -139,39 +139,45 @@ const Profile = () => {
                     </p>
                   </div>
                 </div>
-                <CopyToClipboard
-                  text={signedUser.promoCode}
-                  onCopy={() => toast.success("Copied")}
-                >
-                  <div className="d-flex justify-content-between align-items-center cursor-pointer">
-                    <h6 className="px-1 my-4 fw-bold">
-                      Promo Code - {signedUser?.promoCode}
-                    </h6>
-                    <AiOutlineCopy size={24} />
-                  </div>
-                </CopyToClipboard>
-                <CopyToClipboard
-                  text={`https://www.easyessaywriting.com/refer/${signedUser._id}`}
-                  onCopy={() => toast.success("Copied")}
-                >
-                  <p className="py-2 bg-primary rounded-3 text-center text-white cursor-pointer">
-                    Invite Your Friends
-                  </p>
-                </CopyToClipboard>
-                <div className="d-flex mt-5 mb-2 rounded-3">
+                {signedUser.promoCode && (
                   <CopyToClipboard
-                    text={`https://www.easyessaywriting.com/refer/${signedUser._id}`}
+                    text={signedUser.promoCode}
                     onCopy={() => toast.success("Copied")}
                   >
-                    <button className="px-2 rounded-0 fs-15 btn-style">
-                      Copy
-                    </button>
+                    <div className="d-flex justify-content-between align-items-center cursor-pointer">
+                      <h6 className="px-1 my-4 fw-bold">
+                        Promo Code - {signedUser?.promoCode}
+                      </h6>
+                      <AiOutlineCopy size={24} />
+                    </div>
                   </CopyToClipboard>
-                  <input
-                    className="form-control rounded-0 affiliate-input-background"
-                    value={`https://www.easyessaywriting.com/refer/${signedUser._id}`}
-                  />
-                </div>
+                )}
+                {signedUser.showReeferLink && (
+                  <>
+                    <CopyToClipboard
+                      text={`https://www.easyessaywriting.com/refer/${signedUser._id}`}
+                      onCopy={() => toast.success("Copied")}
+                    >
+                      <p className="py-2 bg-primary rounded-3 text-center text-white cursor-pointer">
+                        Invite Your Friends
+                      </p>
+                    </CopyToClipboard>
+                    <div className="d-flex mt-5 mb-2 rounded-3">
+                      <CopyToClipboard
+                        text={`https://www.easyessaywriting.com/refer/${signedUser._id}`}
+                        onCopy={() => toast.success("Copied")}
+                      >
+                        <button className="px-2 rounded-0 fs-15 btn-style">
+                          Copy
+                        </button>
+                      </CopyToClipboard>
+                      <input
+                        className="form-control rounded-0 affiliate-input-background"
+                        value={`https://www.easyessaywriting.com/refer/${signedUser._id}`}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
             </div>
             <div className="col-12 col-md-8">

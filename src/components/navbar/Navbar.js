@@ -169,7 +169,7 @@ const Navbar = () => {
                         currentPath === "/admin/complete-orders"
                           ? `${styles.navItem}`
                           : ""
-                      } navBar text-white nav-link px-2`}
+                      } navBar text-white nav-link px-2 me-md-2`}
                     >
                       Complete Orders
                     </a>

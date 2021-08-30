@@ -6,11 +6,13 @@ import { UserContext } from "../../../pages/_app";
 import styles from "./card.module.css";
 
 const Card = ({ data, index, notify }) => {
-  const [showError, setShowError] = useState(false);
+  const [promoCodeUserEmail, setPromoCodeUserEmail] = useState(null);
+  const [promoCode, setPromoCode] = useState("");
+  const [calculatedPrice, setCalculatedPrice] = useState(0);
+  const [discountPrice, setDiscountPrice] = useState(0);
   const [error, setError] = useState("");
   const [signedUser] = useContext(UserContext);
   const [deliveriesDay, setDeliveriesDay] = useState("");
-  const [perPageData, setPerPageData] = useState("");
   const [wordPerPageData, setWordPerPageData] = useState("");
   const [userInfo, setUserInfo] = useState({});
   const [referredBy, setReferredBy] = useState(null);
@@ -23,7 +25,11 @@ const Card = ({ data, index, notify }) => {
   const wordPerPageValue = wordPerPage;
   const id = data._id;
 
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const router = useRouter();
 
@@ -78,7 +84,6 @@ const Card = ({ data, index, notify }) => {
         if (result) {
           notify();
           setDeliveriesDay(result.deliveryDay);
-          setPerPageData(result.perPage);
           setWordPerPageData(result.wordPerPage);
         }
       });
@@ -86,30 +91,7 @@ const Card = ({ data, index, notify }) => {
 
   //calculation for payment
 
-  //discount calculation
-  const halfPrice = perPage / 2;
-
   const discount = parseFloat(discountPercentage) / 100;
-  let price;
-  let profit;
-
-  if (userInfo.hasDiscountOffer) {
-    if (parseFloat(userInfo.balance) > halfPrice) {
-      const discountPrice = perPage - perPage * discount;
-      price = discountPrice / 2;
-      profit = perPage * discount;
-    } else {
-      price = perPage - perPage * discount;
-      profit = perPage * discount;
-    }
-  } else {
-    if (parseFloat(userInfo.balance) > halfPrice) {
-      const discountPrice = perPage;
-      price = discountPrice / 2;
-    } else {
-      price = perPage;
-    }
-  }
 
   //split delivery date
   let value;
@@ -135,59 +117,62 @@ const Card = ({ data, index, notify }) => {
   orderDetails.file = "";
   orderDetails.customerName = signedUser?.name;
   orderDetails.customerEmail = signedUser?.email;
-  orderDetails.orderAmount = price;
   orderDetails.deliveryTime = data.deliveryDay;
-  orderDetails.quantity = "1";
 
   if (userInfo.hasDiscountOffer) {
     orderDetails.referredBy = referredBy;
-    orderDetails.referredUserProfit = profit;
   }
 
-  if (userInfo.balance > halfPrice) {
-    orderDetails.userBalance = price;
-  }
-
-  const handleOrderCard = (data) => {
-    const promoCode = data.promoCode;
-    if (data.promoCode) {
+  const handleCheckPromoCode = () => {
+    if (promoCode) {
       fetch("https://essay-essay-writing.herokuapp.com/create/checkPromoCode", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ promoCode, email }),
       })
         .then((res) => res.json())
-        .then((result) => {
-          if (Array.isArray(result)) {
-            setShowError(true);
-            if (signedUser.email) {
-              orderDetails.referredBy = result[0].email;
-              orderDetails.orderAmount = price - price * discount;
-              orderDetails.referredUserProfit = price * discount;
-              orderDetails.promoCode = promoCode;
-              window.localStorage.setItem(
-                "orderInfos",
-                JSON.stringify(orderDetails)
-              );
-              router.push("/paymentMethod");
-            } else {
-              toast.error("Please Login First");
-            }
+        .then((data) => {
+          if (Array.isArray(data)) {
+            setError("");
+            setDiscountPrice(calculatedPrice - calculatedPrice * discount);
+            setPromoCodeUserEmail(data[0].email);
           } else {
-            setError(result);
-            setShowError(true);
+            setError(data);
+            setDiscountPrice("");
           }
         });
-    } else {
-      if (signedUser.email) {
-        orderDetails.promoCode = "";
-        window.localStorage.setItem("orderInfos", JSON.stringify(orderDetails));
-
-        router.push("/paymentMethod");
-      } else {
-        toast.error("Please Login First");
-      }
     }
+  };
+
+  const handleCheckLogin = () => {
+    if (!signedUser.email) {
+      toast.error("Please Login First");
+    }
+  };
+
+  const handleOrderCard = (data) => {
+    orderDetails.numberOfPages = data.numberOfPages;
+    orderDetails.topicName = data.topicName;
+    orderDetails.description = data.description;
+
+    if (!data.promoCode) {
+      orderDetails.orderAmount = calculatedPrice;
+    } else {
+      orderDetails.promoCode = data.promoCode;
+      orderDetails.referredBy = promoCodeUserEmail;
+      orderDetails.orderAmount = calculatedPrice - calculatedPrice * discount;
+      orderDetails.referredUserProfit =
+        calculatedPrice - (calculatedPrice - calculatedPrice * discount);
+    }
+
+    if (userInfo.hasDiscountOffer) {
+      orderDetails.orderAmount = calculatedPrice - calculatedPrice * discount;
+      orderDetails.referredUserProfit =
+        calculatedPrice - (calculatedPrice - calculatedPrice * discount);
+    }
+
+    window.localStorage.setItem("orderInfos", JSON.stringify(orderDetails));
+    router.push("/paymentMethod");
   };
 
   return (
@@ -219,7 +204,9 @@ const Card = ({ data, index, notify }) => {
               {deliveriesDay || data.deliveryDay} Days
             </p>
             <span className="fw-bold">
-              <p className={`${styles.priceStyle} fs-60 d-inline`}>${price}</p>
+              <p className={`${styles.priceStyle} fs-60 d-inline`}>
+                ${data.perPage}
+              </p>
               /page
             </span>
             <p className="fw-bold fs-4">or</p>
@@ -229,7 +216,8 @@ const Card = ({ data, index, notify }) => {
             <button
               className={`${styles.pricingBtn} btn`}
               data-bs-target={`#AB${index + 10}`}
-              data-bs-toggle="modal"
+              data-bs-toggle={signedUser.email ? "modal" : ""}
+              onClick={handleCheckLogin}
             >
               Order Now
             </button>
@@ -323,28 +311,105 @@ const Card = ({ data, index, notify }) => {
             </div>
             <div className="modal-body">
               <form onSubmit={handleSubmit(handleOrderCard)}>
-                <p>Enter Promo Code</p>
-                <input
+                <p>Topic Name</p>
+                <textarea
                   rows="3"
                   cols="5"
-                  placeholder="Enter promo code"
-                  {...register("promoCode")}
-                  name="promoCode"
-                  id="promoCode"
+                  placeholder="Enter Your Topic Name"
+                  {...register("topicName", { required: true })}
+                  name="topicName"
+                  id="topicName"
+                  className="form-control mb-2"
+                ></textarea>
+                {errors.topicName && (
+                  <p className="text-danger">Topic Title Required</p>
+                )}
+                <p>Topic Description</p>
+                <textarea
+                  rows="3"
+                  cols="5"
+                  placeholder="Enter Your Topic Description"
+                  {...register("description", { required: true })}
+                  name="description"
+                  id="description"
+                  className="form-control mb-2"
+                ></textarea>
+                {errors.description && (
+                  <p className="text-danger">Topic Description Required</p>
+                )}
+                <p>Number of pages</p>
+                <input
+                  type="number"
+                  min="1"
+                  placeholder="Enter number of pages"
+                  {...register("numberOfPages", { required: true })}
+                  name="numberOfPages"
+                  id="numberOfPages"
+                  onChange={(e) =>
+                    setCalculatedPrice(
+                      parseInt(e.target.value) * parseFloat(perPageValue)
+                    )
+                  }
                   className="form-control mb-2"
                 />
-                <div className="text-end">
-                  <input
-                    type="submit"
-                    className="btn btn-primary mx-2"
-                    value="Skip"
-                    data-bs-dismiss={showError ? "codal" : "modal"}
-                  />
+                {errors.numberOfPages && (
+                  <p className="text-danger">Number Of Pages Required</p>
+                )}
+                <p className="text-end m-0">
+                  Regular Price - ${calculatedPrice}
+                </p>
+                {userInfo.hasDiscountOffer && (
+                  <>
+                    <p className="m-0 text-end">
+                      <span className="border-bottom border-primary">
+                        Discount Price -${" "}
+                        {calculatedPrice -
+                          (calculatedPrice - calculatedPrice * discount)}
+                      </span>
+                    </p>
+                    <p className="text-end m-0">
+                      Total Price -${" "}
+                      {calculatedPrice - calculatedPrice * discount}
+                    </p>
+                  </>
+                )}
+                {!userInfo.hasDiscountOffer && (
+                  <>
+                    <p>Promo Code</p>
+                    <div className="input-group my-2">
+                      <input
+                        type="text"
+                        name="promoCode"
+                        {...register("promoCode")}
+                        className="form-control rounded-3"
+                        placeholder="Enter your promo code if you have"
+                        onChange={(e) => setPromoCode(e.target.value)}
+                      />
+                      <p
+                        className="btn btn-primary ms-2 rounded-3 m-0"
+                        onClick={handleCheckPromoCode}
+                      >
+                        Add
+                      </p>
+                    </div>
+                    {error ? <p className="text-danger">{error}</p> : ""}
+                  </>
+                )}
+                {discountPrice ? (
+                  <p>
+                    Discount Price - $
+                    {calculatedPrice -
+                      (calculatedPrice - calculatedPrice * discount)}
+                  </p>
+                ) : (
+                  ""
+                )}
+                <div className="my-3">
                   <input
                     type="submit"
                     className="btn btn-primary"
-                    value="Add"
-                    data-bs-dismiss={showError ? "codal" : "modal"}
+                    value="Submit"
+                    data-bs-dismiss="modal"
                   />
                 </div>
               </form>

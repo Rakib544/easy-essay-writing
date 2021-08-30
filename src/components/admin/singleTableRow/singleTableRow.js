@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { MdDelete } from "react-icons/md";
 
 const SingleTableRow = ({ user, index, serial }) => {
   const { register, handleSubmit } = useForm();
   const [userPromoCode, setUserPromoCode] = useState("");
+  const [isActivate, setIsActivate] = useState(user.showReeferLink);
 
   const onSubmit = (data) => {
     const _id = user._id;
@@ -36,37 +36,64 @@ const SingleTableRow = ({ user, index, serial }) => {
       });
   };
 
+  const handleChangeAccessURL = (url) => {
+    setIsActivate(!url);
+    const deleteURL = url;
+    const _id = user._id;
+    fetch("https://essay-essay-writing.herokuapp.com/create/accessURL", {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ _id, deleteURL }),
+    });
+  };
+
   return (
     <>
       <tr key={user._id}>
         <th scope="row">{serial + index + 1}</th>
         <td>{user.name}</td>
         <td>{user.email}</td>
-        <td className="d-flex align-items-center px-2">
+        <td className="ps-4">{userPromoCode || user.promoCode || "None"}</td>
+        <td>
           {userPromoCode || user.promoCode ? (
-            <>
-              <p className="cursor-pointer">
-                {userPromoCode || user.promoCode}{" "}
-                <MdDelete
-                  size="24"
-                  className="ms-5 text-danger"
-                  data-bs-toggle="modal"
-                  data-bs-target={`#promo${index + 21}`}
-                />
-              </p>
-            </>
+            <button
+              className="btn btn-danger"
+              data-bs-toggle="modal"
+              data-bs-target={`#promo${index + 21}`}
+            >
+              Delete Promo
+            </button>
           ) : (
             <button
-              className="btn btn-primary"
+              className="btn btn-success"
               data-bs-toggle="modal"
               data-bs-target={`#promo${index + 11}`}
             >
-              Add Promo
+              &nbsp; Add Promo &nbsp;
+            </button>
+          )}
+        </td>
+        <td>
+          {isActivate || user.showReeferLink ? (
+            <button
+              className="btn btn-danger"
+              onClick={() => handleChangeAccessURL(true)}
+            >
+              Deactivate
+            </button>
+          ) : (
+            <button
+              className="btn btn-success"
+              onClick={() => handleChangeAccessURL(false)}
+            >
+              {" "}
+              &nbsp; Activate &nbsp;
             </button>
           )}
         </td>
       </tr>
 
+      {/* add promo modal */}
       <div
         className="modal fade"
         id={`promo${index + 11}`}
@@ -115,7 +142,7 @@ const SingleTableRow = ({ user, index, serial }) => {
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
+              <h5 class="modal-title">Delete Promo</h5>
               <button
                 type="button"
                 class="btn-close"
@@ -129,7 +156,7 @@ const SingleTableRow = ({ user, index, serial }) => {
             <div class="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
+                class="btn btn-success"
                 data-bs-dismiss="modal"
               >
                 No
@@ -138,6 +165,7 @@ const SingleTableRow = ({ user, index, serial }) => {
                 type="button"
                 class="btn btn-danger"
                 onClick={handleDeletePromo}
+                data-bs-dismiss="modal"
               >
                 Yes
               </button>
