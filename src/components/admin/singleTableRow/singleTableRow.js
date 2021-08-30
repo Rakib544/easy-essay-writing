@@ -70,11 +70,14 @@ const SingleTableRow = ({ user, index, serial }) => {
     if (payableAmount === 0 || payableAmount === "") {
       setError("Please Enter the payable amount");
     } else {
-      fetch("http://localhost:8080/create/update/userBalance", {
-        method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ _id, balance }),
-      })
+      fetch(
+        "https://essay-essay-writing.herokuapp.com/create/update/userBalance",
+        {
+          method: "PUT",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ _id, balance }),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           setUserBalance(balance);
@@ -131,6 +134,7 @@ const SingleTableRow = ({ user, index, serial }) => {
           <p>${userBalance || 0} &nbsp; &nbsp;</p>
           <p>
             <BiEdit
+              size={24}
               className="text-primary cursor-pointer"
               data-bs-toggle="modal"
               data-bs-target={`#balance${index + 21}`}

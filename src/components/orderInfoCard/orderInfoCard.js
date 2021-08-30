@@ -5,6 +5,7 @@ import { MdFileUpload } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./orderInfoCard.module.css";
+import { BiEdit } from "react-icons/bi";
 
 const OrderInfoCard = ({ data, number, setNumber }) => {
   const router = useRouter();
@@ -139,11 +140,11 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
           </div>
         </div>
         <div className="row  d-flex justify-content-center align-items-center ">
-          <div className="col-md-3 ">
+          <div className="col-md-3">
             <p className="fs-18 fw-bold">Customer Name</p>
             <p className="text-muted">{data.customerName}</p>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-2">
             <p className="fs-18 fw-regular fw-bold">Customer Mail</p>
             <p className="text-muted">{data.customerEmail}</p>
           </div>
@@ -158,6 +159,38 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
           <div className="col-md-2 d-flex flex-column  ">
             <p className="text-primary fs-18 fw-bold">Quantity</p>
             <p className="text-muted">{data?.numberOfPages} Pages</p>
+          </div>
+          <div className="col-md-1 d-flex flex-column  ">
+            <p className="text-primary fs-18 fw-bold">Order Details</p>
+            <p>
+              <BiEdit
+                size={28}
+                className="text-primary cursor-pointer"
+                data-bs-toggle="modal"
+                data-bs-target={`#orderDetailssfdsf${data._id}`}
+              />
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal" tabIndex="-1" id={`orderDetailssfdsf${data._id}`}>
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">{data?.customerName}</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p className="fw-bold">Topic Name</p>
+              <p>{data?.topicName}</p>
+              <p className="fw-bold">Topic Description</p>
+              <p>{data?.description}</p>
+            </div>
           </div>
         </div>
       </div>
