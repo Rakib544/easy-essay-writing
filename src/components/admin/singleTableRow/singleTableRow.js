@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { BiEdit } from "react-icons/bi";
 
 const SingleTableRow = ({ user, index, serial }) => {
+  const [payableAmount, setPayableAmount] = useState(0);
+  const [userBalance, setUserBalance] = useState(user.balance);
+  const [error, setError] = useState("");
   const { register, handleSubmit } = useForm();
   const [userPromoCode, setUserPromoCode] = useState("");
   const [isActivate, setIsActivate] = useState(user.showReeferLink);
@@ -47,6 +51,40 @@ const SingleTableRow = ({ user, index, serial }) => {
     });
   };
 
+  const handlePayAmount = (e) => {
+    if (e.target.valueAsNumber <= 0) {
+      setError("You can't provide negative value");
+    } else if (e.target.valueAsNumber > user.balance) {
+      setError("Your payable amount is bigger than user current balance");
+    } else if (e.target.valueAsNumber === NaN) {
+      setError("Test");
+    } else {
+      setError("");
+      setPayableAmount(e.target.value);
+    }
+  };
+
+  console.log(payableAmount);
+
+  const handlePaymentSubmit = () => {
+    const _id = user._id;
+    const balance = `${parseFloat(user.balance) - parseFloat(payableAmount)}`;
+    if (payableAmount === 0 || payableAmount === "") {
+      setError("Please Enter the payable amount");
+    } else {
+      fetch("http://localhost:8080/create/update/userBalance", {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ _id, balance }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setUserBalance(balance);
+          setError("");
+        });
+    }
+  };
+
   return (
     <>
       <tr key={user._id}>
@@ -90,6 +128,16 @@ const SingleTableRow = ({ user, index, serial }) => {
               &nbsp; Activate &nbsp;
             </button>
           )}
+        </td>
+        <td className="d-flex justify-content-evenly">
+          <p>${userBalance || 0} &nbsp; &nbsp;</p>
+          <p>
+            <BiEdit
+              className="text-primary cursor-pointer"
+              data-bs-toggle="modal"
+              data-bs-target={`#balance${index + 21}`}
+            />
+          </p>
         </td>
       </tr>
 
@@ -168,6 +216,42 @@ const SingleTableRow = ({ user, index, serial }) => {
                 data-bs-dismiss="modal"
               >
                 Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* balance reduce modal */}
+      <div class="modal" tabindex="-1" id={`balance${index + 21}`}>
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"></h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p className="m-0">Payable Amount</p>
+              <input
+                type="number"
+                placeholder="Enter how much you pay the user"
+                min="1"
+                className="form-control my-2"
+                name="payableAmount"
+                value={payableAmount}
+                onChange={handlePayAmount}
+              />
+              {error && <p className="text-danger">{error}</p>}
+              <button
+                onClick={handlePaymentSubmit}
+                className="btn btn-primary d-block ms-auto my-4"
+              >
+                Submit
               </button>
             </div>
           </div>

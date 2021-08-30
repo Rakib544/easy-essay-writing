@@ -55,6 +55,7 @@ const AffiliateUser = ({ userData, totalData }) => {
                 <th scope="col" className="text-center" colSpan="2">
                   Action
                 </th>
+                <th scope="col">User Balance</th>
               </tr>
             </thead>
             <tbody>

@@ -1,3 +1,5 @@
+import axios from "axios";
+import fileDownload from "js-file-download";
 import { useRouter } from "next/router";
 import { MdFileUpload } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
@@ -36,6 +38,16 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
       .then((filepath) => {
         setNumber(number + 1);
         toast.success("File Uploaded");
+      });
+  };
+
+  const handleDownload = (url, filename) => {
+    axios
+      .get(url, {
+        responseType: "blob",
+      })
+      .then((res) => {
+        fileDownload(res.data, filename);
       });
   };
 
@@ -91,7 +103,22 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
               </div>
             </>
           ) : (
-            ""
+            <>
+              <div className="col-md-4 d-flex flex-column align-items-center">
+                <p className="text-primary fs-22 fw-bold">Download</p>
+                <button
+                  className="btn btn-primary d-inline bg-primary text-white px-4"
+                  onClick={() =>
+                    handleDownload(
+                      `https://essay-essay-writing.herokuapp.com/${data.file}`,
+                      `${data.file}`
+                    )
+                  }
+                >
+                  Download
+                </button>
+              </div>
+            </>
           )}
           <div className="col-md-2 ms-auto d-flex flex-column align-items-center">
             <p className="text-primary fs-22 fw-bold">Order-Action</p>
@@ -130,7 +157,7 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
           </div>
           <div className="col-md-2 d-flex flex-column  ">
             <p className="text-primary fs-18 fw-bold">Quantity</p>
-            <p className="text-muted">{data.quantity} Items</p>
+            <p className="text-muted">{data?.numberOfPages} Pages</p>
           </div>
         </div>
       </div>

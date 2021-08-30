@@ -40,6 +40,16 @@ function MyApp({ Component, pageProps }) {
     try {
       const decoded = jwt_decode(info);
       setSignedUser(decoded);
+      fetch("https://essay-essay-writing.herokuapp.com/create/getCurrentUser", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ _id: decoded._id }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          window.localStorage.getItem("info", data[0]);
+          setSignedUser(data[0]);
+        });
     } catch (err) {}
   }, []);
 
