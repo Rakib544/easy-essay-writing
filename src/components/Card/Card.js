@@ -355,24 +355,6 @@ const Card = ({ data, index, notify }) => {
                 {errors.numberOfPages && (
                   <p className="text-danger">Number Of Pages Required</p>
                 )}
-                <p className="text-end m-0">
-                  Regular Price - ${calculatedPrice}
-                </p>
-                {userInfo.hasDiscountOffer && (
-                  <>
-                    <p className="m-0 text-end">
-                      <span className="border-bottom border-primary">
-                        Discount Price -${" "}
-                        {calculatedPrice -
-                          (calculatedPrice - calculatedPrice * discount)}
-                      </span>
-                    </p>
-                    <p className="text-end m-0">
-                      Total Price -${" "}
-                      {calculatedPrice - calculatedPrice * discount}
-                    </p>
-                  </>
-                )}
                 {!userInfo.hasDiscountOffer && (
                   <>
                     <p>Promo Code</p>
@@ -395,12 +377,38 @@ const Card = ({ data, index, notify }) => {
                     {error ? <p className="text-danger">{error}</p> : ""}
                   </>
                 )}
+                <p className="text-end m-0">
+                  Regular Price - ${calculatedPrice}
+                </p>
+                {userInfo.hasDiscountOffer && (
+                  <>
+                    <p className="m-0 text-end">
+                      <span className="border-bottom border-primary">
+                        Discount Price -${" "}
+                        {calculatedPrice -
+                          (calculatedPrice - calculatedPrice * discount)}
+                      </span>
+                    </p>
+                    <p className="text-end m-0">
+                      Total Price -${" "}
+                      {calculatedPrice - calculatedPrice * discount}
+                    </p>
+                  </>
+                )}
                 {discountPrice ? (
-                  <p>
-                    Discount Price - $
-                    {calculatedPrice -
-                      (calculatedPrice - calculatedPrice * discount)}
-                  </p>
+                  <>
+                    <p className="m-0 text-end">
+                      <span className="border-bottom border-primary">
+                        Discount Price -${" "}
+                        {calculatedPrice -
+                          (calculatedPrice - calculatedPrice * discount)}
+                      </span>
+                    </p>
+                    <p className="text-end m-0">
+                      Total Price -${" "}
+                      {calculatedPrice - calculatedPrice * discount}
+                    </p>
+                  </>
                 ) : (
                   ""
                 )}

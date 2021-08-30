@@ -83,6 +83,7 @@ const SingleTableRow = ({ user, index, serial, setNumber }) => {
         .then((res) => res.json())
         .then((data) => {
           setNumber((prevState) => prevState + 1);
+          setPayableAmount(0);
           setError("");
         });
     }
