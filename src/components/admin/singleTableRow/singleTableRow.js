@@ -64,8 +64,6 @@ const SingleTableRow = ({ user, index, serial }) => {
     }
   };
 
-  console.log(payableAmount);
-
   const handlePaymentSubmit = () => {
     const _id = user._id;
     const balance = `${parseFloat(user.balance) - parseFloat(payableAmount)}`;
