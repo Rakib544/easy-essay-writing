@@ -1,18 +1,15 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BiEdit } from "react-icons/bi";
+import { toast } from "react-toastify";
 
-const SingleTableRow = ({ user, index, serial }) => {
+const SingleTableRow = ({ user, index, serial, setNumber }) => {
   const [payableAmount, setPayableAmount] = useState(0);
-  const [userBalance, setUserBalance] = useState(user.balance);
   const [error, setError] = useState("");
   const { register, handleSubmit } = useForm();
-  const [userPromoCode, setUserPromoCode] = useState("");
-  const [isActivate, setIsActivate] = useState(user.showReeferLink);
 
   const onSubmit = (data) => {
     const _id = user._id;
-    setUserPromoCode(data.promoCode);
     const promoCode = data.promoCode;
     fetch("https://essay-essay-writing.herokuapp.com/create/update/promoCode", {
       method: "PUT",
@@ -21,13 +18,17 @@ const SingleTableRow = ({ user, index, serial }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if (data === "ALready Used This Promo Code") {
+          toast.error("Already Used This Promo Code");
+        } else {
+          toast.success("Promo Code Added Successfully");
+          setNumber((prevState) => prevState + 1);
+        }
       });
   };
 
   const handleDeletePromo = () => {
     const _id = user._id;
-    setUserPromoCode("");
     const promoCode = "";
     fetch("https://essay-essay-writing.herokuapp.com/create/update/promoCode", {
       method: "PUT",
@@ -36,19 +37,20 @@ const SingleTableRow = ({ user, index, serial }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        setNumber((prevState) => prevState + 1);
       });
   };
 
   const handleChangeAccessURL = (url) => {
-    setIsActivate(!url);
     const deleteURL = url;
     const _id = user._id;
     fetch("https://essay-essay-writing.herokuapp.com/create/accessURL", {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ _id, deleteURL }),
-    });
+    })
+      .then((res) => res.json())
+      .then((data) => setNumber((prevState) => prevState + 1));
   };
 
   const handlePayAmount = (e) => {
@@ -80,7 +82,7 @@ const SingleTableRow = ({ user, index, serial }) => {
       )
         .then((res) => res.json())
         .then((data) => {
-          setUserBalance(balance);
+          setNumber((prevState) => prevState + 1);
           setError("");
         });
     }
@@ -92,9 +94,9 @@ const SingleTableRow = ({ user, index, serial }) => {
         <th scope="row">{serial + index + 1}</th>
         <td>{user.name}</td>
         <td>{user.email}</td>
-        <td className="ps-4">{userPromoCode || user.promoCode || "None"}</td>
+        <td className="ps-4">{user.promoCode || "None"}</td>
         <td>
-          {userPromoCode || user.promoCode ? (
+          {user.promoCode ? (
             <button
               className="btn btn-danger"
               data-bs-toggle="modal"
@@ -113,7 +115,7 @@ const SingleTableRow = ({ user, index, serial }) => {
           )}
         </td>
         <td>
-          {isActivate || user.showReeferLink ? (
+          {user.showReeferLink ? (
             <button
               className="btn btn-danger"
               onClick={() => handleChangeAccessURL(true)}
@@ -131,7 +133,7 @@ const SingleTableRow = ({ user, index, serial }) => {
           )}
         </td>
         <td className="d-flex justify-content-evenly">
-          <p>${userBalance || 0} &nbsp; &nbsp;</p>
+          <p>${user.balance} &nbsp; &nbsp;</p>
           <p>
             <BiEdit
               size={24}
