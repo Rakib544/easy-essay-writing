@@ -121,7 +121,7 @@ const SingleTableRow = ({ user, index, serial, setNumber }) => {
               className="btn btn-danger"
               onClick={() => handleChangeAccessURL(true)}
             >
-              Deactivate
+              Deactivate URL
             </button>
           ) : (
             <button
@@ -129,7 +129,7 @@ const SingleTableRow = ({ user, index, serial, setNumber }) => {
               onClick={() => handleChangeAccessURL(false)}
             >
               {" "}
-              &nbsp; Activate &nbsp;
+              &nbsp; Activate URL &nbsp;
             </button>
           )}
         </td>
