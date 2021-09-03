@@ -7,7 +7,7 @@ import BannerInfo from "../../src/components/admin/bannerInfo/bannerInfo";
 import DiscountPrice from "../../src/components/admin/discountPrice/discountPrice";
 import Faq from "../../src/components/admin/faq/faq";
 import OurProcess from "../../src/components/admin/ourProcess/ourProcess";
-import AdminCard from "../../src/components/adminCard/AdminCard";
+import AdminCard from "../../src/components/adminCard/adminCard";
 import withAdminAuth from "../../src/components/AdminPrivateRoute";
 import Navbar from "../../src/components/navbar/Navbar";
 import ProfileCard from "../../src/components/profileCard/profileCard";
