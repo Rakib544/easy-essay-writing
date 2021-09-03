@@ -4,7 +4,7 @@ import { BiEdit } from "react-icons/bi";
 import { toast } from "react-toastify";
 
 const SingleTableRow = ({ user, index, serial, setNumber }) => {
-  const [payableAmount, setPayableAmount] = useState(0);
+  const [payableAmount, setPayableAmount] = useState('');
   const [error, setError] = useState("");
   const { register, handleSubmit } = useForm();
 
@@ -83,7 +83,7 @@ const SingleTableRow = ({ user, index, serial, setNumber }) => {
         .then((res) => res.json())
         .then((data) => {
           setNumber((prevState) => prevState + 1);
-          setPayableAmount(0);
+          setPayableAmount('');
           setError("");
         });
     }
