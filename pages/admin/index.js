@@ -7,18 +7,27 @@ import BannerInfo from "../../src/components/admin/bannerInfo/bannerInfo";
 import DiscountPrice from "../../src/components/admin/discountPrice/discountPrice";
 import Faq from "../../src/components/admin/faq/faq";
 import OurProcess from "../../src/components/admin/ourProcess/ourProcess";
-import Pricing from "../../src/components/admin/pricing/pricing";
+import AdminCard from "../../src/components/adminCard/AdminCard";
 import withAdminAuth from "../../src/components/AdminPrivateRoute";
 import Navbar from "../../src/components/navbar/Navbar";
 import ProfileCard from "../../src/components/profileCard/profileCard";
 
-const Edit = ({ priceCardData }) => {
+const Edit = () => {
   const [aboutData, setAboutData] = useState({});
+  const [adminCards, setAdminCards] = useState([]);
+  const [number, setNumber] = useState(0);
+
   useEffect(() => {
     fetch("https://essay-essay-writing.herokuapp.com/about")
       .then((res) => res.json())
       .then((data) => setAboutData(data[0]));
   }, []);
+
+  useEffect(() => {
+    fetch("https://essay-essay-writing.herokuapp.com/priceCard")
+      .then((res) => res.json())
+      .then((data) => setAdminCards(data));
+  }, [number]);
 
   return (
     <>
@@ -39,7 +48,16 @@ const Edit = ({ priceCardData }) => {
           <BannerInfo />
           <About aboutData={aboutData} />
           <OurProcess />
-          <Pricing priceCardData={priceCardData} />
+          <div className="row">
+            {adminCards.map((adminCard, index) => (
+              <AdminCard
+                adminCard={adminCard}
+                setNumber={setNumber}
+                index={index}
+                key={adminCard._id}
+              />
+            ))}
+          </div>
           <DiscountPrice />
           <Faq />
         </div>
@@ -47,18 +65,5 @@ const Edit = ({ priceCardData }) => {
     </>
   );
 };
-
-export async function getServerSideProps() {
-  const priceCardResponse = await fetch(
-    "https://essay-essay-writing.herokuapp.com/priceCard"
-  );
-  const priceCardData = await priceCardResponse.json();
-
-  return {
-    props: {
-      priceCardData,
-    },
-  };
-}
 
 export default withAdminAuth(Edit);

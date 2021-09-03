@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { UserContext } from "../../../pages/_app";
 import styles from "./card.module.css";
 
-const Card = ({ data, index, notify }) => {
+const Card = ({ data, index }) => {
   const [promoCodeUserEmail, setPromoCodeUserEmail] = useState(null);
   const [promoCode, setPromoCode] = useState("");
   const [calculatedPrice, setCalculatedPrice] = useState(0);
@@ -17,13 +17,8 @@ const Card = ({ data, index, notify }) => {
   const [userInfo, setUserInfo] = useState({});
   const [referredBy, setReferredBy] = useState(null);
   const [discountPercentage, setDiscountPercentage] = useState(null);
-
   const { deliveryDay, perPage, wordPerPage } = data;
-
-  const deliveryDayValue = deliveryDay;
   const perPageValue = perPage;
-  const wordPerPageValue = wordPerPage;
-  const id = data._id;
 
   const {
     register,
@@ -64,30 +59,6 @@ const Card = ({ data, index, notify }) => {
         setReferredBy(result.referredBy);
       });
   }, [email]);
-
-  const onSubmit = (data) => {
-    const deliveryDay = data.deliveryDay || deliveryDayValue;
-    const perPage = data.perPage || perPageValue;
-    const wordPerPage = data.wordPerPage || wordPerPageValue;
-
-    fetch(`https://essay-essay-writing.herokuapp.com/priceCard/update/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        deliveryDay,
-        perPage,
-        wordPerPage,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result) {
-          notify();
-          setDeliveriesDay(result.deliveryDay);
-          setWordPerPageData(result.wordPerPage);
-        }
-      });
-  };
 
   //calculation for payment
 
@@ -221,70 +192,6 @@ const Card = ({ data, index, notify }) => {
             >
               Order Now
             </button>
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="modal fade"
-        id={`AA${index + 1}`}
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Card - {index + 1}
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <p>Delivery Day</p>
-                <textarea
-                  rows="3"
-                  cols="5"
-                  defaultValue={data.deliveryDay}
-                  {...register("deliveryDay")}
-                  name="deliveryDay"
-                  id="deliveryDay"
-                  className="form-control mb-2"
-                ></textarea>
-                <p>Per Page</p>
-                <textarea
-                  rows="3"
-                  cols="5"
-                  defaultValue={data.perPage}
-                  {...register("perPage")}
-                  name="perPage"
-                  id="perPage"
-                  className="form-control mb-2"
-                ></textarea>
-                <p>Word Per Page</p>
-                <textarea
-                  rows="3"
-                  cols="5"
-                  defaultValue={data.wordPerPage}
-                  {...register("wordPerPage")}
-                  name="wordPerPage"
-                  id="wordPerPage"
-                  className="form-control mb-2"
-                ></textarea>
-                <input
-                  type="submit"
-                  className="btn btn-primary"
-                  value="Save Changes"
-                  data-bs-dismiss="modal"
-                />
-              </form>
-            </div>
           </div>
         </div>
       </div>

@@ -52,8 +52,8 @@ const PaymentMethod = () => {
         <div className="row vh-100 w-100">
           <div className="col-md-6 mt-5 mt-md-0 pb-5 bg-white d-flex justify-content-center align-items-center">
             <div className="text-center">
-              <Image src={logoImage} className="w-75" />
-              <p className="fs-44 fw-bold">
+              <Image src={logoImage} className="w-75 p-md-5 p-0" />
+              <p className="fs-28 fw-bold">
                 <i>PAY WITH STRIPE</i>
               </p>
               <div className="px-md-5 mx-md-5 ps-3 ps-md-0">
@@ -72,8 +72,8 @@ const PaymentMethod = () => {
             style={{ background: "#556cd6" }}
           >
             <div className="text-center mt-md-4">
-              <Image src={btcImage} className="p-5 p-md-0" />
-              <p className="text-white fs-44 py-mb-0 mt-md-5 fw-bold">
+              <Image src={btcImage} className="p-4" />
+              <p className="text-white fs-28 py-mb-0 mt-md-5 fw-bold">
                 <i>PAY WITH BTC</i>
               </p>
               <CopyToClipboard
