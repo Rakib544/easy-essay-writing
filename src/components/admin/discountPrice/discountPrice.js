@@ -39,6 +39,7 @@ const DiscountPrice = () => {
       .then((result) => {
         if (result) {
           setNumber(number + 1);
+          toast.success('Update Successfully');
         }
       });
   };
