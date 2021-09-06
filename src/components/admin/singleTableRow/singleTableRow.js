@@ -4,7 +4,7 @@ import { BiEdit } from "react-icons/bi";
 import { toast } from "react-toastify";
 
 const SingleTableRow = ({ user, index, serial, setNumber }) => {
-  const [payableAmount, setPayableAmount] = useState('');
+  const [payableAmount, setPayableAmount] = useState("");
   const [error, setError] = useState("");
   const { register, handleSubmit } = useForm();
 
@@ -72,18 +72,15 @@ const SingleTableRow = ({ user, index, serial, setNumber }) => {
     if (payableAmount === 0 || payableAmount === "") {
       setError("Please Enter the payable amount");
     } else {
-      fetch(
-        "https://api.easyessaywriting.com/create/update/userBalance",
-        {
-          method: "PUT",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ _id, balance }),
-        }
-      )
+      fetch("https://api.easyessaywriting.com/create/update/userBalance", {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ _id, balance }),
+      })
         .then((res) => res.json())
         .then((data) => {
           setNumber((prevState) => prevState + 1);
-          setPayableAmount('');
+          setPayableAmount("");
           setError("");
         });
     }
@@ -110,6 +107,7 @@ const SingleTableRow = ({ user, index, serial, setNumber }) => {
               className="btn btn-success"
               data-bs-toggle="modal"
               data-bs-target={`#promo${index + 11}`}
+              disabled={user.userType !== "admin" ? false : true}
             >
               &nbsp; Add Promo &nbsp;
             </button>
@@ -126,6 +124,7 @@ const SingleTableRow = ({ user, index, serial, setNumber }) => {
           ) : (
             <button
               className="btn btn-success"
+              disabled={user.userType !== "admin" ? false : true}
               onClick={() => handleChangeAccessURL(false)}
             >
               {" "}
@@ -134,15 +133,21 @@ const SingleTableRow = ({ user, index, serial, setNumber }) => {
           )}
         </td>
         <td className="d-flex justify-content-evenly">
-          <p>${user.balance} &nbsp; &nbsp;</p>
-          <p>
-            <BiEdit
-              size={24}
-              className="text-primary cursor-pointer"
-              data-bs-toggle="modal"
-              data-bs-target={`#balance${index + 21}`}
-            />
-          </p>
+          {user.userType === "admin" ? (
+            <p>None</p>
+          ) : (
+            <>
+              <p>${user.balance} &nbsp; &nbsp;</p>
+              <p>
+                <BiEdit
+                  size={24}
+                  className="text-primary cursor-pointer"
+                  data-bs-toggle="modal"
+                  data-bs-target={`#balance${index + 21}`}
+                />
+              </p>
+            </>
+          )}
         </td>
       </tr>
 
