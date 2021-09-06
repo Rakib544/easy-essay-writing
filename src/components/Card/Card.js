@@ -31,7 +31,7 @@ const Card = ({ data, index }) => {
   const email = signedUser.email;
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/admin", {
+    fetch("https://api.easyessaywriting.com/admin", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email }),
@@ -39,7 +39,7 @@ const Card = ({ data, index }) => {
       .then((res) => res.json())
       .then((data) => setUserInfo(data));
     fetch(
-      "https://essay-essay-writing.herokuapp.com/discount/discountPercentage"
+      "https://api.easyessaywriting.com/discount/discountPercentage"
     )
       .then((res) => res.json())
       .then((data) => setDiscountPercentage(data.discountPercentage));
@@ -47,7 +47,7 @@ const Card = ({ data, index }) => {
 
   useEffect(() => {
     fetch(
-      "https://essay-essay-writing.herokuapp.com/affiliateUser/affiliateUserFind",
+      "https://api.easyessaywriting.com/affiliateUser/affiliateUserFind",
       {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -96,7 +96,7 @@ const Card = ({ data, index }) => {
 
   const handleCheckPromoCode = () => {
     if (promoCode) {
-      fetch("https://essay-essay-writing.herokuapp.com/create/checkPromoCode", {
+      fetch("https://api.easyessaywriting.com/create/checkPromoCode", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ promoCode, email }),

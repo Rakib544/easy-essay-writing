@@ -29,7 +29,7 @@ const ConfirmOrder = () => {
   const router = useRouter();
 
   const handleOrder = () => {
-    fetch("https://essay-essay-writing.herokuapp.com/orderCard/post", {
+    fetch("https://api.easyessaywriting.com/orderCard/post", {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(orderInfos),
@@ -37,7 +37,7 @@ const ConfirmOrder = () => {
       .then((res) => res.json())
       .then((data) => {
         fetch(
-          `https://essay-essay-writing.herokuapp.com/create/update/${singedUser._id}`,
+          `https://api.easyessaywriting.com/create/update/${singedUser._id}`,
           {
             method: "POST",
             headers: { "content-type": "application/json" },

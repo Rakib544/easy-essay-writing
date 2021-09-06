@@ -51,7 +51,7 @@ const OrderDownloadCard = ({ singleOrderDetails, previousOrderDetails }) => {
           className="btn w-100 bg-primary text-white"
           onClick={() =>
             handleDownload(
-              `https://essay-essay-writing.herokuapp.com/${singleOrderDetails.file}`,
+              `https://api.easyessaywriting.com/${singleOrderDetails.file}`,
               `${singleOrderDetails.file}`
             )
           }

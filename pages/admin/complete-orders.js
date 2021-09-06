@@ -60,7 +60,7 @@ const CompleteOrders = ({ orderData, totalData }) => {
 export async function getServerSideProps(context) {
   const page = context.query.page;
   const res = await fetch(
-    "https://essay-essay-writing.herokuapp.com/orderCard/completed",
+    "https://api.easyessaywriting.com/orderCard/completed",
     {
       method: "POST",
       headers: { "content-type": "application/json" },

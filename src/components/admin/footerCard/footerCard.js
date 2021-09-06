@@ -16,7 +16,7 @@ const FooterCard = ({ footerCardData, index, setNumber, number, notify }) => {
     const link = data.link;
 
     fetch(
-      `https://essay-essay-writing.herokuapp.com/footerIcons/update/${_id}`,
+      `https://api.easyessaywriting.com/footerIcons/update/${_id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

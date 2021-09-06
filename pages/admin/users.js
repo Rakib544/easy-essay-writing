@@ -25,7 +25,7 @@ const AffiliateUser = () => {
   useEffect(() => {
     const loadData = async () => {
       const res = await fetch(
-        "https://essay-essay-writing.herokuapp.com/create",
+        "https://api.easyessaywriting.com/create",
         {
           method: "POST",
           headers: { "content-type": "application/json" },

@@ -73,7 +73,7 @@ const SignupComplete = () => {
 
         if (referrerEmail) {
           fetch(
-            "https://essay-essay-writing.herokuapp.com/create/affiliateUser",
+            "https://api.easyessaywriting.com/create/affiliateUser",
             {
               method: "POST",
               headers: { "content-type": "application/json" },
@@ -85,7 +85,7 @@ const SignupComplete = () => {
               doAfterSignUp(e);
             });
         } else {
-          fetch("https://essay-essay-writing.herokuapp.com/create/user", {
+          fetch("https://api.easyessaywriting.com/create/user", {
             mode: "cors",
             method: "POST",
             headers: { "content-type": "application/json" },

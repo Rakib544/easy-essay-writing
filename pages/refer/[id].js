@@ -63,7 +63,7 @@ const ReferAccount = ({ data }) => {
 export async function getServerSideProps(context) {
   const id = context.query.id;
   const res = await fetch(
-    `https://essay-essay-writing.herokuapp.com/admin/checkURL/${id}`
+    `https://api.easyessaywriting.com/admin/checkURL/${id}`
   );
   const data = await res.json();
   return {

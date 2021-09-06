@@ -21,7 +21,7 @@ const OurProcessCard = ({
     const content = data.content;
 
     fetch(
-      `https://essay-essay-writing.herokuapp.com/processCard/update/${_id}`,
+      `https://api.easyessaywriting.com/processCard/update/${_id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

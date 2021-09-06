@@ -18,7 +18,7 @@ const BannerInfo = () => {
   } = useForm();
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/banner")
+    fetch("https://api.easyessaywriting.com/banner")
       .then((res) => res.json())
       .then((data) => setBannerDate(data[0]));
   }, [number]);
@@ -27,7 +27,7 @@ const BannerInfo = () => {
     const title = data.title || titleValue;
     const headerDetails = data.headerDetails || headerDetailsValue;
 
-    fetch(`https://essay-essay-writing.herokuapp.com/banner/update/${_id}`, {
+    fetch(`https://api.easyessaywriting.com/banner/update/${_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

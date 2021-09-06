@@ -23,7 +23,7 @@ const Profile = () => {
   const email = signedUser.email;
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/affiliateUser/all", {
+    fetch("https://api.easyessaywriting.com/affiliateUser/all", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email }),
@@ -34,7 +34,7 @@ const Profile = () => {
       });
 
     fetch(
-      "https://essay-essay-writing.herokuapp.com/affiliateUser/lastSevenDays",
+      "https://api.easyessaywriting.com/affiliateUser/lastSevenDays",
       {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -47,7 +47,7 @@ const Profile = () => {
       });
 
     fetch(
-      "https://essay-essay-writing.herokuapp.com/affiliateUser/lastOneDay",
+      "https://api.easyessaywriting.com/affiliateUser/lastOneDay",
       {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -58,7 +58,7 @@ const Profile = () => {
       .then((data) => {
         setLastOneDaysUsers(data.lastOneDayUser);
       });
-    fetch("https://essay-essay-writing.herokuapp.com/earnInfo/all", {
+    fetch("https://api.easyessaywriting.com/earnInfo/all", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email }),
@@ -68,7 +68,7 @@ const Profile = () => {
         setTotalEarns(data.totalEarning);
       });
 
-    fetch("https://essay-essay-writing.herokuapp.com/earnInfo/lastSevenDays", {
+    fetch("https://api.easyessaywriting.com/earnInfo/lastSevenDays", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email }),
@@ -78,7 +78,7 @@ const Profile = () => {
         setLastSevenDaysEarning(data.lastSevenDaysEarning);
       });
 
-    fetch("https://essay-essay-writing.herokuapp.com/earnInfo/lastOneDay", {
+    fetch("https://api.easyessaywriting.com/earnInfo/lastOneDay", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email }),
@@ -88,7 +88,7 @@ const Profile = () => {
         setLastOneDayEarning(data.lastOneDayEarning);
       });
 
-    fetch("https://essay-essay-writing.herokuapp.com/admin", {
+    fetch("https://api.easyessaywriting.com/admin", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email }),

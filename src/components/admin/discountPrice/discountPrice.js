@@ -15,7 +15,7 @@ const DiscountPrice = () => {
 
   useEffect(() => {
     fetch(
-      "https://essay-essay-writing.herokuapp.com/discount/discountPercentage"
+      "https://api.easyessaywriting.com/discount/discountPercentage"
     )
       .then((res) => res.json())
       .then((data) => {
@@ -28,7 +28,7 @@ const DiscountPrice = () => {
     const id = discountPrice._id;
     
     fetch(
-      `https://essay-essay-writing.herokuapp.com/discount/updateDiscount/${id}`,
+      `https://api.easyessaywriting.com/discount/updateDiscount/${id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

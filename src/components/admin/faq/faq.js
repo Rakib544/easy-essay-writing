@@ -10,7 +10,7 @@ const Faq = () => {
   const [number, setNumber] = useState(0);
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/faq")
+    fetch("https://api.easyessaywriting.com/faq")
       .then((res) => res.json())
       .then((data) => {
         setFaqCardsData(data);
@@ -18,7 +18,7 @@ const Faq = () => {
   }, [number]);
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/footerIcons")
+    fetch("https://api.easyessaywriting.com/footerIcons")
       .then((res) => res.json())
       .then((data) => {
         setFooterCardsData(data);

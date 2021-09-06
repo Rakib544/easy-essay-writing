@@ -11,7 +11,7 @@ const SingleTableRow = ({ user, index, serial, setNumber }) => {
   const onSubmit = (data) => {
     const _id = user._id;
     const promoCode = data.promoCode;
-    fetch("https://essay-essay-writing.herokuapp.com/create/update/promoCode", {
+    fetch("https://api.easyessaywriting.com/create/update/promoCode", {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ _id, promoCode }),
@@ -30,7 +30,7 @@ const SingleTableRow = ({ user, index, serial, setNumber }) => {
   const handleDeletePromo = () => {
     const _id = user._id;
     const promoCode = "";
-    fetch("https://essay-essay-writing.herokuapp.com/create/update/promoCode", {
+    fetch("https://api.easyessaywriting.com/create/update/promoCode", {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ _id, promoCode }),
@@ -44,7 +44,7 @@ const SingleTableRow = ({ user, index, serial, setNumber }) => {
   const handleChangeAccessURL = (url) => {
     const deleteURL = url;
     const _id = user._id;
-    fetch("https://essay-essay-writing.herokuapp.com/create/accessURL", {
+    fetch("https://api.easyessaywriting.com/create/accessURL", {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ _id, deleteURL }),
@@ -73,7 +73,7 @@ const SingleTableRow = ({ user, index, serial, setNumber }) => {
       setError("Please Enter the payable amount");
     } else {
       fetch(
-        "https://essay-essay-writing.herokuapp.com/create/update/userBalance",
+        "https://api.easyessaywriting.com/create/update/userBalance",
         {
           method: "PUT",
           headers: { "content-type": "application/json" },

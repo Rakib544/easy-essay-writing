@@ -21,7 +21,7 @@ const OurProcess = () => {
   const [processCardsData, setProcessCardsData] = useState([]);
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/process")
+    fetch("https://api.easyessaywriting.com/process")
       .then((res) => res.json())
       .then((data) => setProcessData(data[0]));
   }, [number]);
@@ -30,7 +30,7 @@ const OurProcess = () => {
     const title = data.title || titleValue;
     const headerDetails = data.headerDetails || headerDetailsValue;
 
-    fetch(`https://essay-essay-writing.herokuapp.com/process/update/${_id}`, {
+    fetch(`https://api.easyessaywriting.com/process/update/${_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -49,7 +49,7 @@ const OurProcess = () => {
   };
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/processCard")
+    fetch("https://api.easyessaywriting.com/processCard")
       .then((res) => res.json())
       .then((data) => setProcessCardsData(data));
   }, [number]);
