@@ -10,7 +10,7 @@ export default async (req, res) => {
       submit_type: "pay",
       payment_method_types: ["card"],
       shipping_address_collection: {
-        allowed_countries: ["US", "CN"],
+        allowed_countries: ["US", "CN", "CA", "NZ", "NU", "AU", "IE", "AT", "BE", "BR", "DK", "FI", "EE", "DE", "GR", "IT", "JP", "MX", "NL", "NO", "PL", "PT", "SG", "GB", "CH", "SE", "ES", "CZ", "HK", "CY", "BG", "FR", "HU", "RO", "SK", "SI", "AE"],
       },
       line_items: [
         {
