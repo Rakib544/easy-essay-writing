@@ -147,7 +147,7 @@ const OurProcessCard = ({
                   {...register("content")}
                   name="content"
                   id="content"
-                  class="form-control mb-2"
+                  className="form-control mb-2"
                 ></textarea>
                 {/* <input type="hidden" name="_id" defaultValue={processCardData._id} {...register("_id")} id='_id' /> */}
                 <input

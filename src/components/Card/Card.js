@@ -233,8 +233,8 @@ const Card = ({ data, index }) => {
                 )}
                 <p>Topic Description</p>
                 <textarea
-                  rows="3"
-                  cols="5"
+                  rows="8"
+                  cols="3"
                   placeholder="Enter Your Topic Description"
                   {...register("description", { required: true })}
                   name="description"
