@@ -77,11 +77,11 @@ const PaymentMethod = () => {
                 <i>PAY WITH BTC</i>
               </p>
               <CopyToClipboard
-                text="3EXDYQqE17N7NE4VRYJoqBmSQ5UFc9vzTG"
+                text="3QuaYGt3FLTqByhtVUJKN8hitncmmFskGo"
                 onCopy={() => toast.success("Copied")}
               >
                 <p className="bg-white px-1 px-md-5 py-1 py-md-3 rounded fs-22 fs-sm-22 cursor-pointer">
-                  3EXDYQqE17N7NE4VRYJoqBmSQ5UFc9vzTG
+                3QuaYGt3FLTqByhtVUJKN8hitncmmFskGo
                 </p>
               </CopyToClipboard>
             </div>
