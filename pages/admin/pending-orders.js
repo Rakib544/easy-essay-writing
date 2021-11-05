@@ -23,7 +23,7 @@ const PendingOrders = () => {
     setShowSpinner(true);
     const loadData = async () => {
       const res = await fetch(
-        "https://essay-essay-writing.herokuapp.com/orderCard/pending",
+        "https://api.easyessaywriting.com/orderCard/pending",
         {
           method: "POST",
           headers: { "content-type": "application/json" },

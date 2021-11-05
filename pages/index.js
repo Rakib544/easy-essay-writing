@@ -49,38 +49,32 @@ export default function Home({
 }
 
 export async function getServerSideProps() {
-  const bannerResponse = await fetch(
-    "https://essay-essay-writing.herokuapp.com/banner"
-  );
+  const bannerResponse = await fetch("https://api.easyessaywriting.com/banner");
   const bannerData = await bannerResponse.json();
 
-  const aboutResponse = await fetch(
-    "https://essay-essay-writing.herokuapp.com/about"
-  );
+  const aboutResponse = await fetch("https://api.easyessaywriting.com/about");
   const aboutData = await aboutResponse.json();
 
   const processResponse = await fetch(
-    "https://essay-essay-writing.herokuapp.com/process"
+    "https://api.easyessaywriting.com/process"
   );
   const processData = await processResponse.json();
 
-  const faqResponse = await fetch(
-    "https://essay-essay-writing.herokuapp.com/faq"
-  );
+  const faqResponse = await fetch("https://api.easyessaywriting.com/faq");
   const faqData = await faqResponse.json();
 
   const priceCardResponse = await fetch(
-    "https://essay-essay-writing.herokuapp.com/priceCard"
+    "https://api.easyessaywriting.com/priceCard"
   );
   const priceCardData = await priceCardResponse.json();
 
   const processCardResponse = await fetch(
-    "https://essay-essay-writing.herokuapp.com/processCard"
+    "https://api.easyessaywriting.com/processCard"
   );
   const processCardData = await processCardResponse.json();
 
   const footerCardsData = await fetch(
-    "https://essay-essay-writing.herokuapp.com/footerIcons"
+    "https://api.easyessaywriting.com/footerIcons"
   );
   const footerCardData = await footerCardsData.json();
 

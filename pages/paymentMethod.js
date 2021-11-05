@@ -2,10 +2,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import btcImage from "../images/btc.svg";
 import logoImage from "../images/stripe.png";
 import withAuth from "../src/components/privateRoute";
 
@@ -49,41 +47,25 @@ const PaymentMethod = () => {
         pauseOnHover
       />
       <div>
-        <div className="row vh-100 w-100">
-          <div className="col-md-6 mt-5 mt-md-0 pb-5 bg-white d-flex justify-content-center align-items-center">
-            <div className="text-center">
-              <Image src={logoImage} className="w-75 p-md-5 p-0" />
-              <p className="fs-28 fw-bold">
-                <i>PAY WITH STRIPE</i>
-              </p>
-              <div className="px-md-5 mx-md-5 ps-3 ps-md-0">
-                <button
-                  role="link"
-                  onClick={createCheckoutSession}
-                  className="stripe-btn d-block px-md-5"
-                >
-                  Continue with Stripe
-                </button>
-              </div>
-            </div>
-          </div>
-          <div
-            className="col-md-6 d-flex justify-content-center align-items-center py-5 py-md-0 "
-            style={{ background: "#556cd6" }}
-          >
-            <div className="text-center mt-md-4">
-              <Image src={btcImage} className="p-4" />
-              <p className="text-white fs-28 py-mb-0 mt-md-5 fw-bold">
-                <i>PAY WITH BTC</i>
-              </p>
-              <CopyToClipboard
-                text="3EXDYQqE17N7NE4VRYJoqBmSQ5UFc9vzTG"
-                onCopy={() => toast.success("Copied")}
+        <div className="vh-100 d-flex align-items-center justify-content-center w-100">
+          <div className="text-center width-100">
+            <Image
+              src={logoImage}
+              height="300px"
+              width="600px"
+              layout="responsive"
+            />
+            <p className="fs-22 fw-bold">
+              <i>PAY WITH STRIPE</i>
+            </p>
+            <div className="me-3">
+              <button
+                role="link"
+                onClick={createCheckoutSession}
+                className="stripe-btn d-block mx-2"
               >
-                <p className="bg-white px-1 px-md-5 py-1 py-md-3 rounded fs-22 fs-sm-22 cursor-pointer">
-                  3EXDYQqE17N7NE4VRYJoqBmSQ5UFc9vzTG
-                </p>
-              </CopyToClipboard>
+                Continue with Stripe
+              </button>
             </div>
           </div>
         </div>

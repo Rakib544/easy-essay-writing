@@ -1,9 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import Link from "next/link";
-import logo from "../../images/logo.png";
+import { useRouter } from "next/router";
 import bannerImg from "../../images/login-img.png";
+import logo from "../../images/logo.png";
 
 const ReferAccount = ({ data }) => {
   const router = useRouter();
@@ -51,7 +51,9 @@ const ReferAccount = ({ data }) => {
                 </button>
               </>
             ) : (
-              <p className="text-center text-danger fs-48 text-capitalize">{data}</p>
+              <p className="text-center text-danger fs-48 text-capitalize">
+                {data}
+              </p>
             )}
           </div>
         </div>
@@ -63,7 +65,7 @@ const ReferAccount = ({ data }) => {
 export async function getServerSideProps(context) {
   const id = context.query.id;
   const res = await fetch(
-    `https://essay-essay-writing.herokuapp.com/admin/checkURL/${id}`
+    `https://api.easyessaywriting.com/admin/checkURL/${id}`
   );
   const data = await res.json();
   return {

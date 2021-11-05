@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FaqCard from "../faqCard/faqCard";
 import FooterCard from "../footerCard/footerCard";
@@ -10,7 +10,7 @@ const Faq = () => {
   const [number, setNumber] = useState(0);
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/faq")
+    fetch("https://api.easyessaywriting.com/faq")
       .then((res) => res.json())
       .then((data) => {
         setFaqCardsData(data);
@@ -18,7 +18,7 @@ const Faq = () => {
   }, [number]);
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/footerIcons")
+    fetch("https://api.easyessaywriting.com/footerIcons")
       .then((res) => res.json())
       .then((data) => {
         setFooterCardsData(data);

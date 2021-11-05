@@ -14,7 +14,7 @@ const About = () => {
   const { register, handleSubmit } = useForm();
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/about")
+    fetch("https://api.easyessaywriting.com/about")
       .then((res) => res.json())
       .then((data) => setAboutData(data[0]));
   }, [number]);
@@ -24,7 +24,7 @@ const About = () => {
     const headerDetails = data.headerDetails || headerDetailsValue;
     const buttonText = data.buttonText || buttonTextValue;
 
-    fetch(`https://essay-essay-writing.herokuapp.com/about/update/${_id}`, {
+    fetch(`https://api.easyessaywriting.com/about/update/${_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

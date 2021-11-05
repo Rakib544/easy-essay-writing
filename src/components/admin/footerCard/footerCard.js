@@ -15,17 +15,14 @@ const FooterCard = ({ footerCardData, index, setNumber, number, notify }) => {
     const title = data.title || titleValue;
     const link = data.link;
 
-    fetch(
-      `https://essay-essay-writing.herokuapp.com/footerIcons/update/${_id}`,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title,
-          link,
-        }),
-      }
-    )
+    fetch(`https://api.easyessaywriting.com/footerIcons/update/${_id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title,
+        link,
+      }),
+    })
       .then((res) => res.json())
       .then((result) => {
         if (result) {

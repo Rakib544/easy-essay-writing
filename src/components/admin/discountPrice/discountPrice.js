@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const DiscountPrice = () => {
@@ -14,27 +14,23 @@ const DiscountPrice = () => {
   } = useForm();
 
   useEffect(() => {
-    fetch(
-      "https://essay-essay-writing.herokuapp.com/discount/discountPercentage"
-    )
+    fetch("https://api.easyessaywriting.com/discount/discountPercentage")
       .then((res) => res.json())
       .then((data) => {
         setDiscountPrice(data);
       });
   }, [number]);
-  
+
   const onSubmit = (data) => {
-    const discountPercentage = data.discountPercentage || discountPrice.discountPercentage;
+    const discountPercentage =
+      data.discountPercentage || discountPrice.discountPercentage;
     const id = discountPrice._id;
-    
-    fetch(
-      `https://essay-essay-writing.herokuapp.com/discount/updateDiscount/${id}`,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({discountPercentage})
-      }
-    )
+
+    fetch(`https://api.easyessaywriting.com/discount/updateDiscount/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ discountPercentage }),
+    })
       .then((res) => res.json())
       .then((result) => {
         if (result) {

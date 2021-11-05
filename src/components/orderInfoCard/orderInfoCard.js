@@ -1,18 +1,18 @@
 import axios from "axios";
 import fileDownload from "js-file-download";
 import { useRouter } from "next/router";
+import { BiEdit } from "react-icons/bi";
 import { MdFileUpload } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./orderInfoCard.module.css";
-import { BiEdit } from "react-icons/bi";
 
 const OrderInfoCard = ({ data, number, setNumber }) => {
   const router = useRouter();
 
   const handleChangeStatus = () => {
     fetch(
-      `https://essay-essay-writing.herokuapp.com/orderCard/update/orderStatus/${data._id}`,
+      `https://api.easyessaywriting.com/orderCard/update/orderStatus/${data._id}`,
       {
         method: "PUT",
         headers: { "content-type": "application/json" },
@@ -31,7 +31,7 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
   const handleFileUpload = (e, id) => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
-    fetch(`https://essay-essay-writing.herokuapp.com/orderCard/upload/${id}`, {
+    fetch(`https://api.easyessaywriting.com/orderCard/upload/${id}`, {
       method: "PUT",
       body: formData,
     })
@@ -111,7 +111,7 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
                   className="btn btn-primary d-inline bg-primary text-white px-4"
                   onClick={() =>
                     handleDownload(
-                      `https://essay-essay-writing.herokuapp.com/${data.file}`,
+                      `https://api.easyessaywriting.com/${data.file}`,
                       `${data.file}`
                     )
                   }

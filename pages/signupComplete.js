@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as Yup from "yup";
 import bannerImg from "../images/login-img.png";
@@ -72,20 +72,17 @@ const SignupComplete = () => {
         };
 
         if (referrerEmail) {
-          fetch(
-            "https://essay-essay-writing.herokuapp.com/create/affiliateUser",
-            {
-              method: "POST",
-              headers: { "content-type": "application/json" },
-              body: JSON.stringify(userObj),
-            }
-          )
+          fetch("https://api.easyessaywriting.com/create/affiliateUser", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(userObj),
+          })
             .then((res) => res.json())
             .then((data) => {
               doAfterSignUp(e);
             });
         } else {
-          fetch("https://essay-essay-writing.herokuapp.com/create/user", {
+          fetch("https://api.easyessaywriting.com/create/user", {
             mode: "cors",
             method: "POST",
             headers: { "content-type": "application/json" },

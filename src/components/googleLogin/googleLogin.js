@@ -40,7 +40,7 @@ const GoogleLogin = () => {
           referrerEmail: referrerEmail,
         };
 
-        fetch("https://essay-essay-writing.herokuapp.com/create/googleUser", {
+        fetch("https://api.easyessaywriting.com/create/googleUser", {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(loggedUser),

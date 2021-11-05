@@ -21,7 +21,7 @@ const AdminCard = ({ setNumber, adminCard, index }) => {
     const perPage = data.perPage || perPageValue;
     const wordPerPage = data.wordPerPage || wordPerPageValue;
 
-    fetch(`https://essay-essay-writing.herokuapp.com/priceCard/update/${id}`, {
+    fetch(`https://api.easyessaywriting.com/priceCard/update/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

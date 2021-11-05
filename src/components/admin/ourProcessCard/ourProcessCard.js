@@ -20,17 +20,14 @@ const OurProcessCard = ({
     const title = data.title;
     const content = data.content;
 
-    fetch(
-      `https://essay-essay-writing.herokuapp.com/processCard/update/${_id}`,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title,
-          content,
-        }),
-      }
-    )
+    fetch(`https://api.easyessaywriting.com/processCard/update/${_id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title,
+        content,
+      }),
+    })
       .then((res) => res.json())
       .then((result) => {
         if (result) {

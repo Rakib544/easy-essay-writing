@@ -20,7 +20,7 @@ const OrderList = ({ cardData }) => {
   useEffect(() => {
     const loadData = async () => {
       const userOrder = await fetch(
-        "https://essay-essay-writing.herokuapp.com/orderCard/userOrder",
+        "https://api.easyessaywriting.com/orderCard/userOrder",
         {
           method: "POST",
           headers: { "content-type": "application/json" },
@@ -132,9 +132,7 @@ const OrderList = ({ cardData }) => {
 export default withAuth(OrderList);
 
 export async function getServerSideProps() {
-  const res = await fetch(
-    "https://essay-essay-writing.herokuapp.com/priceCard"
-  );
+  const res = await fetch("https://api.easyessaywriting.com/priceCard");
   const cardData = await res.json();
 
   return {

@@ -57,7 +57,7 @@ const Signin = () => {
           email: email,
           photoURL: photoURL,
         };
-        fetch("https://essay-essay-writing.herokuapp.com/admin", {
+        fetch("https://api.easyessaywriting.com/admin", {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(googleLoggedUser),

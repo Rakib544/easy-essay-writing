@@ -14,7 +14,7 @@ const FaqCard = ({ faqCardData, index, setNumber, number, notify }) => {
     const answer = data.answer;
     const question = data.question;
 
-    fetch(`https://essay-essay-writing.herokuapp.com/faq/update/${_id}`, {
+    fetch(`https://api.easyessaywriting.com/faq/update/${_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

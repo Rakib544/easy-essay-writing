@@ -18,13 +18,13 @@ const Edit = () => {
   const [number, setNumber] = useState(0);
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/about")
+    fetch("https://api.easyessaywriting.com/about")
       .then((res) => res.json())
       .then((data) => setAboutData(data[0]));
   }, []);
 
   useEffect(() => {
-    fetch("https://essay-essay-writing.herokuapp.com/priceCard")
+    fetch("https://api.easyessaywriting.com/priceCard")
       .then((res) => res.json())
       .then((data) => setAdminCards(data));
   }, [number]);
