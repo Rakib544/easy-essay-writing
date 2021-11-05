@@ -140,11 +140,11 @@ const OrderInfoCard = ({ data, number, setNumber }) => {
           </div>
         </div>
         <div className="row  d-flex justify-content-center align-items-center ">
-          <div className="col-md-3">
+          <div className="col-md-2">
             <p className="fs-18 fw-bold">Customer Name</p>
             <p className="text-muted">{data.customerName}</p>
           </div>
-          <div className="col-md-2">
+          <div className="col-md-3">
             <p className="fs-18 fw-regular fw-bold">Customer Mail</p>
             <p className="text-muted">{data.customerEmail}</p>
           </div>

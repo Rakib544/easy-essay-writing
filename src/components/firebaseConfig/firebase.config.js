@@ -1,8 +1,8 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyB1GPALmNkxl219Hlr-Ba66CT0PlceL-T0",
-  authDomain: "easy-essay-writing.firebaseapp.com",
-  projectId: "easy-essay-writing",
-  storageBucket: "easy-essay-writing.appspot.com",
-  messagingSenderId: "596448484478",
-  appId: "1:596448484478:web:75ce17ba3de80f19b50c2f",
+  apiKey: "AIzaSyCuLaO7drq2WMkQHZ0LIuKxguOEb_cYPUo",
+  authDomain: "easy-essay-writing-official.firebaseapp.com",
+  projectId: "easy-essay-writing-official",
+  storageBucket: "easy-essay-writing-official.appspot.com",
+  messagingSenderId: "448906905901",
+  appId: "1:448906905901:web:9d2da2dd070410ced5eba4",
 };

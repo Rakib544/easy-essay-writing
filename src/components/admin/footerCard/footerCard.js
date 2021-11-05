@@ -15,6 +15,7 @@ const FooterCard = ({ footerCardData, index, setNumber, number, notify }) => {
     const title = data.title || titleValue;
     const link = data.link;
 
+<<<<<<< HEAD
     fetch(`https://api.easyessaywriting.com/footerIcons/update/${_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -23,6 +24,19 @@ const FooterCard = ({ footerCardData, index, setNumber, number, notify }) => {
         link,
       }),
     })
+=======
+    fetch(
+      `https://api.easyessaywriting.com/footerIcons/update/${_id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title,
+          link,
+        }),
+      }
+    )
+>>>>>>> 45fcc41e443b06a9034aa617fc1d6004cef99dc6
       .then((res) => res.json())
       .then((result) => {
         if (result) {

@@ -20,6 +20,7 @@ const OurProcessCard = ({
     const title = data.title;
     const content = data.content;
 
+<<<<<<< HEAD
     fetch(`https://api.easyessaywriting.com/processCard/update/${_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -28,6 +29,19 @@ const OurProcessCard = ({
         content,
       }),
     })
+=======
+    fetch(
+      `https://api.easyessaywriting.com/processCard/update/${_id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title,
+          content,
+        }),
+      }
+    )
+>>>>>>> 45fcc41e443b06a9034aa617fc1d6004cef99dc6
       .then((res) => res.json())
       .then((result) => {
         if (result) {
@@ -144,7 +158,7 @@ const OurProcessCard = ({
                   {...register("content")}
                   name="content"
                   id="content"
-                  class="form-control mb-2"
+                  className="form-control mb-2"
                 ></textarea>
                 {/* <input type="hidden" name="_id" defaultValue={processCardData._id} {...register("_id")} id='_id' /> */}
                 <input

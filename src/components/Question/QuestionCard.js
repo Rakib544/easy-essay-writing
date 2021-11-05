@@ -5,7 +5,6 @@ import styles from "./Question.module.css";
 
 const QuestionCard = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
-
   return (
     <>
       <div className={`${styles.acc} my-3 `}>

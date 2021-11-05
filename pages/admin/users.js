@@ -24,11 +24,22 @@ const AffiliateUser = () => {
 
   useEffect(() => {
     const loadData = async () => {
+<<<<<<< HEAD
       const res = await fetch("https://api.easyessaywriting.com/create", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ page: page }),
       });
+=======
+      const res = await fetch(
+        "https://api.easyessaywriting.com/create",
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ page: page }),
+        }
+      );
+>>>>>>> 45fcc41e443b06a9034aa617fc1d6004cef99dc6
       const usersData = await res.json();
       const userData = usersData.result;
       setUserData(userData);

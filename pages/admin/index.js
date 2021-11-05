@@ -48,15 +48,20 @@ const Edit = () => {
           <BannerInfo />
           <About aboutData={aboutData} />
           <OurProcess />
-          <div className="row">
-            {adminCards.map((adminCard, index) => (
-              <AdminCard
-                adminCard={adminCard}
-                setNumber={setNumber}
-                index={index}
-                key={adminCard._id}
-              />
-            ))}
+          <div>
+            <p className="bg-white py-2 px-5 d-inline-block fs-26 fw-bold my-4 box-shadow">
+              Price Card
+            </p>
+            <div className="row">
+              {adminCards.map((adminCard, index) => (
+                <AdminCard
+                  adminCard={adminCard}
+                  setNumber={setNumber}
+                  index={index}
+                  key={adminCard._id}
+                />
+              ))}
+            </div>
           </div>
           <DiscountPrice />
           <Faq />

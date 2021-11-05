@@ -14,7 +14,13 @@ const DiscountPrice = () => {
   } = useForm();
 
   useEffect(() => {
+<<<<<<< HEAD
     fetch("https://api.easyessaywriting.com/discount/discountPercentage")
+=======
+    fetch(
+      "https://api.easyessaywriting.com/discount/discountPercentage"
+    )
+>>>>>>> 45fcc41e443b06a9034aa617fc1d6004cef99dc6
       .then((res) => res.json())
       .then((data) => {
         setDiscountPrice(data);
@@ -25,16 +31,29 @@ const DiscountPrice = () => {
     const discountPercentage =
       data.discountPercentage || discountPrice.discountPercentage;
     const id = discountPrice._id;
+<<<<<<< HEAD
 
     fetch(`https://api.easyessaywriting.com/discount/updateDiscount/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ discountPercentage }),
     })
+=======
+    
+    fetch(
+      `https://api.easyessaywriting.com/discount/updateDiscount/${id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({discountPercentage})
+      }
+    )
+>>>>>>> 45fcc41e443b06a9034aa617fc1d6004cef99dc6
       .then((res) => res.json())
       .then((result) => {
         if (result) {
           setNumber(number + 1);
+          toast.success('Update Successfully');
         }
       });
   };

@@ -107,6 +107,7 @@ const SingleTableRow = ({ user, index, serial, setNumber }) => {
               className="btn btn-success"
               data-bs-toggle="modal"
               data-bs-target={`#promo${index + 11}`}
+              disabled={user.userType !== "admin" ? false : true}
             >
               &nbsp; Add Promo &nbsp;
             </button>
@@ -123,6 +124,7 @@ const SingleTableRow = ({ user, index, serial, setNumber }) => {
           ) : (
             <button
               className="btn btn-success"
+              disabled={user.userType !== "admin" ? false : true}
               onClick={() => handleChangeAccessURL(false)}
             >
               {" "}
@@ -131,15 +133,21 @@ const SingleTableRow = ({ user, index, serial, setNumber }) => {
           )}
         </td>
         <td className="d-flex justify-content-evenly">
-          <p>${user.balance} &nbsp; &nbsp;</p>
-          <p>
-            <BiEdit
-              size={24}
-              className="text-primary cursor-pointer"
-              data-bs-toggle="modal"
-              data-bs-target={`#balance${index + 21}`}
-            />
-          </p>
+          {user.userType === "admin" ? (
+            <p>None</p>
+          ) : (
+            <>
+              <p>${user.balance} &nbsp; &nbsp;</p>
+              <p>
+                <BiEdit
+                  size={24}
+                  className="text-primary cursor-pointer"
+                  data-bs-toggle="modal"
+                  data-bs-target={`#balance${index + 21}`}
+                />
+              </p>
+            </>
+          )}
         </td>
       </tr>
 
