@@ -28,7 +28,7 @@ const Card = ({ data, index }) => {
 
   const router = useRouter();
 
-  const email = signedUser.email;
+  const email = signedUser?.email;
 
   useEffect(() => {
     fetch("https://api.easyessaywriting.com/admin", {
