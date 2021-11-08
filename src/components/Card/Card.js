@@ -38,34 +38,17 @@ const Card = ({ data, index }) => {
     })
       .then((res) => res.json())
       .then((data) => setUserInfo(data));
-<<<<<<< HEAD
     fetch("https://api.easyessaywriting.com/discount/discountPercentage")
-=======
-    fetch(
-      "https://api.easyessaywriting.com/discount/discountPercentage"
-    )
->>>>>>> 45fcc41e443b06a9034aa617fc1d6004cef99dc6
       .then((res) => res.json())
       .then((data) => setDiscountPercentage(data.discountPercentage));
   }, [email]);
 
   useEffect(() => {
-<<<<<<< HEAD
     fetch("https://api.easyessaywriting.com/affiliateUser/affiliateUserFind", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email }),
     })
-=======
-    fetch(
-      "https://api.easyessaywriting.com/affiliateUser/affiliateUserFind",
-      {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ email }),
-      }
-    )
->>>>>>> 45fcc41e443b06a9034aa617fc1d6004cef99dc6
       .then((res) => res.json())
       .then((result) => {
         setReferredBy(result.referredBy);
